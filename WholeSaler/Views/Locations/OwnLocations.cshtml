@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WholeSaler.Models.Location>
+
+@{
+    ViewData["Title"] = "OwnLocations";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-flex justify-content-between">
+            <a asp-action="Create" class="btn btn-primary btn-icon-split float-right">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">Create Location</span>
+            </a>
+            <h6 class="m-0 font-weight-bold text-primary align-self-center">
+                @ViewData["Title"]
+            </h6>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Adress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Adress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City.CityName)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.LocationID">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@item.LocationID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

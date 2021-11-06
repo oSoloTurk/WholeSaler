@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WholeSaler.Models.Operation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-flex justify-content-between">
+            <a asp-action="Create" class="btn btn-primary btn-icon-split float-right">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">Add Item</span>
+            </a>
+            <h6 class="m-0 font-weight-bold text-primary align-self-center">
+                @ViewData["Title"]
+            </h6>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Basket)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OperationValue)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Basket.UserID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date.DateID)
+                            </td>
+                            <td>
+                                @item.Location.GetFullAdress()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OperationValue)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.OperationID">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.OperationID">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.OperationID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WholeSaler.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-flex justify-content-between">
+            <a asp-action="Create" class="btn btn-primary btn-icon-split float-right">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">Add Category</span>
+            </a>
+            <h6 class="m-0 font-weight-bold text-primary align-self-center">
+                @ViewData["Title"]
+            </h6>
+            <div></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                           Category ID
+                        </th>
+                        <th>
+                            CategoryName
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryName)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.CategoryID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WholeSaler.Models;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<div class="card o-hidden border-0 shadow-lg my-5 mainbody">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\hakki\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\hakki\\.nuget\\packages"
+    ]
+  }
+}

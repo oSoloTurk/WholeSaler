@@ -1,0 +1,101 @@
+﻿<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success border-start-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Earnings (Last 7 Days)
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Earnings7"]</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning border-start-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Earnings (Monthly)
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Earnings30"]</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success border-start-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Waiting Customer
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["WaitingCustomer"]</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning border-start-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Something here
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Something</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card corner-bottom col-3 text-center" style="width: 18rem;">
+        <img src="~/images/admin/vehicle.jpg" class="card-img-top" alt="vehicle">
+        <div class="card-body">
+            <h5 class="card-title">Vehicles</h5>
+            <p class="card-text">You can manage your fleet.</p>            <p class="card-text">Lenght of fleet is @ViewData["fleetSize"]</p>
+
+            <a class="btn theme-button-success" asp-controller="Vehicles" asp-action="Index">Go Vehicle Management Page</a>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="card corner-bottom col-4 text-center" style="width: 18rem;">
+        <img src="~/images/admin/item.jpg" class="card-img-top" alt="item">
+        <div class="card-body">
+            <h5 class="card-title">Items</h5>
+            <p class="card-text">You can manage your items.</p>
+            <p class="card-text theme-button-success">Lenght of items is @ViewData["itemSize"] in @ViewData["categorySize"] category.</p>
+            <a class="btn theme-button-success" asp-controller="Items" asp-action="Index">Go Items Management Page</a>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="card corner-bottom col-3 text-center" style="width: 18rem;">
+        <img src="~/images/admin/report.jpg" class="card-img-top" alt="report">
+        <div class="card-body">
+            <h5 class="card-title">Reports</h5>
+            <p class="card-text">You can see reports.</p>
+            //list of last x report
+            <a class="btn theme-button-success" asp-controller="Reports" asp-action="Index">Go Reports Page</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model WholeSaler.Models.Operation
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Operation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OperationID" />
+            <div class="form-group">
+                <label asp-for="DateID" class="control-label"></label>
+                <select asp-for="DateID" class="form-control" asp-items="ViewBag.DateID"></select>
+                <span asp-validation-for="DateID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BasketID" class="control-label"></label>
+                <select asp-for="BasketID" class="form-control" asp-items="ViewBag.BasketID"></select>
+                <span asp-validation-for="BasketID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationID" class="control-label"></label>
+                <select asp-for="LocationID" class="form-control" asp-items="ViewBag.LocationID"></select>
+                <span asp-validation-for="LocationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OperationValue" class="control-label"></label>
+                <input asp-for="OperationValue" class="form-control" />
+                <span asp-validation-for="OperationValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
