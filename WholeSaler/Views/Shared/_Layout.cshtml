@@ -91,6 +91,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <partial name="_LoggedTopbar" />
@@ -123,10 +124,10 @@
                             </div>
                         </li>
 
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
-        </div></div>                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                        <div class="container-fluid">
+                            @RenderBody()
+                        </div>
+</div></div>                <script src="~/lib/jquery/dist/jquery.min.js"></script>
                 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
                 <script src='~/js/header.js'></script>
                 <script src='~/js/theme.js'></script>

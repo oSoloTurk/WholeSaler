@@ -20,5 +20,6 @@ namespace WholeSaler.Models
         public virtual ICollection<Action> ActionEffecterUserNavigations { get; set; }
         [NotMapped]
         public virtual ICollection<Operation> OperationNavigations { get; set; }
+        public virtual ICollection<Alert> Alerts { get; set; }
     }
 }

@@ -12,9 +12,9 @@ namespace WholeSaler.Controllers
 {
     public class ItemsController : Controller
     {
-        private readonly WholesellerContext _context;
+        private readonly WholesalerContext _context;
 
-        public ItemsController(WholesellerContext context)
+        public ItemsController(WholesalerContext context)
         {
             _context = context;
         }

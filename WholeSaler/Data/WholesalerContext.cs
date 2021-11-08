@@ -9,13 +9,13 @@ using Action = WholeSaler.Models.Action;
 
 namespace WholeSaler.Data
 {
-    public partial class WholesellerContext : DbContext
+    public partial class WholesalerContext : DbContext
     {
-        public WholesellerContext()
+        public WholesalerContext()
         {
         }
 
-        public WholesellerContext(DbContextOptions<WholesellerContext> options)
+        public WholesalerContext(DbContextOptions<WholesalerContext> options)
             : base(options)
         {
         }
@@ -28,7 +28,7 @@ namespace WholeSaler.Data
         public virtual DbSet<Date> Dates { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Alert> Alerts { get; set; }
         public virtual DbSet<Operation> Operations { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
@@ -235,23 +235,21 @@ namespace WholeSaler.Data
                     .HasConstraintName("state_id");
             });
 
-            modelBuilder.Entity<Message>(entity =>
+            modelBuilder.Entity<Alert>(entity =>
             {
-                entity.HasIndex(e => e.DateID, "IX_Messages_DateID");
-
-                entity.Property(e => e.MessageID)
-                    .ValueGeneratedNever()
-                    .HasColumnName("MessageID");
-
-                entity.Property(e => e.DateID).HasColumnName("DateID");
-
-                entity.Property(e => e.MessageText).IsRequired();
+                entity.HasIndex(e => e.AlertID, "IX_Messages_DateID");
 
                 entity.HasOne(d => d.Date)
-                    .WithMany(p => p.Messages)
+                    .WithMany(p => p.Alerts)
                     .HasForeignKey(d => d.DateID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("date_id");
+
+                entity.HasOne(d => d.User)
+                .WithMany(u => u.Alerts)
+                .HasForeignKey(d => d.UserID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("user_id");
             });
 
             modelBuilder.Entity<Operation>(entity =>

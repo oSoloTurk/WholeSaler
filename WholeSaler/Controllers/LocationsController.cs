@@ -14,11 +14,11 @@ namespace WholeSaler.Controllers
 {
     public class LocationsController : Controller
     {
-        private readonly WholesellerContext _context;
+        private readonly WholesalerContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public LocationsController(WholesellerContext context,
+        public LocationsController(WholesalerContext context,
             UserManager<User> userManager,
             SignInManager<User> signInManager)
         {

@@ -11,7 +11,7 @@ namespace WholeSaler.Models
         {
             Actions = new HashSet<Action>();
             Baskets = new HashSet<Basket>();
-            Messages = new HashSet<Message>();
+            Alerts = new HashSet<Alert>();
             OperationDetails = new HashSet<Operation>();
         }
 
@@ -22,7 +22,7 @@ namespace WholeSaler.Models
 
         public virtual ICollection<Action> Actions { get; set; }
         public virtual ICollection<Basket> Baskets { get; set; }
-        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Alert> Alerts { get; set; }
         public virtual ICollection<Operation> OperationDetails { get; set; }
     }
 }

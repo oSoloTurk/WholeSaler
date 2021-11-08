@@ -13,9 +13,9 @@ namespace WholeSaler.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly WholesellerContext _context;
+        private readonly WholesalerContext _context;
 
-        public DashboardController(WholesellerContext context)
+        public DashboardController(WholesalerContext context)
         {
             _context = context;
         }
