@@ -26,16 +26,24 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.ItemName)
+                            <a asp-route-sortOrder="item_name">
+                                @Html.DisplayNameFor(model => model.ItemName)
+                            </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ItemPrice)
+                            <a asp-route-sortOrder="item_price">
+                                @Html.DisplayNameFor(model => model.ItemPrice)
+                            </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ItemDesc)
+                            <a asp-route-sortOrder="item_desc">
+                                @Html.DisplayNameFor(model => model.ItemDesc)
+                            </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Category)
+                            <a asp-route-sortOrder="item_category">
+                                @Html.DisplayNameFor(model => model.Category)
+                            </a>
                         </th>
                         <th>
                             Actions
@@ -70,3 +78,4 @@
         </div>
     </div>
 </div>
+

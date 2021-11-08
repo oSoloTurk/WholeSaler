@@ -20,10 +20,21 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var wholesellerContext = _context.Vehicles;
-            ViewBag.vehiclesInTheOperation = _context.Operations.Distinct().Select(operation => operation.VehicleID).ToList();
+            IQueryable<Vehicle> wholesellerContext = _context.Vehicles;
+            switch (sortOrder)
+            {
+                default:
+                case "vehicle_name":
+                    wholesellerContext = wholesellerContext.OrderBy(vehicle => vehicle.VehicleName);
+                    break;
+                case "vehicle_plate":
+                    wholesellerContext = wholesellerContext.OrderBy(vehicle => vehicle.VehiclePlate);
+                    break;
+            }
+            TempData["CurrentFilter"] = sortOrder;
+            ViewBag.vehiclesInTheOperation = await _context.Operations.Distinct().Select(operation => operation.VehicleID).ToListAsync();
             return View(await wholesellerContext.ToListAsync());
         }
 

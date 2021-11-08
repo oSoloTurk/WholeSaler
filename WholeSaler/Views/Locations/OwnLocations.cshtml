@@ -26,10 +26,14 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Adress)
+                            <a asp-route-sortOrder="adress">
+                                @Html.DisplayNameFor(model => model.Adress)
+                                </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.City)
+                            <a asp-route-sortOrder="city_name">
+                                @Html.DisplayNameFor(model => model.City)
+                                </a>
                         </th>
                         <th>Actions</th>
                     </tr>

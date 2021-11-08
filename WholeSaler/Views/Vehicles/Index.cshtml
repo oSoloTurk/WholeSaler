@@ -26,11 +26,16 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.VehicleName)
+                            <a asp-route-sortOrder="vehicle_name">
+                                @Html.DisplayNameFor(model => model.VehicleName)
+                                </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.VehiclePlate)
+                            <a asp-route-sortOrder="vehicle_plate">
+                                @Html.DisplayNameFor(model => model.VehiclePlate)
+                                </a>
                         </th>
+                        <th>Current Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

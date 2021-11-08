@@ -20,9 +20,18 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Categories.ToListAsync());
+            IQueryable<Category> wholesellerContext = _context.Categories;
+            switch (sortOrder)
+            {
+                default:
+                case "category_name":
+                    wholesellerContext = wholesellerContext.OrderBy(category => category.CategoryName);
+                    break;
+            }
+
+            return View(await wholesellerContext.ToListAsync());
         }
 
         // GET: Categories/Details/5

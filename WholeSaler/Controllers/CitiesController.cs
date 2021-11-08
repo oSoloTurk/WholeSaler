@@ -19,9 +19,21 @@ namespace WholeSaler.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Cities.Include(city => city.Country).ToListAsync());
+            IQueryable<City> wholesellerContext = _context.Cities.Include(city => city.Country);
+            switch (sortOrder)
+            {
+                default:
+                case "city_name":
+                    wholesellerContext = wholesellerContext.OrderBy(city => city.CityName);
+                    break;
+                case "country_name":
+                    wholesellerContext = wholesellerContext.OrderBy(city => city.Country.CountryName);
+                    break;
+            }
+
+            return View(await wholesellerContext.ToListAsync());
         }
 
         public IActionResult Create()

@@ -30,7 +30,9 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.CountryName)
+                           <a asp-route-sortOrder="country_name">
+                                @Html.DisplayNameFor(model => model.CountryName)
+                           </a>
                         </th>
                         <th>
                             Actions
