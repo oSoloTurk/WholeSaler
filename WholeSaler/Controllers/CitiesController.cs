@@ -19,20 +19,28 @@ namespace WholeSaler.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string query)
         {
             IQueryable<City> wholesellerContext = _context.Cities.Include(city => city.Country);
-            switch (sortOrder)
+            if (query != null)
             {
-                default:
-                case "city_name":
-                    wholesellerContext = wholesellerContext.OrderBy(city => city.CityName);
-                    break;
-                case "country_name":
-                    wholesellerContext = wholesellerContext.OrderBy(city => city.Country.CountryName);
-                    break;
+                wholesellerContext = wholesellerContext.Where(c => c.CityID.ToString().Contains(query) || c.CityName.Contains(query) || c.Country.CountryName.Contains(query));
+                TempData["Query"] = query;
             }
-
+            if (sortOrder != null)
+            {
+                switch (sortOrder)
+                {
+                    default:
+                    case "city_name":
+                        wholesellerContext = wholesellerContext.OrderBy(city => city.CityName);
+                        break;
+                    case "country_name":
+                        wholesellerContext = wholesellerContext.OrderBy(city => city.Country.CountryName);
+                        break;
+                }
+                TempData["CurrentFilter"] = sortOrder;
+            }
             return View(await wholesellerContext.ToListAsync());
         }
 

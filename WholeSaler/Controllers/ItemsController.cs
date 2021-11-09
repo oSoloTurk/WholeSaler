@@ -20,9 +20,16 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string query)
         {
             IQueryable<Item> wholesellerContext = _context.Items.Include(i => i.Category);
+            if(query != null)
+            {
+                wholesellerContext = wholesellerContext.Where(i => i.ItemID.ToString().Contains(query) | i.ItemName.Contains(query));
+                TempData["Query"] = query;
+            }
+            if(sortOrder != null)
+            {
             switch(sortOrder)
             {
                 default:
@@ -40,6 +47,8 @@ namespace WholeSaler.Controllers
                     break;
             }
             TempData["CurrentFilter"] = sortOrder;
+            }
+
             return View(await wholesellerContext.ToListAsync());
         }
 

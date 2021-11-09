@@ -35,20 +35,28 @@ namespace WholeSaler.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> OwnLocations(string sortOrder)
+        public async Task<IActionResult> OwnLocations(string sortOrder, string query)
         {
             var wholesellerContext = _context.Locations.Include(l => l.City).Include(l => l.LocationOwner).Where(l => l.LocationOwnerID == _userManager.GetUserId(User));
-            switch (sortOrder)
+            if (query != null)
             {
-                default:
-                case "adress":
-                    wholesellerContext = wholesellerContext.OrderBy(loc => loc.Adress);
-                    break;
-                case "city_name":
-                    wholesellerContext = wholesellerContext.OrderBy(loc => loc.City.CityName);
-                    break;
+                wholesellerContext = wholesellerContext.Where(l => l.LocationID.ToString().Contains(query) | l.LocationOwner.UserName.Contains(query));
+                TempData["Query"] = query;
             }
-            TempData["CurrentFilter"] = sortOrder;
+            if (sortOrder != null)
+            {
+                switch (sortOrder)
+                {
+                    default:
+                    case "adress":
+                        wholesellerContext = wholesellerContext.OrderBy(loc => loc.Adress);
+                        break;
+                    case "city_name":
+                        wholesellerContext = wholesellerContext.OrderBy(loc => loc.City.CityName);
+                        break;
+                }
+                TempData["CurrentFilter"] = sortOrder;
+            }
             return View(await wholesellerContext.ToListAsync());
         }
 
