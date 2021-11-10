@@ -17,9 +17,12 @@ Sakarya University - Web Programming Project - This application is aimed at smal
 
 ## Sample Datasets for Example
 
-* Items [cavallo-online-offline-price by bgadoci](https://data.world/bgadoci/cavallo-online-offline-prices/workspace/)
-* Cities of Turkey [SimpleMaps - TR Cities](https://simplemaps.com/data/tr-cities)
-* Cities of TRNC(Northern Cyprus)[CityPopulation by  Thomas Brinkhoff](http://www.citypopulation.de/en/cyprus/cities/north/)
+* Items 
+   * Source: [cavallo-online-offline-price by bgadoci](https://data.world/bgadoci/cavallo-online-offline-prices/workspace/)
+* Cities of Turkey 
+   * Source: [SimpleMaps - TR Cities](https://simplemaps.com/data/tr-cities)
+* Cities of TRNC(Northern Cyprus)
+   * Source: [CityPopulation by  Thomas Brinkhoff](http://www.citypopulation.de/en/cyprus/cities/north/)
 
 ## License
 
