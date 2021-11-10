@@ -15,6 +15,12 @@ Sakarya University - Web Programming Project - This application is aimed at smal
 * Bootstrap
 * FontAwesome
 
+## Sample Datasets for Example
+
+* Items [cavallo-online-offline-price by bgadoci](https://data.world/bgadoci/cavallo-online-offline-prices/workspace/)
+* Cities of Turkey [SimpleMaps - TR Cities](https://simplemaps.com/data/tr-cities)
+* Cities of TRNC(Northern Cyprus)[CityPopulation by  Thomas Brinkhoff](http://www.citypopulation.de/en/cyprus/cities/north/)
+
 ## License
 
 This project is licensed under the GPL-3.0 License - see the LICENSE.md file for details
