@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WholeSaler.Models;
 using WholeSaler.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WholeSaler.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
     public class CategoriesController : Controller
     {
         private readonly WholesalerContext _context;

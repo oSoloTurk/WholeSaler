@@ -47,8 +47,17 @@ namespace WholeSaler.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name ="Username")]
+            [Display(Name = "Username")]
             public string UserName { get; set; }
+            [Required]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+            [Required]
+            [Display(Name = "SurName")]
+            public string SurName { get; set; }
+            [Required]
+            [Display(Name = "CompanyName")]
+            public string CompanyName { get; set; }
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]

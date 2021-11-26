@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Services;
 
 namespace WholeSaler
 {
@@ -35,7 +37,15 @@ namespace WholeSaler
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<User, AppRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+
+            services.AddIdentity<User, AppRole>(options =>
+            {
+                options.Password.RequiredLength = 2;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI().AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
 
             services.ConfigureApplicationCookie(options =>
@@ -44,6 +54,9 @@ namespace WholeSaler
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
+
+            services.AddTransient<IEmailSender, EmailService>();
+
 
             services.AddControllersWithViews();
             services.AddMvc();
@@ -79,6 +92,9 @@ namespace WholeSaler
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            IdentitySeed.Initialize(app.ApplicationServices);
+
         }
     }
 }

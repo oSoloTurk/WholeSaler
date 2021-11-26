@@ -1,29 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using WholeSaler.Controllers;
+using WholeSaler.Enums;
 using WholeSaler.Models;
+using WholeSaler.Services;
+using WholeSaler.Utils;
 
 namespace WholeSaler.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [System.Web.Mvc.AllowAnonymous]
     public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _emailSender;
-
-        public ResendEmailConfirmationModel(UserManager<User> userManager, IEmailSender emailSender)
+        private readonly EmailService _emailSender;
+        private readonly IHostingEnvironment _env;
+        public ResendEmailConfirmationModel(UserManager<User> userManager, IEmailSender emailSender, IHostingEnvironment env)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
+            _emailSender = (EmailService)emailSender;
+            _env = env;
         }
 
         [BindProperty]
@@ -62,10 +73,7 @@ namespace WholeSaler.Areas.Identity.Pages.Account
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            _emailSender.SendEmail(Input.Email, "Confirm Your Account", _env.WebRootPath, EmailTemplates.CONFIRM_ACCOUNT.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();

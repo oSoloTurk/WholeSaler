@@ -5,103 +5,146 @@
     var area = this.ViewContext.RouteData.Values["area"];
     String page = controller != null ? controller.ToString() : (area != null ? area.ToString() : "");
 }
+<!-- Nav Item - Dashboard -->
+<li class="nav-item @(page == "Dashboard" ? "active" : "")">
+    @if (User.IsInRole("Admin"))
+    {
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <a class="nav-link" asp-controller="Dashboard" asp-action="Admin">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Admin Dashboard</span>
+        </a>
+    }
+    @if (User.IsInRole("Customer"))
+    {
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <a class="nav-link" asp-controller="Dashboard" asp-action="User">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Customer Dashboard</span>
+        </a>
+    }
+</li>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
+@if (User.IsInRole("Customer"))
+{
+    <li class="nav-item @(page == "Items" ? "active" : "")">
 
-<!-- Nav Item - Dashboard -->
-<li class="nav-item active">
-    <a class="nav-link" asp-controller="Dashboard" asp-action="User">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span>
-    </a>
-</li>
-<li class="nav-item @(page=="Vehicles"?"active":"")">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Vehicles</span>
-    </a>
-    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Shortcuts</h6>
-            <a class="collapse-item" asp-controller="Vehicles" asp-action="Create">Add Vehicle</a>
-            <a class="collapse-item" asp-controller="Vehicles" asp-action="Index">List Vehicles</a>
-            <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">Send Operation</a>
-        </div>
-    </div>
-</li>
-<li class="nav-item @(page=="Items"?"active":"")">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Items</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Shortcuts</h6>
-            <a class="collapse-item" asp-controller="Items" asp-action="Create">Add Item</a>
-            <a class="collapse-item" asp-controller="Items" asp-action="Index">List Items</a>
-        </div>
-    </div>
-</li>
-<li class="nav-item @(page=="Categories"?"active":"")">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Categories</span>
-    </a>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Shortcuts</h6>
-            <a class="collapse-item" asp-controller="Categories" asp-action="Create">Add Category</a>
-            <a class="collapse-item" asp-controller="Categories" asp-action="Index">List Categories</a>
-        </div>
-    </div>
-</li>
-<li class="nav-item @(page=="Operations"?"active":"")">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Operations</span>
-    </a>
-    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Shortcuts</h6>
-            <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">New Operation</a>
-            <a class="collapse-item" asp-controller="Operations" asp-action="Index">Operation History</a>
-        </div>
-    </div>
-</li>
-<li class="nav-item @(page=="Identity"?"active":"")">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Profile</span>
-    </a>
-    
-    <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Shortcuts</h6>
-            <a class="collapse-item @ManageNavPages.IndexNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/Index"
-               title="Manage">Manage Phone</a>
-            <a class="collapse-item @ManageNavPages.EmailNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/Email"
-               title="Manage">Manage Email</a>
-            <a class="collapse-item @ManageNavPages.ChangePasswordNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/ChangePassword"
-               title="Manage">Manage Password</a>
-            <a class="collapse-item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication"
-               title="Manage">Manage T-FA</a>            
-            <a class="collapse-item @(page=="Locations"?"active":"")" asp-controller="Locations" asp-action="OwnLocations" title="Manage">Manage Locations</a>
-            <a class="collapse-item @ManageNavPages.PersonalDataNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/PersonalData"
-               title="Manage">Manage Personal Datas</a>
-        </div>
-    </div>    
-</li>
-<li class="nav-item @(page=="Countries" || page =="States"?"active":"")">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Operation States</span>
-    </a>
+        <a class="nav-link" asp-controller="Items" asp-action="CreateOrder">
+            <i class="fas fa-shopping-basket"></i>
+            <span>Create Order</span>
+        </a>
+    </li>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+        <li class="nav-item @(page == "Vehicles" ? "active" : "")">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Vehicles</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Shortcuts</h6>
+                    <a class="collapse-item" asp-controller="Vehicles" asp-action="Create">Add Vehicle</a>
+                    <a class="collapse-item" asp-controller="Vehicles" asp-action="Index">List Vehicles</a>
+                    <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">Send Operation</a>
+                </div>
+            </div>
+        </li>
+    }
+        @if (User.IsInRole("Employee"))
+        {
+            <li class="nav-item @(page == "Items" ? "active" : "")">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Items</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Shortcuts</h6>
+                        <a class="collapse-item" asp-controller="Items" asp-action="Create">Add Item</a>
+                        <a class="collapse-item" asp-controller="Items" asp-action="Index">List Items</a>
+                    </div>
+                </div>
+            </li>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <li class="nav-item @(page == "Categories" ? "active" : "")">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Categories</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Shortcuts</h6>
+                        <a class="collapse-item" asp-controller="Categories" asp-action="Create">Add Category</a>
+                        <a class="collapse-item" asp-controller="Categories" asp-action="Index">List Categories</a>
+                    </div>
+                </div>
+            </li>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <li class="nav-item @(page == "Operations" ? "active" : "")">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Operations</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Shortcuts</h6>
+                        <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">New Operation</a>
+                        <a class="collapse-item" asp-controller="Operations" asp-action="Index">Operation History</a>
+                    </div>
+                </div>
+            </li>
+        }
+        @if (User.IsInRole("Customer"))
+        {
+            <li class="nav-item @(page == "Identity" ? "active" : "")">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Profile</span>
+                </a>
 
-    <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Shortcuts</h6>
-            <a class="collapse-item" asp-controller="Cities" asp-action="Index">Operationally Cities</a>
-            <a class="collapse-item" asp-controller="Countries" asp-action="Index">Operationally Countries</a>
-        </div>
-    </div>
-</li>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Shortcuts</h6>
+                        <a class="collapse-item @ManageNavPages.IndexNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/Index"
+                           title="Manage">Manage Phone</a>
+                        <a class="collapse-item @ManageNavPages.EmailNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/Email"
+                           title="Manage">Manage Email</a>
+                        <a class="collapse-item @ManageNavPages.ChangePasswordNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/ChangePassword"
+                           title="Manage">Manage Password</a>
+                        <a class="collapse-item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication"
+                           title="Manage">Manage T-FA</a>
+                        <a class="collapse-item @(page == "Locations" ? "active" : "")" asp-controller="Locations" asp-action="OwnLocations" title="Manage">Manage Locations</a>
+                        <a class="collapse-item @ManageNavPages.PersonalDataNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/PersonalData"
+                           title="Manage">Manage Personal Datas</a>
+                    </div>
+                </div>
+            </li>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <li class="nav-item @(page == "Countries" || page == "States" ? "active" : "")">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Operation States</span>
+                </a>
+
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Shortcuts</h6>
+                        <a class="collapse-item" asp-controller="Cities" asp-action="Index">Operationally Cities</a>
+                        <a class="collapse-item" asp-controller="Countries" asp-action="Index">Operationally Countries</a>
+                    </div>
+                </div>
+            </li>
+        }

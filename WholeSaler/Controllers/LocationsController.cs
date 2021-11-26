@@ -12,6 +12,7 @@ using WholeSaler.Models;
 
 namespace WholeSaler.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class LocationsController : Controller
     {
         private readonly WholesalerContext _context;

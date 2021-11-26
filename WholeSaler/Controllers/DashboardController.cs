@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -19,11 +20,14 @@ namespace WholeSaler.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles = "Customer")]
+
         public IActionResult User()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Admin()
         { 
             int earnWeek = 0;
@@ -46,6 +50,7 @@ namespace WholeSaler.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> GetEarnHistory()
         {
             Dictionary<DateTime, double> earns = new Dictionary<DateTime, double>();
