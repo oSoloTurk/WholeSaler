@@ -17,7 +17,7 @@ namespace WholeSaler.Controllers
     {
         private readonly WholesalerContext _context;
 
-        public CategoriesController(Data.WholesalerContext context)
+        public CategoriesController(WholesalerContext context)
         {
             _context = context;
         }
