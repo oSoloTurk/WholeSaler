@@ -1,5 +1,5 @@
-﻿@model IEnumerable<WholeSaler.Models.City>
-
+﻿@using WholeSaler.Utils
+@model PaginatedList<WholeSaler.Models.City>
 @{
     ViewData["Title"] = "Cities";
 }
@@ -31,13 +31,13 @@
                     <tr>
                         <th>
                             <a asp-route-sortOrder="city_name">
-                                @Html.DisplayNameFor(model => model.CityName)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().CityName)
                             </a>
                         </th>
                         <th>
                             <a asp-route-sortOrder="country_name">
-                                Country
-                            </a>  
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Country.CountryName)
+                            </a>
                         </th>
                         <th>
                             Actions
@@ -47,21 +47,58 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CityName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Country.CountryName)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.CityID">Edit</a> |
-                            <a asp-action="Delete" asp-route-id="@item.CityID">Delete</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CityName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country.CountryName)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.CityID">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@item.CityID">Delete</a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+        </div>
+        <div class="row justify-content-center">
+
+            <a asp-action="Index"
+               asp-route-pageSize="@ViewData["CurrentSize"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-primary mr-1 @prevDisabled">
+                Önceki
+            </a>
+
+            <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
+                @foreach (int index in Enumerable.Range(1, 10))
+                {
+                    int value = index * 10;
+                    <option value="@value">
+                        <a class="dropdown-item btn btn-primary" asp-action="Index"
+                           asp-route-pageSize="@value"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@ViewData["CurrentPage"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
+                    </option>
+                }
+            </select>
+            <a asp-action="Index"
+               asp-route-pageSize="@ViewData["CurrentSize"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-primary ml-1 @nextDisabled">
+                Sonraki
+            </a>
         </div>
     </div>
 </div>

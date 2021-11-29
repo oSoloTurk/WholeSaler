@@ -73,6 +73,7 @@ namespace WholeSaler.Areas.Identity.Pages.Account
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
+
             _emailSender.SendEmail(Input.Email, "Confirm Your Account", _env.WebRootPath, EmailTemplates.CONFIRM_ACCOUNT.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");

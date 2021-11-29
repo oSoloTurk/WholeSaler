@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
@@ -21,8 +22,11 @@ namespace WholeSaler.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string query)
+        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
+            if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
+            if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
+
             IQueryable<City> wholesellerContext = _context.Cities.Include(city => city.Country);
             if (query != null)
             {
@@ -43,7 +47,7 @@ namespace WholeSaler.Controllers
                 }
                 TempData["CurrentFilter"] = sortOrder;
             }
-            return View(await wholesellerContext.ToListAsync());
+            return View(await PaginatedList<City>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 
         public IActionResult Create()

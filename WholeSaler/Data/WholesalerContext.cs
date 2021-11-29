@@ -37,7 +37,7 @@ namespace WholeSaler.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Username=postgres;Password=123456;Server=localhost;Port=5432;Database=TestDatabase;Integrated Security=true;Pooling=true;Search Path=public");
+                optionsBuilder.UseNpgsql("Username=postgres;Password=123456;Server=localhost;Port=5432;Database=WholeSaler;Integrated Security=true;Pooling=true;Search Path=public");
             }
         }
 

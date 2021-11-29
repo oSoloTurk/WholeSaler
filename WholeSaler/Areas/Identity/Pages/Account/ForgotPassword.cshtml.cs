@@ -11,19 +11,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using WholeSaler.Models;
+using WholeSaler.Services;
+using Microsoft.AspNetCore.Hosting;
+using WholeSaler.Enums;
 
 namespace WholeSaler.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
+        private readonly UserManager<User> _userManager;
+        private readonly EmailService _emailSender;
+        private readonly IHostingEnvironment _env;
+
+        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender, IHostingEnvironment env)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
+            _emailSender = (EmailService)emailSender;
+            _env = env;
         }
 
         [BindProperty]
@@ -57,14 +63,11 @@ namespace WholeSaler.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                _emailSender.SendEmail(Input.Email, "Confirm Your Account", _env.WebRootPath, EmailTemplates.FORGOT_PASSWORD.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
-
+            
             return Page();
         }
     }

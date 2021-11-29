@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WholeSaler.Models;
 using WholeSaler.Data;
 using Microsoft.AspNetCore.Authorization;
+using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
@@ -22,8 +23,11 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index(string sortOrder, string query)
+        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
+            if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
+            if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
+
             IQueryable<Vehicle> wholesellerContext = _context.Vehicles;
             if (query != null)
             {
@@ -45,7 +49,7 @@ namespace WholeSaler.Controllers
                 TempData["CurrentFilter"] = sortOrder;
             }
             ViewBag.vehiclesInTheOperation = await _context.Operations.Distinct().Select(operation => operation.VehicleID).ToListAsync();
-            return View(await wholesellerContext.ToListAsync());
+            return View(await PaginatedList<Vehicle>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 
         // GET: Vehicles/Details/5

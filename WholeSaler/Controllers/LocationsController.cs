@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
@@ -36,8 +37,11 @@ namespace WholeSaler.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> OwnLocations(string sortOrder, string query)
+        public async Task<IActionResult> OwnLocations(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
+            if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
+            if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
+
             var wholesellerContext = _context.Locations.Include(l => l.City).Include(l => l.LocationOwner).Where(l => l.LocationOwnerID == _userManager.GetUserId(User));
             if (query != null)
             {
@@ -58,7 +62,7 @@ namespace WholeSaler.Controllers
                 }
                 TempData["CurrentFilter"] = sortOrder;
             }
-            return View(await wholesellerContext.ToListAsync());
+            return View(await PaginatedList<Location>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 
         // GET: Locations/Details/5
