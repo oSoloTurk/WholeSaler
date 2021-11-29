@@ -54,7 +54,7 @@ namespace WholeSaler.Controllers
             }
             TempData["CurrentFilter"] = sortOrder;
             }
-
+            TempData["CurrentSize"] = pageSize;
             return View(await PaginatedList<Item>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 
