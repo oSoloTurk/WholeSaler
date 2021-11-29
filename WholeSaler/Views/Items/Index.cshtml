@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WholeSaler.Models.Item>
+﻿@using WholeSaler.Utils
+@model PaginatedList<WholeSaler.Models.Item>
 
 @{
     ViewData["Title"] = "Items";
@@ -27,22 +28,22 @@
                     <tr>
                         <th>
                             <a asp-route-sortOrder="item_name">
-                                @Html.DisplayNameFor(model => model.ItemName)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().ItemName)
                             </a>
                         </th>
                         <th>
                             <a asp-route-sortOrder="item_price">
-                                @Html.DisplayNameFor(model => model.ItemPrice)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().ItemPrice)
                             </a>
                         </th>
                         <th>
                             <a asp-route-sortOrder="item_desc">
-                                @Html.DisplayNameFor(model => model.ItemDesc)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().ItemDesc)
                             </a>
                         </th>
                         <th>
                             <a asp-route-sortOrder="item_category">
-                                @Html.DisplayNameFor(model => model.Category)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Category)
                             </a>
                         </th>
                         <th>
@@ -75,7 +76,45 @@
                     }
                 </tbody>
             </table>
-        </div>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+        
+        </div><div class="row justify-content-center">
+
+    <a asp-action="Index"
+       asp-route-pageSize="@ViewData["CurrentSize"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-primary mr-1 @prevDisabled">
+        Önceki
+    </a>
+
+    <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
+        @foreach (int index in Enumerable.Range(1, 10))
+        {
+            int value = index * 10;
+            <option value="@value">
+                <a class="dropdown-item btn btn-primary" asp-action="Index"
+                   asp-route-pageSize="@value"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@ViewData["CurrentPage"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
+            </option>
+        }
+    </select>
+    <a asp-action="Index"
+       asp-route-pageSize="@ViewData["CurrentSize"]"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-primary ml-1 @nextDisabled">
+        Sonraki
+    </a>
+</div>
     </div>
 </div>
 
+<script src="~/js/data_table.js"></script>
