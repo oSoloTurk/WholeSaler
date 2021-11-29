@@ -12,11 +12,15 @@
 
         public int TotalPages { get; private set; }
 
+        public int CurrentPage { get; set; }
+        public int CurrentPageSize { get; set; }
+
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-
+            CurrentPage = pageIndex;
+            CurrentPageSize = pageSize;
             this.AddRange(items);
         }
 
