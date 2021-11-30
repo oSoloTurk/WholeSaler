@@ -31,4 +31,5 @@ This project is licensed under the GPL-3.0 License - see the LICENSE.md file for
 ## Acknowledgments
 
 * [StartBoostrap SBAdmin-2 for UI Design](https://github.com/StartBootstrap/startbootstrap-sb-admin-2)
+* [Frontal Theme on HTML5 for Showcase Page](https://html5up.net/fractal)
 * [Email Template by BBBootstrap Team](https://bbbootstrap.com/snippets/confirm-account-email-template-17848137)
