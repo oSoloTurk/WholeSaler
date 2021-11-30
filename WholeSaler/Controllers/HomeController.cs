@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,18 +17,32 @@ namespace WholeSaler.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             _logger = logger;
         }
 
         [AllowAnonymous]
         public IActionResult Index()
         {
-
-            return View();
+            if(User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Admin", "Dashboard");
+            }
+            if(User.IsInRole("Customer"))
+            {
+                return RedirectToAction("Customer", "Dashboard");
+            }
+            return View("Showcase");
         }
+
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
