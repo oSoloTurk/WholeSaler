@@ -1,4 +1,7 @@
-﻿@using WholeSaler.Utils
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.Vehicle>
 
 @{
@@ -59,7 +62,7 @@
                                     }
                                     else
                                     {
-                            <span class="text-warning">@Localizer["Vehicle is not in active operation!"]</span>
+                                        <span class="text-warning">@Localizer["Vehicle is not in active operation!"]</span>
                                     }
                                 }
                             </td>

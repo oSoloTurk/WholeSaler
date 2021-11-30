@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,10 +79,10 @@
             </div>
         </div>
     </div>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src='~/js/header.js'></script>
-        <script src='~/js/theme.js'></script>
-        @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src='~/js/header.js'></script>
+    <script src='~/js/theme.js'></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

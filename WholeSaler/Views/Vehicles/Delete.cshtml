@@ -1,4 +1,7 @@
-﻿@model WholeSaler.Models.Vehicle
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model WholeSaler.Models.Vehicle
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,20 +14,20 @@
     <h4>@Localizer["Vehicle"]</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VehicleName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.VehicleName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VehiclePlate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.VehiclePlate)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="VehicleID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

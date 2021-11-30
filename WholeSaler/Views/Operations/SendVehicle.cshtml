@@ -1,12 +1,15 @@
-﻿@model WholeSaler.Models.Operation
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model WholeSaler.Models.Operation
 
 @{
     ViewData["Title"] = "SendVehicle";
 }
-@{ 
-    foreach(Operation operation in ViewBag.Operations)
+@{
+    foreach (Operation operation in ViewBag.Operations)
     {
-        if(ViewBag.Vehicles.Contains(operation.Vehicle))
+        if (ViewBag.Vehicles.Contains(operation.Vehicle))
         {
             ViewBag.Vehicles.Remove(operation.Vehicle);
         }

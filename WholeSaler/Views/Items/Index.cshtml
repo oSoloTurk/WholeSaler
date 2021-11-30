@@ -1,4 +1,7 @@
-﻿@using WholeSaler.Utils
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.Item>
 
 @{
@@ -80,65 +83,65 @@
                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";
             }
-        
+
         </div><div class="row justify-content-center">
 
-                  <a asp-action="Index"
-                     asp-route-pageSize="@ViewData["CurrentSize"]"
-                     asp-route-sortOrder="@ViewData["CurrentSort"]"
-                     asp-route-pageNumber="@(Model.PageIndex - 1)"
-                     asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                     class="btn btn-primary mr-1 @prevDisabled">
-                      @Localizer["Back"]
-                  </a>
+            <a asp-action="Index"
+               asp-route-pageSize="@ViewData["CurrentSize"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-primary mr-1 @prevDisabled">
+                @Localizer["Back"]
+            </a>
 
 
-    <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
-        @foreach (int index in Enumerable.Range(1, 10))
-        {
-            int value = index * 10;
-            @if (Model.CurrentPageSize == value)
-            {
-                <option selected value="@value">
-                    <a class="dropdown-item btn btn-primary" asp-action="Index"
-                       asp-route-pageSize="@value"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-pageNumber="@ViewData["CurrentPage"]"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
-                </option>
-            }
-            else
-            {
-                <option value="@value">
-                    <a class="dropdown-item btn btn-primary" asp-action="Index"
-                       asp-route-pageSize="@value"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-pageNumber="@ViewData["CurrentPage"]"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
-                </option>
-            }
+            <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
+                @foreach (int index in Enumerable.Range(1, 10))
+                {
+                    int value = index * 10;
+                    @if (Model.CurrentPageSize == value)
+                    {
+                        <option selected value="@value">
+                            <a class="dropdown-item btn btn-primary" asp-action="Index"
+                               asp-route-pageSize="@value"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                               asp-route-pageNumber="@ViewData["CurrentPage"]"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@value">
+                            <a class="dropdown-item btn btn-primary" asp-action="Index"
+                               asp-route-pageSize="@value"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                               asp-route-pageNumber="@ViewData["CurrentPage"]"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
+                        </option>
+                    }
 
-        }
-    </select>
-    <a asp-action="Index"
-       asp-route-pageSize="@ViewData["CurrentSize"]"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-pageNumber="@ViewData["CurrentSize"]"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       hidden
-       id="applyPageSizeChange"
-       class="btn btn-primary ml-1">
-        @ViewData["CurrentSize"]
-    </a>
-    <a asp-action="Index"
-       asp-route-pageSize="@ViewData["CurrentSize"]"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-pageNumber="@(Model.PageIndex + 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-primary ml-1 @nextDisabled">
-        @Localizer["Next"]
-    </a>
-</div>
+                }
+            </select>
+            <a asp-action="Index"
+               asp-route-pageSize="@ViewData["CurrentSize"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@ViewData["CurrentSize"]"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               hidden
+               id="applyPageSizeChange"
+               class="btn btn-primary ml-1">
+                @ViewData["CurrentSize"]
+            </a>
+            <a asp-action="Index"
+               asp-route-pageSize="@ViewData["CurrentSize"]"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-primary ml-1 @nextDisabled">
+                @Localizer["Next"]
+            </a>
+        </div>
     </div>
 </div>
 
