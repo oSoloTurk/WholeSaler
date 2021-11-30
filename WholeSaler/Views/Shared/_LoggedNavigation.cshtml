@@ -14,7 +14,7 @@
 
         <a class="nav-link" asp-controller="Dashboard" asp-action="Admin">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Admin Dashboard</span>
+            <span>@Localizer["Admin Dashboard"]</span>
         </a>
     }
     @if (User.IsInRole("Customer"))
@@ -24,7 +24,7 @@
 
         <a class="nav-link" asp-controller="Dashboard" asp-action="User">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Customer Dashboard</span>
+            <span>@Localizer["Customer Dashboard"]</span>
         </a>
     }
 </li>
@@ -36,7 +36,7 @@
 
         <a class="nav-link" asp-controller="Items" asp-action="CreateOrder">
             <i class="fas fa-shopping-basket"></i>
-            <span>Create Order</span>
+            <span>@Localizer["Create Order"]</span>
         </a>
     </li>
         }
@@ -45,14 +45,14 @@
         <li class="nav-item @(page == "Vehicles" ? "active" : "")">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Vehicles</span>
+                <span>@Localizer["Vehicles"]</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Shortcuts</h6>
-                    <a class="collapse-item" asp-controller="Vehicles" asp-action="Create">Add Vehicle</a>
-                    <a class="collapse-item" asp-controller="Vehicles" asp-action="Index">List Vehicles</a>
-                    <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">Send Operation</a>
+                    <h6 class="collapse-header">@Localizer["Shortcuts"]</h6>
+                    <a class="collapse-item" asp-controller="Vehicles" asp-action="Create">@Localizer["Add Vehicle"]</a>
+                    <a class="collapse-item" asp-controller="Vehicles" asp-action="Index">@Localizer["List Vehicles"]</a>
+                    <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">@Localizer["Send Operation"]</a>
                 </div>
             </div>
         </li>
@@ -62,13 +62,13 @@
             <li class="nav-item @(page == "Items" ? "active" : "")">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Items</span>
+                    <span>@Localizer["Items"]</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Shortcuts</h6>
-                        <a class="collapse-item" asp-controller="Items" asp-action="Create">Add Item</a>
-                        <a class="collapse-item" asp-controller="Items" asp-action="Index">List Items</a>
+                        <h6 class="collapse-header">@Localizer["Shortcuts"]</h6>
+                        <a class="collapse-item" asp-controller="Items" asp-action="Create">@Localizer["Add Item"]</a>
+                        <a class="collapse-item" asp-controller="Items" asp-action="Index">@Localizer["List Items"]</a>
                     </div>
                 </div>
             </li>
@@ -78,13 +78,13 @@
             <li class="nav-item @(page == "Categories" ? "active" : "")">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Categories</span>
+                    <span>@Localizer["Categories"]</span>
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Shortcuts</h6>
-                        <a class="collapse-item" asp-controller="Categories" asp-action="Create">Add Category</a>
-                        <a class="collapse-item" asp-controller="Categories" asp-action="Index">List Categories</a>
+                        <h6 class="collapse-header">@Localizer["Shortcuts"]</h6>
+                        <a class="collapse-item" asp-controller="Categories" asp-action="Create">@Localizer["Add Category"]</a>
+                        <a class="collapse-item" asp-controller="Categories" asp-action="Index">@Localizer["List Categories"]</a>
                     </div>
                 </div>
             </li>
@@ -94,13 +94,13 @@
             <li class="nav-item @(page == "Operations" ? "active" : "")">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Operations</span>
+                    <span>@Localizer["Operations"]</span>
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Shortcuts</h6>
-                        <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">New Operation</a>
-                        <a class="collapse-item" asp-controller="Operations" asp-action="Index">Operation History</a>
+                        <h6 class="collapse-header">@Localizer["Shortcuts"]</h6>
+                        <a class="collapse-item" asp-controller="Operations" asp-action="SendVehicle">New Operation@Localizer["About"]</a>
+                        <a class="collapse-item" asp-controller="Operations" asp-action="Index">Operation History@Localizer["About"]</a>
                     </div>
                 </div>
             </li>
@@ -110,23 +110,23 @@
             <li class="nav-item @(page == "Identity" ? "active" : "")">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Profile</span>
+                    <span>@Localizer["Profile"]</span>
                 </a>
 
                 <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Shortcuts</h6>
+                        <h6 class="collapse-header">Shortcuts@Localizer["About"]</h6>
                         <a class="collapse-item @ManageNavPages.IndexNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/Index"
-                           title="Manage">Manage Phone</a>
+                           title="Manage">@Localizer["Manage Phone"]</a>
                         <a class="collapse-item @ManageNavPages.EmailNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/Email"
-                           title="Manage">Manage Email</a>
+                           title="Manage">@Localizer["Manage Email"]</a>
                         <a class="collapse-item @ManageNavPages.ChangePasswordNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/ChangePassword"
-                           title="Manage">Manage Password</a>
+                           title="Manage">@Localizer["Manage Password"]</a>
                         <a class="collapse-item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication"
-                           title="Manage">Manage T-FA</a>
+                           title="Manage">@Localizer["Manage T-FA"]</a>
                         <a class="collapse-item @(page == "Locations" ? "active" : "")" asp-controller="Locations" asp-action="OwnLocations" title="Manage">Manage Locations</a>
                         <a class="collapse-item @ManageNavPages.PersonalDataNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/PersonalData"
-                           title="Manage">Manage Personal Datas</a>
+                           title="Manage">@Localizer["Manage Personal Datas"]</a>
                     </div>
                 </div>
             </li>
@@ -136,14 +136,14 @@
             <li class="nav-item @(page == "Countries" || page == "States" ? "active" : "")">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Operation States</span>
+                    <span>@Localizer["Operation States"]</span>
                 </a>
 
                 <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Shortcuts</h6>
-                        <a class="collapse-item" asp-controller="Cities" asp-action="Index">Operationally Cities</a>
-                        <a class="collapse-item" asp-controller="Countries" asp-action="Index">Operationally Countries</a>
+                        <h6 class="collapse-header">@Localizer["Shortcuts"]</h6>
+                        <a class="collapse-item" asp-controller="Cities" asp-action="Index">@Localizer["Operationally Cities"]</a>
+                        <a class="collapse-item" asp-controller="Countries" asp-action="Index">@Localizer["Operationally Countries"]</a>
                     </div>
                 </div>
             </li>

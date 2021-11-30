@@ -12,7 +12,7 @@
                 <span class="icon text-white-50">
                     <i class="fas fa-flag"></i>
                 </span>
-                <span class="text">Create Location</span>
+                <span class="text">@Localizer["Create Location"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
                 @ViewData["Title"]
@@ -36,7 +36,7 @@
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().City)
                             </a>
                         </th>
-                        <th>Actions</th>
+                        <th>@Localizer["Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,8 +50,8 @@
                                 @Html.DisplayFor(modelItem => item.City.CityName)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.LocationID">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@item.LocationID">Delete</a>
+                                <a asp-action="Edit" asp-route-id="@item.LocationID">@Localizer["Edit"]</a> |
+                                <a asp-action="Delete" asp-route-id="@item.LocationID">@Localizer["Delete"]</a>
                             </td>
                         </tr>
                     }
@@ -70,7 +70,7 @@
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary mr-1 @prevDisabled">
-                Önceki
+                @Localizer["Back"]
             </a>
 
             <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
@@ -115,7 +115,7 @@
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary ml-1 @nextDisabled">
-                Sonraki
+                @Localizer["Next"]
             </a>
         </div>
     </div>
