@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WholeSaler.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -69,18 +69,20 @@ namespace WholeSaler.Controllers
             }
             return View(model);
         }
+
         [HttpPost]
-        public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Manage([Bind]List<ManageUserRolesViewModel> model, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return View("Index");
+                return RedirectToAction("Index");
             }
             var roles = await _userManager.GetRolesAsync(user);
             var result = await _userManager.RemoveFromRolesAsync(user, roles);
             result = await _userManager.AddToRolesAsync(user, model.Where(x => x.Selected).Select(y => y.RoleName));
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
     public class UserRolesViewModel

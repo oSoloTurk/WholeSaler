@@ -68,7 +68,6 @@ namespace WholeSaler.Controllers
            return View(operation);
         }
 
-
         // GET: Operations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

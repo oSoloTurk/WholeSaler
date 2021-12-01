@@ -15,20 +15,23 @@ namespace WholeSaler.Controllers
     public class DashboardController : Controller
     {
         private readonly WholesalerContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public DashboardController(WholesalerContext context)
+        public DashboardController(WholesalerContext context, UserManager<User> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
         [Authorize(Roles = "Customer")]
 
-        public IActionResult User()
+        public async Task<IActionResult> UserBoard()
         {
+            var operations = await _context.Operations.Where(operation => operation.OwnerID == _userManager.GetUserId(User)).ToListAsync();
             return View();
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Admin()
+        public async Task<IActionResult> AdminBoard()
         { 
             int earnWeek = 0;
             int earnMonthly = 0;
@@ -70,5 +73,9 @@ namespace WholeSaler.Controllers
             }
             return Json(earns);
         }
+    }
+    public class UserDashboardModel
+    {
+
     }
 }

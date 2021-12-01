@@ -15,7 +15,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <a class="nav-link" asp-controller="Dashboard" asp-action="Admin">
+        <a class="nav-link" asp-controller="Dashboard" asp-action="AdminBoard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>@Localizer["Admin Dashboard"]</span>
         </a>
@@ -25,7 +25,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <a class="nav-link" asp-controller="Dashboard" asp-action="User">
+        <a class="nav-link" asp-controller="Dashboard" asp-action="UserBoard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>@Localizer["Customer Dashboard"]</span>
         </a>
@@ -149,5 +149,14 @@
                 <a class="collapse-item" asp-controller="Countries" asp-action="Index">@Localizer["Operationally Countries"]</a>
             </div>
         </div>
+    </li>
+}
+@if (User.IsInRole("SuperAdmin"))
+{
+    <li class="nav-item @(page == "User" || page == "States" ? "active" : "")">
+        <a class="nav-link" asp-controller="User" asp-action="Index">
+            <i class="fas fa-fw fa-user-check"></i>
+            <span>@Localizer["User Roles"]</span>
+        </a>
     </li>
 }
