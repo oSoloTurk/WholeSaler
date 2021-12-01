@@ -4,6 +4,8 @@
 @inject IViewLocalizer Localizer
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @model WholeSaler.Models.Item
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @{
     ViewData["Title"] = "Create";
@@ -26,7 +28,7 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                     </span>
-                    <span class="text">@Localizer["Create"]</span>
+                    <span class="text">@SharedLocalizer["Create"]</span>
                 </button>
             </div>
         </div>

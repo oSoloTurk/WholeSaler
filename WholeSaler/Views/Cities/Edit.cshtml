@@ -2,6 +2,8 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @model WholeSaler.Models.City
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @{
     ViewData["Title"] = "Edit";
@@ -16,7 +18,7 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-arrow-left"></i>
                     </span>
-                    <span class="text">@Localizer["Back to List"]</span>
+                    <span class="text">@SharedLocalizer["Back to List"]</span>
                 </a>
                 <h6 class="m-0 font-weight-bold text-primary align-self-center">
                     @ViewData["Title"]
@@ -25,7 +27,7 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                     </span>
-                    <span class="text">@Localizer["Create"]</span>
+                    <span class="text">@SharedLocalizer["Create"]</span>
                 </button>
             </div>
         </div>

@@ -3,6 +3,8 @@
 @inject IViewLocalizer Localizer
 @using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.Country>
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @{
     ViewData["Title"] = "Countries";
@@ -39,7 +41,7 @@
                             </a>
                         </th>
                         <th>
-                            @Localizer["Actions"]
+                            @SharedLocalizer["Actions"]
                         </th>
                     </tr>
                 </thead>
@@ -71,7 +73,7 @@
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary mr-1 @prevDisabled">
-                @Localizer["Back"]
+                @SharedLocalizer["Back"]
             </a>
 
             <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
@@ -116,7 +118,7 @@
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary ml-1 @nextDisabled">
-                @Localizer["Next"]
+                @SharedLocalizer["Next"]
             </a>
         </div>
     </div>

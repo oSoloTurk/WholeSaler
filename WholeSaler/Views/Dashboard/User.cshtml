@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success border-start-3 shadow h-100 py-2">
@@ -75,7 +77,7 @@
     <div class="card corner-bottom col-3 text-center" style="width: 18rem;">
         <img src="~/images/admin/vehicle.jpg" class="card-img-top" alt="vehicle">
         <div class="card-body">
-            <h5 class="card-title">@Localizer["Vehicles"]</h5>
+            <h5 class="card-title">@SharedLocalizer["Vehicles"]</h5>
             <p class="card-text">@Localizer["You can manage your fleet."]</p>            <p class="card-text">@Localizer["Lenght of fleet is"] @ViewData["fleetSize"]</p>
 
             <a class="btn theme-button-success" asp-controller="Vehicles" asp-action="Index">@Localizer["Go Vehicle Management Page"]</a>

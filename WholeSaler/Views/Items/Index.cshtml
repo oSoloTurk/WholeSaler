@@ -1,11 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
-@using WholeSaler.Resources 
+@using WholeSaler.Resources
 @inject IViewLocalizer Localizer
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.Item>
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @{
     ViewData["Title"] = "Items";
@@ -18,7 +20,7 @@
                 <span class="icon text-white-50">
                     <i class="fas fa-flag"></i>
                 </span>
-                <span class="text">@Localizer["Add Item"]</span>
+                <span class="text">@SharedLocalizer["Add Item"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
                 @ViewData["Title"]
@@ -53,7 +55,7 @@
                             </a>
                         </th>
                         <th>
-                            @Localizer["Actions"]
+                            @SharedLocalizer["Actions"]
                         </th>
                     </tr>
                 </thead>
@@ -74,9 +76,9 @@
                                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.ItemID">@Localizer["Edit"]</a> |
-                                <a asp-action="Details" asp-route-id="@item.ItemID">@Localizer["Details"]</a> |
-                                <a asp-action="Delete" asp-route-id="@item.ItemID">@Localizer["Delete"]</a>
+                                <a asp-action="Edit" asp-route-id="@item.ItemID">@SharedLocalizer["Edit"]</a> |
+                                <a asp-action="Details" asp-route-id="@item.ItemID">@SharedLocalizer["Details"]</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ItemID">@SharedLocalizer["Delete"]</a>
                             </td>
                         </tr>
                     }
@@ -95,7 +97,7 @@
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary mr-1 @prevDisabled">
-                @Localizer["Back"]
+                @SharedLocalizer["Back"]
             </a>
 
 
@@ -142,7 +144,7 @@
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary ml-1 @nextDisabled">
-                @Localizer["Next"]
+                @SharedLocalizer["Next"]
             </a>
         </div>
     </div>

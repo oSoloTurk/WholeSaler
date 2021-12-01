@@ -2,15 +2,17 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @model WholeSaler.Models.Category
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>@Localizer["Details"]</h1>
+<h1>@SharedLocalizer["Details"]</h1>
 
 <div>
-    <h4>@Localizer["Category"]</h4>
+    <h4>@SharedLocalizer["Category"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -22,6 +24,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CategoryID">@Localizer["Edit"]</a> |
-    <a asp-action="Index">@Localizer["Back to List"]</a>
+    <a asp-action="Edit" asp-route-id="@Model.CategoryID">@SharedLocalizer["Edit"]</a> |
+    <a asp-action="Index">@SharedLocalizer["Back to List"]</a>
 </div>

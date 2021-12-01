@@ -3,6 +3,8 @@
 @inject IViewLocalizer Localizer
 @using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.City>
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @{
     ViewData["Title"] = "Cities";
 }
@@ -46,7 +48,7 @@
                             @Html.DisplayNameFor(model => model.FirstOrDefault().OperationalState)
                         </th>
                         <th>
-                            @Localizer["Actions"]
+                            @SharedLocalizer["Actions"]
                         </th>
                     </tr>
                 </thead>
@@ -64,8 +66,8 @@
                                 @Html.DisplayFor(model => model.FirstOrDefault().OperationalState)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.CityID">@Localizer["Edit"]</a> |
-                                <a asp-action="Delete" asp-route-id="@item.CityID">@Localizer["Delete"]</a>
+                                <a asp-action="Edit" asp-route-id="@item.CityID">@SharedLocalizer["Edit"]</a> |
+                                <a asp-action="Delete" asp-route-id="@item.CityID">@SharedLocalizer["Delete"]</a>
                             </td>
                         </tr>
                     }
@@ -84,7 +86,7 @@
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary mr-1 @prevDisabled">
-                @Localizer["Back"]
+                @SharedLocalizer["Back"]
             </a>
 
             <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">
@@ -129,7 +131,7 @@
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary ml-1 @nextDisabled">
-                @Localizer["Next"]
+                @SharedLocalizer["Next"]
             </a>
         </div>
     </div>
