@@ -78,7 +78,7 @@
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                class="btn btn-primary mr-1 @prevDisabled">
-                Önceki@Localizer["Back"]
+                @Localizer["Back"]
             </a>
 
             <select class="custom-select custom-select-sm form-control form-control-sm col-sm-1" aria-label=".form-select-lg example" onchange="javascript:pageSizeChange(this)">

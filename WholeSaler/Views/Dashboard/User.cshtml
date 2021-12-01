@@ -76,7 +76,7 @@
         <img src="~/images/admin/vehicle.jpg" class="card-img-top" alt="vehicle">
         <div class="card-body">
             <h5 class="card-title">@Localizer["Vehicles"]</h5>
-            <p class="card-text">@Localizer["You can manage your fleet."]</p>            <p class="card-text">Lenght of fleet is @ViewData["fleetSize"]</p>
+            <p class="card-text">@Localizer["You can manage your fleet."]</p>            <p class="card-text">@Localizer["Lenght of fleet is"] @ViewData["fleetSize"]</p>
 
             <a class="btn theme-button-success" asp-controller="Vehicles" asp-action="Index">@Localizer["Go Vehicle Management Page"]</a>
         </div>
@@ -87,8 +87,8 @@
         <div class="card-body">
             <h5 class="card-title">@Localizer["Items"]</h5>
             <p class="card-text">@Localizer["You can manage your items."]</p>
-            <p class="card-text theme-button-success">Lenght of items is @ViewData["itemSize"] in @ViewData["categorySize"] category.</p>
-            <a class="btn theme-button-success" asp-controller="Items" asp-action="Index">@Localizer["About"]Go Items Management Page</a>
+            <p class="card-text theme-button-success">@Localizer["Lenght of items is"] @ViewData["itemSize"] in @ViewData["categorySize"] category.</p>
+            <a class="btn theme-button-success" asp-controller="Items" asp-action="Index">@Localizer["Go Items Management Page"]</a>
         </div>
     </div>
     <div class="col-1"></div>

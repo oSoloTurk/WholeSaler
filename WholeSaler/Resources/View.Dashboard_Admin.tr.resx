@@ -117,16 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Hello {0}!" xml:space="preserve">
-    <value>Merhaba {0}!</value>
+  <data name="About" xml:space="preserve">
+    <value>Hakkında</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Giriş Yap</value>
+  <data name="asd" xml:space="preserve">
+    <value />
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Çıkış Yap</value>
+  <data name="asdas" xml:space="preserve">
+    <value />
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Kayıt Ol</value>
+  <data name="Go Items Management Page" xml:space="preserve">
+    <value>Ürün Yönetim Sayfasın Git</value>
+  </data>
+  <data name="Go Reports Page" xml:space="preserve">
+    <value>Raporlar Sayfasına Git</value>
+  </data>
+  <data name="Go Vehicle Management" xml:space="preserve">
+    <value>Araç Yönetimine Git {0}</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Ürünler</value>
+  </data>
+  <data name="Lenght of fleet is {0}" xml:space="preserve">
+    <value>Filo Genişliği {0}</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Raporlar</value>
+  </data>
+  <data name="Vehicles" xml:space="preserve">
+    <value>Araçlar</value>
+  </data>
+  <data name="You can manage your fleet" xml:space="preserve">
+    <value>Filoyu Yönet</value>
+  </data>
+  <data name="You can manage your items" xml:space="preserve">
+    <value>Ürünleri Yönetebilirsiniz</value>
+  </data>
+  <data name="You can see reports" xml:space="preserve">
+    <value>Raporları Görebilirsiniz</value>
   </data>
 </root>
