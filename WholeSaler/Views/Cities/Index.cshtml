@@ -43,6 +43,9 @@
                             </a>
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().OperationalState)
+                        </th>
+                        <th>
                             @Localizer["Actions"]
                         </th>
                     </tr>
@@ -56,6 +59,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Country.CountryName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.FirstOrDefault().OperationalState)
                             </td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.CityID">@Localizer["Edit"]</a> |

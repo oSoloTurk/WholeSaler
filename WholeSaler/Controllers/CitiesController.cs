@@ -21,7 +21,6 @@ namespace WholeSaler.Controllers
         {
             _context = context;
         }
-
         public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
             if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
@@ -58,7 +57,7 @@ namespace WholeSaler.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CountryID,CityName")] City city)
+        public async Task<IActionResult> Create([Bind("CountryID,CityName,OperationalState")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +86,7 @@ namespace WholeSaler.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CityID,CountryID,CityName")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("CityID,CountryID,CityName,OperationalState")] City city)
         {
             if (id != city.CityID)
             {

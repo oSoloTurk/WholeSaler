@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
+@using WholeSaler.Resources 
 @inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
 @using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.Item>
 
