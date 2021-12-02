@@ -2,18 +2,31 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @model WholeSaler.Models.Vehicle
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>@Localizer["Edit"]</h1>
-
-<h4>@Localizer["Vehicle"]</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<form asp-action="Edit">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-secondary btn-icon-split" asp-action="Index">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                    <span class="text">@SharedLocalizer["Back to List"]</span>
+                </a>
+                <h6 class="m-0 font-weight-bold text-primary align-self-center">
+                    @ViewData["Title"]
+                </h6>
+                <button type="submit" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">@SharedLocalizer["Save"]</span>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="VehicleID" />
             <div class="form-group">
@@ -26,16 +39,9 @@
                 <input asp-for="VehiclePlate" class="form-control" />
                 <span asp-validation-for="VehiclePlate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">@Localizer["Back to List"]</a>
-</div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
