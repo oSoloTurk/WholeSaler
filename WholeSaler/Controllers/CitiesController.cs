@@ -131,10 +131,19 @@ namespace WholeSaler.Controllers
                 return NotFound();
             }
 
-            _context.Cities.Remove(city);
+            return View(city);
+
+        }
+
+        // POST: Cities/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var item = await _context.Cities.FindAsync(id);
+            _context.Cities.Remove(item);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-
         }
 
         private bool CityExists(int id)

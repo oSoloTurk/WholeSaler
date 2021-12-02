@@ -34,11 +34,11 @@ namespace WholeSaler.Controllers
         {
             if(User.IsInRole("Admin"))
             {
-                return RedirectToAction("Admin", "Dashboard");
+                return RedirectToAction("AdminBoard", "Dashboard");
             }
             if(User.IsInRole("Customer"))
             {
-                return RedirectToAction("Customer", "Dashboard");
+                return RedirectToAction("UserBoard", "Dashboard");
             }
             return View("Showcase");
         }

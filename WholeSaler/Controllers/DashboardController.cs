@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
@@ -24,10 +25,15 @@ namespace WholeSaler.Controllers
         }
         [Authorize(Roles = "Customer")]
 
-        public async Task<IActionResult> UserBoard()
+        public async Task<IActionResult> UserBoard(int? pageNumber, int? pageSize = 5)
         {
-            var operations = await _context.Operations.Where(operation => operation.OwnerID == _userManager.GetUserId(User)).ToListAsync();
-            return View();
+            if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
+            if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
+
+            UserDashboardModel model = new UserDashboardModel();
+            var query = _context.Operations.Where(operation => operation.OwnerID == _userManager.GetUserId(User));
+            model.Operations = await PaginatedList<Operation>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize.Value);
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -76,6 +82,6 @@ namespace WholeSaler.Controllers
     }
     public class UserDashboardModel
     {
-
+        public PaginatedList<Operation> Operations { get; set; }
     }
 }

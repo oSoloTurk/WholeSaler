@@ -2,12 +2,9 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using WholeSaler.Controllers 
 @inject IViewLocalizer Localizer
-<<<<<<< Updated upstream
 @using WholeSaler.Resources
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
-=======
 @model UserDashboardModel
->>>>>>> Stashed changes
 <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success border-start-3 shadow h-100 py-2">
@@ -78,26 +75,6 @@
         </div>
     </div>
 </div>
-<<<<<<< Updated upstream
-<div class="row">
-    <div class="card corner-bottom col-3 text-center" style="width: 18rem;">
-        <img src="~/images/admin/vehicle.jpg" class="card-img-top" alt="vehicle">
-        <div class="card-body">
-            <h5 class="card-title">@SharedLocalizer["Vehicles"]</h5>
-            <p class="card-text">@Localizer["You can manage your fleet."]</p>            <p class="card-text">@Localizer["Lenght of fleet is"] @ViewData["fleetSize"]</p>
-
-            <a class="btn theme-button-success" asp-controller="Vehicles" asp-action="Index">@Localizer["Go Vehicle Management Page"]</a>
-        </div>
-    </div>
-    <div class="col-1"></div>
-    <div class="card corner-bottom col-4 text-center" style="width: 18rem;">
-        <img src="~/images/admin/item.jpg" class="card-img-top" alt="item">
-        <div class="card-body">
-            <h5 class="card-title">@Localizer["Items"]</h5>
-            <p class="card-text">@Localizer["You can manage your items."]</p>
-            <p class="card-text theme-button-success">@Localizer["Lenght of items is"] @ViewData["itemSize"] in @ViewData["categorySize"] category.</p>
-            <a class="btn theme-button-success" asp-controller="Items" asp-action="Index">@Localizer["Go Items Management Page"]</a>
-=======
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="d-flex justify-content-between">
@@ -107,7 +84,6 @@
                 <div></div>
                 <div></div>
             </div>
->>>>>>> Stashed changes
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -115,58 +91,48 @@
                     <thead>
                         <tr>
                             <th>
-                                <a asp-route-sortOrder="item_name">
-                                    @Html.DisplayNameFor(model => model.FirstOrDefault().ItemName)
-                                </a>
+                                @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Basket)
                             </th>
                             <th>
-                                <a asp-route-sortOrder="item_price">
-                                    @Html.DisplayNameFor(model => model.FirstOrDefault().ItemPrice)
-                                </a>
+                                @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Date)
                             </th>
                             <th>
-                                <a asp-route-sortOrder="item_desc">
-                                    @Html.DisplayNameFor(model => model.FirstOrDefault().ItemDesc)
-                                </a>
+                                @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Location)
                             </th>
                             <th>
-                                <a asp-route-sortOrder="item_category">
-                                    @Html.DisplayNameFor(model => model.FirstOrDefault().Category)
-                                </a>
+                                @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().OperationValue)
                             </th>
-                            <th>
-                                @Localizer["Actions"]
-                            </th>
+                            <th>@Localizer["Actions"]</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Operations)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                    @Html.DisplayFor(modelItem => item.Basket.UserID)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ItemPrice)
+                                    @Html.DisplayFor(modelItem => item.Date.DateID)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ItemDesc)
+                                    @item.Location.GetFullAdress()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                    @Html.DisplayFor(modelItem => item.OperationValue)
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.ItemID">@Localizer["Edit"]</a> |
-                                    <a asp-action="Details" asp-route-id="@item.ItemID">@Localizer["Details"]</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ItemID">@Localizer["Delete"]</a>
+                                    <a asp-action="Edit" asp-route-id="@item.OperationID">@SharedLocalizer["Edit"]</a> |
+                                    <a asp-action="Details" asp-route-id="@item.OperationID">@SharedLocalizer["Details"]</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.OperationID">@SharedLocalizer["Delete"]</a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
                 @{
-                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    var prevDisabled = !Model.Operations.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.Operations.HasNextPage ? "disabled" : "";
                 }
 
             </div><div class="row justify-content-center">
@@ -174,7 +140,7 @@
                 <a asp-action="Index"
                    asp-route-pageSize="@ViewData["CurrentSize"]"
                    asp-route-sortOrder="@ViewData["CurrentSort"]"
-                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-pageNumber="@(Model.Operations.PageIndex - 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary mr-1 @prevDisabled">
                     @Localizer["Back"]
@@ -185,7 +151,7 @@
                     @foreach (int index in Enumerable.Range(1, 10))
                     {
                         int value = index * 10;
-                        @if (Model.CurrentPageSize == value)
+                        @if (Model.Operations.CurrentPageSize == value)
                         {
                             <option selected value="@value">
                                 <a class="dropdown-item btn btn-primary" asp-action="Index"
@@ -221,7 +187,7 @@
                 <a asp-action="Index"
                    asp-route-pageSize="@ViewData["CurrentSize"]"
                    asp-route-sortOrder="@ViewData["CurrentSort"]"
-                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-pageNumber="@(Model.Operations.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary ml-1 @nextDisabled">
                     @Localizer["Next"]

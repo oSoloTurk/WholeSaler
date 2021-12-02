@@ -124,8 +124,17 @@ namespace WholeSaler.Controllers
             {
                 return NotFound();
             }
+            return View(country);
 
-            _context.Countries.Remove(country);
+        }
+
+        // POST: Countries/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var item = await _context.Countries.FindAsync(id);
+            _context.Countries.Remove(item);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
