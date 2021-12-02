@@ -132,6 +132,9 @@
   <data name="Manage Roles" xml:space="preserve">
     <value>Rolleri Yönet</value>
   </data>
+  <data name="Manage Users Roles" xml:space="preserve">
+    <value>Kullanıcıların Rollerini Yönet</value>
+  </data>
   <data name="Roles" xml:space="preserve">
     <value>Roller</value>
   </data>

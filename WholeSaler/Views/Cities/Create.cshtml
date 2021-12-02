@@ -5,10 +5,6 @@
 @using WholeSaler.Resources
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
-@{
-    ViewData["Title"] = "Create";
-}
-
 <form asp-action="Create">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -20,7 +16,7 @@
                     <span class="text">@SharedLocalizer["Back to List"]</span>
                 </a>
                 <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                    @ViewData["Title"]
+                    @Localizer["Create City"]
                 </h6>
                 <button type="submit" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">

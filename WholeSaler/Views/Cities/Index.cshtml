@@ -5,9 +5,6 @@
 @model PaginatedList<WholeSaler.Models.City>
 @using WholeSaler.Resources
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
-@{
-    ViewData["Title"] = "Cities";
-}
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -19,7 +16,7 @@
                 <span class="text">@Localizer["Add Operation City"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                @ViewData["Title"]
+                @SharedLocalizer["Cities"]
             </h6>
             <a asp-controller="Countries" asp-action="Create" class="btn btn-primary btn-icon-split float-right">
                 <span class="icon text-white-50">

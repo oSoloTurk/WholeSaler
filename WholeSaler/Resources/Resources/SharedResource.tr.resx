@@ -129,8 +129,20 @@
   <data name="Back to List" xml:space="preserve">
     <value>Listeye Dön</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
   <data name="Category" xml:space="preserve">
     <value>Kategori</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Şehirler</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Şehir</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Ülkeler</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Ülke</value>
@@ -150,8 +162,14 @@
   <data name="Item" xml:space="preserve">
     <value>Ürün</value>
   </data>
+  <data name="Items" xml:space="preserve">
+    <value>Ürünler</value>
+  </data>
   <data name="Location" xml:space="preserve">
     <value>Lokasyon</value>
+  </data>
+  <data name="Locations" xml:space="preserve">
+    <value>Adresler</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>İleri</value>
@@ -159,7 +177,10 @@
   <data name="Save" xml:space="preserve">
     <value>Kaydet</value>
   </data>
-  <data name="Vehicles" xml:space="preserve">
+  <data name="Vehicle" xml:space="preserve">
     <value>Araç</value>
+  </data>
+  <data name="Vehicles" xml:space="preserve">
+    <value>Araçlar</value>
   </data>
 </root>

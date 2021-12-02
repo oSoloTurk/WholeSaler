@@ -7,10 +7,6 @@
 @using WholeSaler.Utils
 @model PaginatedList<WholeSaler.Models.Item>
 
-@{
-    ViewData["Title"] = "Items";
-}
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
@@ -18,10 +14,10 @@
                 <span class="icon text-white-50">
                     <i class="fas fa-flag"></i>
                 </span>
-                <span class="text">@SharedLocalizer["Add Item"]</span>
+                <span class="text">@Localizer["Add Item"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                @ViewData["Title"]
+                @SharedLocalizer["Items"]
             </h6>
             <div></div>
             <div></div>

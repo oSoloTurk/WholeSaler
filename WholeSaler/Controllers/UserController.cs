@@ -42,17 +42,16 @@ namespace WholeSaler.Controllers
         }
         public async Task<IActionResult> Manage(string userId)
         {
-            ViewBag.userId = userId;
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return RedirectToAction("Index");
             }
-            ViewBag.UserName = user.UserName;
-            var model = new List<ManageUserRolesViewModel>();
+            var model = new ManageUserRolesViewModel();
+            model.UserName = user.UserName;
             foreach (var role in await _roleManager.Roles.ToListAsync())
             {
-                var userRolesViewModel = new ManageUserRolesViewModel
+                var userRolesViewModel = new UserRolesModel
                 {
                     RoleId = role.Id,
                     RoleName = role.Name
@@ -65,14 +64,14 @@ namespace WholeSaler.Controllers
                 {
                     userRolesViewModel.Selected = false;
                 }
-                model.Add(userRolesViewModel);
+                model.Roles.Add(userRolesViewModel);
             }
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Manage([Bind]List<ManageUserRolesViewModel> model, string userId)
+        public async Task<IActionResult> Manage([Bind]ManageUserRolesViewModel model, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -81,7 +80,7 @@ namespace WholeSaler.Controllers
             }
             var roles = await _userManager.GetRolesAsync(user);
             var result = await _userManager.RemoveFromRolesAsync(user, roles);
-            result = await _userManager.AddToRolesAsync(user, model.Where(x => x.Selected).Select(y => y.RoleName));
+            result = await _userManager.AddToRolesAsync(user, model.Roles.Where(x => x.Selected).Select(y => y.RoleName));
             return RedirectToAction("Index");
         }
     }
@@ -94,7 +93,19 @@ namespace WholeSaler.Controllers
         public string Email { get; set; }
         public IEnumerable<string> Roles { get; set; }
     }
+
     public class ManageUserRolesViewModel
+    {
+        public ManageUserRolesViewModel()
+        {
+            Roles = new List<UserRolesModel>();
+        }
+
+        public string UserName { get; set; }
+        public List<UserRolesModel> Roles { get; set; }
+    }
+
+    public class UserRolesModel
     {
         public string RoleId { get; set; }
         public string RoleName { get; set; }

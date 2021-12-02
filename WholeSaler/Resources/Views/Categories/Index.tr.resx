@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Actions" xml:space="preserve">
-    <value>Kayıtlar</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Geri</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Sil</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Düzenle</value>
-  </data>
-  <data name="Next" xml:space="preserve">
-    <value>İleri</value>
+  <data name="Add Category" xml:space="preserve">
+    <value>Kategori Ekle</value>
   </data>
 </root>

@@ -168,6 +168,9 @@
   <data name="Manage T-FA" xml:space="preserve">
     <value>2FA</value>
   </data>
+  <data name="Manage User Roles" xml:space="preserve">
+    <value>Kullanıcı Yetkilerini Yönet</value>
+  </data>
   <data name="New Operation" xml:space="preserve">
     <value>Yeni Operasyon Oluştur</value>
   </data>

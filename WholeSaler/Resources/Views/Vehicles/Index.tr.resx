@@ -138,10 +138,10 @@
   <data name="Next" xml:space="preserve">
     <value>İleri</value>
   </data>
-  <data name="Vehicle is currently operation" xml:space="preserve">
+  <data name="Vehicle is currently operation!" xml:space="preserve">
     <value>Araç Şu Anda Operasyonda</value>
   </data>
-  <data name="Vehicle is not in active operation" xml:space="preserve">
+  <data name="Vehicle is not in active operation!" xml:space="preserve">
     <value>Araç Aktif Operasyonda Değil</value>
   </data>
 </root>

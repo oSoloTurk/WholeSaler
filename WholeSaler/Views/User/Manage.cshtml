@@ -1,10 +1,10 @@
-﻿@model List<WholeSaler.Controllers.ManageUserRolesViewModel>
+﻿@using WholeSaler.Controllers;
+@model ManageUserRolesViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
-
+@using WholeSaler.Resources
 @inject IViewLocalizer Localizer
-@{
-    ViewData["Title"] = "Manage";
-}
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
 <form method="post">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -13,33 +13,33 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-arrow-left"></i>
                     </span>
-                    <span class="text">@Localizer["Back to List"]</span>
+                    <span class="text">@SharedLocalizer["Back to List"]</span>
                 </a>
                 <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                    @ViewBag.UserName
+                    @Localizer["{0}'s Roles", Model.UserName]
                 </h6>
                 <button type="submit" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                     </span>
-                    <span class="text">@Localizer["Save"]</span>
+                    <span class="text">@SharedLocalizer["Save"]</span>
                 </button>
             </div>
         </div>
         <div class="card-body">
             <div class="card-body">
                 <center>
-                    @for (int i = 0; i < Model.Count; i++)
+                    @for (int i = 0; i < Model.Roles.Count; i++)
                     {
                         <div class="form-check m-1">
-                            @Html.HiddenFor(model => model[i].RoleId)
-                            @Html.HiddenFor(model => model[i].RoleName)
-                            @Html.CheckBoxFor(model => model[i].Selected)
-                            <label class="form-check-label" asp-for="@Model[i].Selected">
-                                @Model[i].RoleName
+                            @Html.HiddenFor(model => model.Roles[i].RoleId)
+                            @Html.HiddenFor(model => model.Roles[i].RoleName)
+                            @Html.CheckBoxFor(model => model.Roles[i].Selected)
+                            <label class="form-check-label" asp-for="@Model.Roles[i].Selected">
+                                @Model.Roles[i].RoleName
                             </label>
                         </div>
-                     }
+                    }
 
                     <div asp-validation-summary="All" class="text-danger"></div>
                 </center>
