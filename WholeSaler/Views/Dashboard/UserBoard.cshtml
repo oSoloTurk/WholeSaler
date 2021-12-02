@@ -106,29 +106,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Operations)
+                        @if (Model.Operations.Count != 0)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Basket.UserID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Date.DateID)
-                                </td>
-                                <td>
-                                    @item.Location.GetFullAdress()
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OperationValue)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.OperationID">@SharedLocalizer["Edit"]</a> |
-                                    <a asp-action="Details" asp-route-id="@item.OperationID">@SharedLocalizer["Details"]</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.OperationID">@SharedLocalizer["Delete"]</a>
-                                </td>
-                            </tr>
+                            @foreach (var item in Model.Operations)
+                            {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Basket.UserID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date.DateID)
+                                        </td>
+                                        <td>
+                                            @item.Location.GetFullAdress()
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OperationValue)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.OperationID">@SharedLocalizer["Edit"]</a> |
+                                            <a asp-action="Details" asp-route-id="@item.OperationID">@SharedLocalizer["Details"]</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.OperationID">@SharedLocalizer["Delete"]</a>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                            {
+                                <tr><td colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
+                            }
                         }
-                    </tbody>
+                        </tbody>
                 </table>
                 @{
                     var prevDisabled = !Model.Operations.HasPreviousPage ? "disabled" : "";
@@ -160,9 +167,7 @@
                                    asp-route-pageNumber="@ViewData["CurrentPage"]"
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
                             </option>
-                        }
-                        else
-                        {
+                        } else {
                             <option value="@value">
                                 <a class="dropdown-item btn btn-primary" asp-action="Index"
                                    asp-route-pageSize="@value"

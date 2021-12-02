@@ -43,36 +43,43 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @if (Model.Count != 0)
                     {
-                        ViewBag.OperationStatus = ViewBag.vehiclesInTheOperation.Contains(item.VehicleID);
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.VehicleName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.VehiclePlate)
-                            </td>
-                            <td>
-                                @{
-                                    if (ViewBag.OperationStatus)
-                                    {
-                                        <span class="text-success">@Localizer["Vehicle is currently operation!"]</span>
+                        @foreach (var item in Model)
+                        {
+                            ViewBag.OperationStatus = ViewBag.vehiclesInTheOperation.Contains(item.VehicleID);
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VehicleName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VehiclePlate)
+                                </td>
+                                <td>
+                                    @{
+                                        if (ViewBag.OperationStatus)
+                                        {
+                                            <span class="text-success">@Localizer["Vehicle is currently operation!"]</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-warning">@Localizer["Vehicle is not in active operation!"]</span>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <span class="text-warning">@Localizer["Vehicle is not in active operation!"]</span>
-                                    }
-                                }
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.VehicleID">@Localizer["Edit"]</a>
-                                | <a asp-action="Delete" asp-route-id="@item.VehicleID">@Localizer["Delete"]</a>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.VehicleID">@Localizer["Edit"]</a>
+                                    | <a asp-action="Delete" asp-route-id="@item.VehicleID">@Localizer["Delete"]</a>
+                                </td>
+                            </tr>
+                        }
                     }
-                </tbody>
-            </table>
+                    else
+                    {
+                        <tr><td colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
+                    }
+                    </tbody>
+</table>
             @{
                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";
