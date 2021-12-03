@@ -43,7 +43,6 @@ namespace WholeSaler.Controllers
             return View("Showcase");
         }
 
-        [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(

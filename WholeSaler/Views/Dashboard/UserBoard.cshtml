@@ -107,7 +107,7 @@
                     </thead>
                     <tbody>
                         @if (Model.Operations.Count != 0)
-                        {
+                        
                             @foreach (var item in Model.Operations)
                             {
                                     <tr>
@@ -132,9 +132,9 @@
                                 }
                                 else
                             {
-                                <tr><td colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
+                                <tr><td colspan="6" class="text-center" > @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
                             }
-                        }
+                        
                         </tbody>
                 </table>
                 @{
@@ -150,7 +150,7 @@
                    asp-route-pageNumber="@(Model.Operations.PageIndex - 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary mr-1 @prevDisabled">
-                    @Localizer["Back"]
+                    @SharedLocalizer["Back"]
                 </a>
 
 
@@ -195,7 +195,7 @@
                    asp-route-pageNumber="@(Model.Operations.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary ml-1 @nextDisabled">
-                    @Localizer["Next"]
+                    @SharedLocalizer["Next"]
                 </a>
             </div>
         </div>

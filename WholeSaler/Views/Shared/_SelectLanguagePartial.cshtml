@@ -10,20 +10,20 @@
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocOptions.Value.SupportedUICultures
-        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .Select(c => new { Value = c.Name, Text = c.DisplayName, Source= "~/images/languages/" + c.Name + ".svg"})
         .ToList();
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 }
 
 <div class="form-group">
-    <form id="selectLanguage" asp-controller="Home"
-          asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
+    <form id="selectLanguage"
           method="post" class="form-horizontal" role="form">
         <label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language:"]</label> </br>
-        <select class="form-select col-md-12" name="culture"
-                onchange="this.form.submit();"
-                asp-for="@requestCulture.RequestCulture.UICulture.Name" 
-                asp-items="cultureItems">
-        </select>
+        <div class="row">
+            @foreach (var culture in cultureItems)
+            {
+                <a asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value" title="@culture.Text"><img class="language-image" src="@Url.Content(culture.Source)" /></a>
+            }
+        </div>
     </form>
 </div>

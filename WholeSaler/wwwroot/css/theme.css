@@ -11546,3 +11546,9 @@ footer.sticky-footer {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
+
+.language-image {
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
+}
