@@ -26,10 +26,10 @@ namespace WholeSaler.Controllers
         {
             return await _context.Cities.Select(city => new CityView
             {
-                CityID = city.CityID,
+                CityID = city.CityID.ToString(),
                 CityName = city.CityName,
-                CountryID = city.CountryID ?? -1,
-            }).ToListAsync();
+                CountryID = city.CountryID != null ? city.CountryID.ToString() : "-1",
+        }).ToListAsync();
         }
 
         // GET api/WorkingAreas/5
@@ -38,25 +38,25 @@ namespace WholeSaler.Controllers
         {
             return await _context.Cities.Select(city => new CityView
             {
-                CityID = city.CityID,
+                CityID = city.CityID.ToString(),
                 CityName = city.CityName,
-                CountryID = city.CountryID ?? -1,
-            }).FirstOrDefaultAsync( city => city.CityID == id);
+                CountryID = city.CountryID != null ? city.CountryID.ToString() : "-1",
+            }).FirstOrDefaultAsync( city => Int32.Parse(city.CityID) == id);
         }
 
-        // GET api/<WorkingAreas/
+        // POST api/WorkingAreas
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CityView value)
+        public async Task<IActionResult> Post([FromForm] CityView value)
         {
-            if (string.IsNullOrEmpty(value.CityName))
+            int cityId = Int32.Parse(value.CityID);
+            int countryId = Int32.Parse(value.CountryID);
+            if (value.CityName != "" && value.CountryName != "")
             {
-                return BadRequest("City name can not be null or empty");
+                _context.Countries.Add(new Country { CountryName = value.CountryName });
+                await _context.SaveChangesAsync();
+                int newId = (await _context.Countries.Where(country => country.CountryName == value.CountryName).FirstOrDefaultAsync()).CountryID;
+                _context.Cities.Add(new City { CityID = newId, CityName = value.CityName, CountryID = countryId, OperationalState = false });
             }
-            if (await _context.Cities.FirstOrDefaultAsync(city => city.CityID == value.CityID) != null)
-            {
-                return BadRequest("City id already exist!");
-            }
-            _context.Cities.Add(new City { CityID = value.CityID, CityName = value.CityName, CountryID = value.CountryID, OperationalState = false });
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -73,7 +73,12 @@ namespace WholeSaler.Controllers
             {
                 return BadRequest("City id does not matching any city");
             }
-            _context.Cities.Update(new City { CityID = value.CityID, CityName = value.CityName, CountryID = value.CountryID, OperationalState = false });
+            int cityId = Int32.Parse(value.CityID);
+            int countryId = Int32.Parse(value.CountryID);
+            if(value.CityName == "")
+            {
+                _context.Cities.Update(new City { CityID = cityId, CityName = value.CityName, CountryID = countryId, OperationalState = false });
+            }
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -97,9 +102,9 @@ namespace WholeSaler.Controllers
 
     public class CityView
     {
-        public int CityID { get; set; }
+        public string CityID { get; set; }
         public string CityName { get; set; }
-        public int CountryID { get; set; }
+        public string CountryID { get; set; }
+        public string CountryName { get; set; }
     }
-
 }
