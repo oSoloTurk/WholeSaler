@@ -50,38 +50,16 @@ namespace WholeSaler.Controllers
         {
             int cityId = Int32.Parse(value.CityID);
             int countryId = Int32.Parse(value.CountryID);
-            if (value.CityName != "" && value.CountryName != "")
-            {
-                var requestedCountry = await _context.Countries.Where(country => country.NormalizedCountryName.Equals(value.CountryName.ToUpper())).FirstOrDefaultAsync();
-                var requestedCity = await _context.Cities.Where(city => city.NormalizedCityName.Equals(value.CountryName.ToUpper())).FirstOrDefaultAsync();
-                if (requestedCountry != null && requestedCountry.OperationalState)
-                {
-                    return BadRequest("This country already operational state");    
-                }
-                if(requestedCity != null && requestedCity.OperationalState)
-                {
-                    return BadRequest("This city already operational state");
-                }
-                if(requestedCountry == null)
-                {
-                    _context.Countries.Add(new Country() { CountryName = value.CountryName, OperationalState= false, RequestCounter = 1 });
-                } 
-                else
-                {
-                    requestedCountry.RequestCounter++;
-                    _context.Countries.Update(requestedCountry);
-                }
-                if (requestedCity == null)
-                {
-                    _context.Cities.Add(new City() { CityName = value.CityName, OperationalState = false, RequestCounter=1 });
-                }
-                else
-                {
-                    requestedCity.RequestCounter++;
-                    _context.Cities.Update(requestedCity);
-                }
+            if (value.CityName == "") {
+                var city = await _context.Cities.FirstOrDefaultAsync(city => city.CityID == cityId);
+                value.CityName = city != null ? city.CityName : "";
             }
-            await _context.SaveChangesAsync();
+            if(value.CountryName== "") {
+                var country = await _context.Countries.FirstOrDefaultAsync(country => country.CountryID== countryId);
+                value.CountryName= country != null ? country.CountryName: "";
+            }
+            if (value.CityName == "" || value.CountryName == "") return BadRequest("Request have not any city details");
+            await _context.Cities.FromSqlRaw("select requestOperationalState(\'" + value.CityName + "\'::TEXT, \'" + value.CountryName + "\'::TEXT);").ToListAsync();
             return Ok();
         }
 
