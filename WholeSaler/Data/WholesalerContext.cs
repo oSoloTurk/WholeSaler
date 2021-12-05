@@ -179,6 +179,8 @@ namespace WholeSaler.Data
                 entity.Property(e => e.CountryID)
                     .HasColumnName("CountryID")
                     .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.CountryName).IsRequired();
             });
 
             modelBuilder.Entity<Date>(entity =>

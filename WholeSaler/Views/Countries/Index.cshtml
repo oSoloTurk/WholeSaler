@@ -35,6 +35,8 @@
                             <a asp-route-sortOrder="country_name">
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().CountryName)
                             </a>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().OperationalState)
                         </th>
                         <th>
                             @SharedLocalizer["Actions"]
@@ -49,6 +51,9 @@
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CountryName)
+                                </td>
+                                 <td>
+                                    @Html.DisplayFor(modelItem => item.OperationalState)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.CountryID">@Localizer["Edit"]</a> |

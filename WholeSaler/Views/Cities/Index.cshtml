@@ -62,7 +62,7 @@
                                     @Html.DisplayFor(modelItem => item.Country.CountryName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(model => model.FirstOrDefault().OperationalState)
+                                    @Html.DisplayFor(modelItem => item.OperationalState)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.CityID">@SharedLocalizer["Edit"]</a> |

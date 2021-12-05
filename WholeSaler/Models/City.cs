@@ -15,6 +15,8 @@ namespace WholeSaler.Models
         public string CityName { get; set; }
         public int? CountryID { get; set; }
         public bool OperationalState { get; set; }
+        public int? RequestCounter { get; set; }
+        public string NormalizedCityName { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<Location> Locations { get; set; }
     }

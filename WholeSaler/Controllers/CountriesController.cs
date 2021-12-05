@@ -54,7 +54,7 @@ namespace WholeSaler.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CountryID,CountryName")] Country country)
+        public async Task<IActionResult> Create([Bind("CountryID,CountryName,OperationalState")] Country country)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace WholeSaler.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CountryID,CountryName")] Country country)
+        public async Task<IActionResult> Edit(int id, [Bind("CountryID,CountryName,OperationalState")] Country country)
         {
             if (id != country.CountryID)
             {

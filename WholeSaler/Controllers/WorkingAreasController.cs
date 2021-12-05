@@ -52,10 +52,34 @@ namespace WholeSaler.Controllers
             int countryId = Int32.Parse(value.CountryID);
             if (value.CityName != "" && value.CountryName != "")
             {
-                _context.Countries.Add(new Country { CountryName = value.CountryName });
-                await _context.SaveChangesAsync();
-                int newId = (await _context.Countries.Where(country => country.CountryName == value.CountryName).FirstOrDefaultAsync()).CountryID;
-                _context.Cities.Add(new City { CityID = newId, CityName = value.CityName, CountryID = countryId, OperationalState = false });
+                var requestedCountry = await _context.Countries.Where(country => country.NormalizedCountryName.Equals(value.CountryName.ToUpper())).FirstOrDefaultAsync();
+                var requestedCity = await _context.Cities.Where(city => city.NormalizedCityName.Equals(value.CountryName.ToUpper())).FirstOrDefaultAsync();
+                if (requestedCountry != null && requestedCountry.OperationalState)
+                {
+                    return BadRequest("This country already operational state");    
+                }
+                if(requestedCity != null && requestedCity.OperationalState)
+                {
+                    return BadRequest("This city already operational state");
+                }
+                if(requestedCountry == null)
+                {
+                    _context.Countries.Add(new Country() { CountryName = value.CountryName, OperationalState= false, RequestCounter = 1 });
+                } 
+                else
+                {
+                    requestedCountry.RequestCounter++;
+                    _context.Countries.Update(requestedCountry);
+                }
+                if (requestedCity == null)
+                {
+                    _context.Cities.Add(new City() { CityName = value.CityName, OperationalState = false, RequestCounter=1 });
+                }
+                else
+                {
+                    requestedCity.RequestCounter++;
+                    _context.Cities.Update(requestedCity);
+                }
             }
             await _context.SaveChangesAsync();
             return Ok();
