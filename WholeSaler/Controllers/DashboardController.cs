@@ -37,7 +37,7 @@ namespace WholeSaler.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AdminBoard()
+        public async Task<IActionResult> AdminBoard(int? pageNumber, int? pageSize = 5)
         { 
             int earnWeek = 0;
             int earnMonthly = 0;
@@ -56,7 +56,12 @@ namespace WholeSaler.Controllers
             ViewData["Earnings7"] = earnWeek;
             ViewData["Earnings30"] = earnMonthly;
             ViewData["WaitingCustomer"] = _context.Operations.Where(operation => operation.Vehicle == null).Count();
-            return View();
+
+            AdminDashboardModel model = new AdminDashboardModel();
+            var query = _context.Operations;
+            model.Operations = await PaginatedList<Operation>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize.Value);
+
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -81,6 +86,11 @@ namespace WholeSaler.Controllers
         }
     }
     public class UserDashboardModel
+    {
+        public PaginatedList<Operation> Operations { get; set; }
+    }
+
+    public class AdminDashboardModel
     {
         public PaginatedList<Operation> Operations { get; set; }
     }

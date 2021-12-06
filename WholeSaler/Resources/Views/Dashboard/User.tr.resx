@@ -117,37 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Earnings (Monthly)" xml:space="preserve">
-    <value>Aylık Kazanç</value>
+  <data name="Last Orders" xml:space="preserve">
+    <value>Son Siparişler</value>
   </data>
-  <data name="Go Items Management Page" xml:space="preserve">
-    <value>Ürün Yönetim Sayafasına Git</value>
+  <data name="No data could be found in the conditions you were looking for." xml:space="preserve">
+    <value>Aradığınız koşullarda ürün bulunmadı.</value>
   </data>
-  <data name="Go Reports Page" xml:space="preserve">
-    <value>Raporlar Sayfasına Git</value>
+  <data name="Orders (Monthly)" xml:space="preserve">
+    <value>Siparişler (Aylık)</value>
   </data>
-  <data name="Go Vehicle Management Page" xml:space="preserve">
-    <value>Araç Yönetim Sayfasına Git</value>
+  <data name="Orders (Weekly)" xml:space="preserve">
+    <value>Siparişler (Haftalık)</value>
   </data>
-  <data name="Items" xml:space="preserve">
-    <value>Ürünler</value>
+  <data name="Payments (Monthly)" xml:space="preserve">
+    <value>Ödeme (Aylık)</value>
   </data>
-  <data name="Lenght of fleet is {0}" xml:space="preserve">
-    <value>Filo Genişliği {0}</value>
-  </data>
-  <data name="Reports" xml:space="preserve">
-    <value>Raporlar</value>
-  </data>
-  <data name="Vehicles" xml:space="preserve">
-    <value>Araçlar</value>
-  </data>
-  <data name="You can manage your fleet" xml:space="preserve">
-    <value>Filonuzu Yönetebilirsiniz</value>
-  </data>
-  <data name="You can manage your items. @ViewData[&quot;itemSize&quot;] in @ViewData[&quot;categorySize&quot;] category" xml:space="preserve">
-    <value>Ürünlerinizi Yönetebilirsiniz {0} {1}</value>
-  </data>
-  <data name="You can see reports" xml:space="preserve">
-    <value>Raporları Görebilirsiniz</value>
+  <data name="Payments (Weekly)" xml:space="preserve">
+    <value>Ödeme (Haftalık)</value>
   </data>
 </root>
