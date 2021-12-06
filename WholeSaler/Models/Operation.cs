@@ -12,8 +12,8 @@ namespace WholeSaler.Models
         public int OperationID { get; set; }
         [DisplayName("Operation Value")]
         public int OperationValue { get; set; }
-        [DisplayName("Date ID")]
-        public int? DateID { get; set; }
+        [DisplayName("Date")] 
+        public DateTime Date { get; set; }
         [DisplayName("Basket ID")]
         public int? BasketID { get; set; }
         [DisplayName("Location ID")]
@@ -24,7 +24,6 @@ namespace WholeSaler.Models
         public string OwnerID { get; set; }
         public virtual User Owner { get; set; }
         public virtual Basket Basket { get; set; }
-        public virtual Date Date { get; set; }
         public virtual Vehicle Vehicle { get; set; }
         public virtual Location Location { get; set; }
     }

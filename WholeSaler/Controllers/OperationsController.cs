@@ -24,7 +24,7 @@ namespace WholeSaler.Controllers
         // GET: Operations
         public async Task<IActionResult> Index()
         {
-            var wholesellerContext = _context.Operations.Include(operation => operation.Basket).Include(operation => operation.Date).Include(operation => operation.Location);
+            var wholesellerContext = _context.Operations.Include(operation => operation.Basket).Include(operation => operation.Location);
             return View(await wholesellerContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace WholeSaler.Controllers
                 return NotFound();
             }
 
-            var operation = await _context.Operations.Include(operation => operation.Basket).Include(operation => operation.Date).Include(operation => operation.Location)
+            var operation = await _context.Operations.Include(operation => operation.Basket).Include(operation => operation.Location)
                 .FirstOrDefaultAsync(m => m.OperationID == id);
             if (operation == null)
             {
@@ -82,7 +82,6 @@ namespace WholeSaler.Controllers
                 return NotFound();
             }
             ViewData["BasketID"] = new SelectList(_context.Baskets, "BasketID", "UserID", operation.BasketID);
-            ViewData["DateID"] = new SelectList(_context.Dates, "DateID", "DateID", operation.DateID);
             ViewData["LocationID"] = new SelectList(_context.Locations.Include(loc => loc.City).Include(loc => loc.City.Country), "LocationID", "LocationOwnerID", operation.LocationID);
             return View(operation);
         }
@@ -120,7 +119,6 @@ namespace WholeSaler.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BasketID"] = new SelectList(_context.Baskets, "BasketID", "UserID", operation.BasketID);
-            ViewData["DateID"] = new SelectList(_context.Dates, "DateID", "DateID", operation.DateID);
             ViewData["LocationID"] = new SelectList(_context.Locations.Include(loc => loc.City).Include(loc => loc.City.Country), "LocationID", "LocationOwnerID", operation.LocationID);
             return View(operation);
         }
@@ -135,7 +133,6 @@ namespace WholeSaler.Controllers
 
             var operation = await _context.Operations
                 .Include(o => o.Basket)
-                .Include(o => o.Date)
                 .Include(o => o.Location)
                 .FirstOrDefaultAsync(m => m.OperationID == id);
             if (operation == null)

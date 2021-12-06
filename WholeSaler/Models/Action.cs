@@ -14,10 +14,9 @@ namespace WholeSaler.Models
         public string EffecterUser { get; set; }
         [DisplayName("Affect User")]
         public string AffectedUser { get; set; }
-        [DisplayName("Date ID")]
-        public int DateID { get; set; }
+        [DisplayName("Date")]
+        public DateTime Date { get; set; }
         public virtual User AffectedUserNavigation { get; set; }
-        public virtual Date Date { get; set; }
         public virtual User EffecterUserNavigation { get; set; }
     }
 }

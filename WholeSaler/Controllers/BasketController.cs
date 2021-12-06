@@ -20,6 +20,7 @@ namespace WholeSaler.Controllers
         public BasketController(WholesalerContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -34,22 +35,41 @@ namespace WholeSaler.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Check()
+        {
+            var userId = _userManager.GetUserId(User);
+            var model = await _context.BasketItems.Include(basketItems => basketItems.Basket).Where(basketItems => basketItems.Basket.UserID == userId).Select(basketItems => new BasketItemModel()
+            {
+                ItemAmount = basketItems.Amount.Value,
+                ItemID = basketItems.ItemID
+            }).ToListAsync();
+            return View(model);
+        }
+
+        public async Task<IActionResult> SubmitOrders()
+        {
+            //convert basket items to operation and clear previous basket informations
+            return View("CustomerBoard", "Dashboard");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async void AddBasket([Bind("ItemID,ItemAmount")] BasketAddModel value)
+        public async Task AddBasket([Bind("ItemID,ItemAmount")] BasketItemModel value)
         {
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User);
-                var basket = await _context.Baskets.Where(basket => basket.UserID == userId).FirstOrDefaultAsync();
+                var basket = await _context.Baskets.FirstOrDefaultAsync(basket => basket.UserID == userId);
                 if(basket == null)
                 {
-                    basket = new Basket() { UserID= userId , };
+                    basket = new Basket() { UserID= userId , Date= DateTime.Now};
+                    _context.Baskets.Add(basket);
+                    await _context.SaveChangesAsync();
+                    basket = await _context.Baskets.FirstOrDefaultAsync(basket => basket.UserID == userId);
                 }
-                var basketItem = new BasketItem() { Amount = value.ItemAmount, BasketItemID = value.ItemID };
                 var item = await _context.Items.Where(item => item.ItemID == value.ItemID).FirstOrDefaultAsync();
-                basketItem.BasketPrice = item.ItemPrice.Value * value.ItemAmount;
-                //basketItem.BasketID = null;
+                _context.BasketItems.Add(new BasketItem() { BasketID = basket.BasketID, Amount = value.ItemAmount, ItemID = value.ItemID, BasketPrice = item.ItemPrice.Value * value.ItemAmount });
+                await _context.SaveChangesAsync();
             }
         }
     }
@@ -60,7 +80,7 @@ namespace WholeSaler.Controllers
         public int ElementCount { get; set; }
     }
 
-    public class BasketAddModel
+    public class BasketItemModel
     {
         public int ItemID { get; set; }
         public int ItemAmount { get; set; }

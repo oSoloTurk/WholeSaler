@@ -23,7 +23,7 @@ namespace WholeSaler.Utils
                 alert.User = targetUser;
                 alert.UserID = targetUser.Id;
                 alert.Message = message;
-                alert.Date = null;
+                alert.Date = DateTime.Now;
                 _context.Add(new Alert());
         }
 

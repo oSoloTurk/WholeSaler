@@ -25,7 +25,6 @@ namespace WholeSaler.Data
         public virtual DbSet<BasketItem> BasketItems { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<Date> Dates { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Alert> Alerts { get; set; }
@@ -57,15 +56,12 @@ namespace WholeSaler.Data
             {
                 entity.HasIndex(e => e.AffectedUser, "IX_Actions_AffectedUser");
 
-                entity.HasIndex(e => e.DateID, "IX_Actions_DateID");
 
                 entity.Property(e => e.ActionID)
                     .ValueGeneratedNever()
                     .HasColumnName("ActionID");
 
                 entity.Property(e => e.AffectedUser).IsRequired();
-
-                entity.Property(e => e.DateID).HasColumnName("DateID");
 
                 entity.Property(e => e.EffecterUser).IsRequired();
 
@@ -74,12 +70,6 @@ namespace WholeSaler.Data
                     .HasForeignKey(d => d.AffectedUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("affected");
-
-                entity.HasOne(d => d.Date)
-                    .WithMany(p => p.Actions)
-                    .HasForeignKey(d => d.DateID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("date");
 
                 entity.HasOne(d => d.EffecterUserNavigation)
                     .WithMany(p => p.ActionEffecterUserNavigations)
@@ -108,23 +98,13 @@ namespace WholeSaler.Data
             {
                 entity.ToTable("Basket");
 
-                entity.HasIndex(e => e.DateID, "IX_Basket_DateID");
-
                 entity.Property(e => e.BasketID)
                     .HasColumnName("BasketID")
                     .UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.DateID).HasColumnName("DateID");
-
                 entity.Property(e => e.UserID)
                     .IsRequired()
                     .HasColumnName("UserID");
-
-                entity.HasOne(d => d.Date)
-                    .WithMany(p => p.Baskets)
-                    .HasForeignKey(d => d.DateID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("date_id");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Baskets)
@@ -137,6 +117,10 @@ namespace WholeSaler.Data
             {
                 entity.HasKey(e => e.BasketID)
                     .HasName("basket_items_pkey");
+
+                entity.Property(e => e.BasketItemID)
+                    .HasColumnName("BasketItemID")
+                    .UseIdentityAlwaysColumn();
 
                 entity.ToTable("Basket_items");
 
@@ -181,18 +165,6 @@ namespace WholeSaler.Data
                     .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.CountryName).IsRequired();
-            });
-
-            modelBuilder.Entity<Date>(entity =>
-            {
-                entity.ToTable("Date");
-
-                entity.Property(e => e.DateID)
-                    .HasColumnName("DateID")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.UserIp).HasColumnName("UserIP");
-                entity.Property(e => e.Time).HasColumnName("Time");
             });
 
             modelBuilder.Entity<Item>(entity =>
@@ -241,12 +213,6 @@ namespace WholeSaler.Data
             {
                 entity.HasIndex(e => e.AlertID, "IX_Messages_DateID");
 
-                entity.HasOne(d => d.Date)
-                    .WithMany(p => p.Alerts)
-                    .HasForeignKey(d => d.DateID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("date_id");
-
                 entity.HasOne(d => d.User)
                 .WithMany(u => u.Alerts)
                 .HasForeignKey(d => d.UserID)
@@ -261,8 +227,6 @@ namespace WholeSaler.Data
                     .HasColumnName("OperationID");
 
                 entity.Property(e => e.BasketID).HasColumnName("BasketID");
-
-                entity.Property(e => e.DateID).HasColumnName("DateID");
 
                 entity.Property(e => e.LocationID).HasColumnName("LocationID");
 

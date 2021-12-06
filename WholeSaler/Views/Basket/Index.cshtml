@@ -10,14 +10,21 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary align-self-center"> @SharedLocalizer["Choose Category for Shopping"] </h6>
-            <div></div>
+            <a class="btn btn-secondary btn-icon-split" asp-action="Check">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">@SharedLocalizer["Check the Basket"]</span>
+            </a>
+            <h6 class="m-0 font-weight-bold text-primary align-self-center">
+                @Localizer["Choose Category for Shopping"]
+            </h6>
         </div>
     </div>
     <div class="card-body d-flex">
-        @foreach(var category in Model)
-            {
-            
+        @foreach (var category in Model)
+        {
+
             <a asp-action="ViewCategory" asp-route-categoryId="@category.Category.CategoryID">
                 <div class="card shadow m-4">
                     <div class="card-header">
@@ -30,6 +37,6 @@
                     </div>
                 </div>
             </a>
-            }
+        }
     </div>
 </div>

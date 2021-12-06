@@ -16,7 +16,6 @@ namespace WholeSaler.Models
         public int CategoryID { get; set; }
         [DisplayName("Category Name")]
         public string CategoryName { get; set; }
-
         public virtual ICollection<Item> Items { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿@using WholeSaler.Controllers;
+@model List<Item>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using WholeSaler.Utils
+@using WholeSaler.Resources
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-secondary btn-icon-split" asp-action="SubmitOrders">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">@SharedLocalizer["Send Orders to Wholesaler"]</span>
+            </a>
+            <h6 class="m-0 font-weight-bold text-primary align-self-center"> @SharedLocalizer["Check Items for Shopping"] </h6>
+            <div></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+        @foreach (var item in Model)
+        {
+            <div class="row mt-2 basket-area-row">
+                <div class="col-3 basket-area">
+                    <div class="h-25">
+                        @item.ItemName
+                    </div>
+                </div>
+                <div class="col-6 basket-area">
+                    <div class="h-50">
+                        @item.ItemDesc
+                    </div>
+                </div>
+                <div class="col-3 basket-area">
+                    <div class="h-50">
+                        <div class="row">
+                            //Add remove from basket button here
+                            <input type="hidden" name="ItemID" value="@item.ItemID" />
+                            <input type="number" disabled name="ItemAmount" value="1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

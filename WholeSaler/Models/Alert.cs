@@ -16,9 +16,8 @@ namespace WholeSaler.Models
         public string Message { get; set; }
         [DisplayName("Action")]
         public string Action { get; set; }
-        [DisplayName("Date ID")]
-        public int DateID { get; set; }
-        public virtual Date Date { get; set; }
+        [DisplayName("Date")]
+        public DateTime Date { get; set; }
         public virtual User User { get; set; }
     }
 }

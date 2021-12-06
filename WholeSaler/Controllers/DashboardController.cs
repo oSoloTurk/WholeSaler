@@ -43,12 +43,12 @@ namespace WholeSaler.Controllers
             int earnMonthly = 0;
             DateTime sevenDaysAgo = DateTime.Now.AddDays(-7);
             DateTime thirtyDaysAgo = DateTime.Now.AddDays(-30);
-            foreach (var operation in await _context.Operations.Include(operation => operation.Date).ToListAsync()) {
-                if(DateTime.Compare(sevenDaysAgo, operation.Date.Time) >= -1)
+            foreach (var operation in await _context.Operations.ToListAsync()) {
+                if(DateTime.Compare(sevenDaysAgo, operation.Date) >= -1)
                 {
                     earnWeek += operation.OperationValue;
                 }
-                if (DateTime.Compare(thirtyDaysAgo, operation.Date.Time) >= -1)
+                if (DateTime.Compare(thirtyDaysAgo, operation.Date) >= -1)
                 {
                     earnMonthly  += operation.OperationValue;
                 }
@@ -62,27 +62,6 @@ namespace WholeSaler.Controllers
             model.Operations = await PaginatedList<Operation>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize.Value);
 
             return View(model);
-        }
-
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> GetEarnHistory()
-        {
-            Dictionary<DateTime, double> earns = new Dictionary<DateTime, double>();
-            List<Operation> operations = await _context.Operations.Include(operation => operation.Date).ToListAsync();
-            DateTime divider = DateTime.Now.AddDays(-1);
-            double valueTracker = 0;
-            foreach(Operation operation in operations)
-            {
-                valueTracker += operation.OperationValue;
-                if (divider.CompareTo(operation.Date.Time) >= -1)
-                {
-                    earns.Add(divider, valueTracker);
-                    divider = operation.Date.Time.AddDays(-1);
-                    continue;
-
-                }
-            }
-            return Json(earns);
         }
     }
     public class UserDashboardModel
