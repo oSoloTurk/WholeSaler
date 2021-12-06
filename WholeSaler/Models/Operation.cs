@@ -11,7 +11,7 @@ namespace WholeSaler.Models
         [DisplayName("Operation ID")]
         public int OperationID { get; set; }
         [DisplayName("Operation Value")]
-        public int OperationValue { get; set; }
+        public double OperationValue { get; set; }
         [DisplayName("Date")] 
         public DateTime Date { get; set; }
         [DisplayName("Basket ID")]

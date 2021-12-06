@@ -10,8 +10,19 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
+            <a class="btn btn-secondary btn-icon-split" asp-action="Index">
+                <span class="icon text-white-50">
+                    <i class="fas fa-shopping-basket"></i>
+                </span>
+                <span class="text">@SharedLocalizer["Turn back to Categories"]</span>
+            </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center"> @SharedLocalizer["Choose Item for Shopping"] </h6>
-            <div></div>
+            <a class="btn btn-secondary btn-icon-split" asp-action="Check">
+                <span class="icon text-white-50">
+                    <i class="fas fa-shopping-basket"></i>
+                </span>
+                <span class="text">@SharedLocalizer["Check the Basket"]</span>
+            </a>
         </div>
     </div>
     <div class="card-body">

@@ -24,9 +24,5 @@ namespace WholeSaler.Models
         public virtual City City { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
 
-        public String GetFullAdress()
-        {
-            return Adress + "\n" + City.CityName + "-" + City.Country.CountryName;
-        }
     }
 }

@@ -30,10 +30,35 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Locations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
-            var wholesellerContext = _context.Locations.Include(l => l.City).Include(l => l.LocationOwner);
-            return View(await wholesellerContext.ToListAsync());
+            if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
+            if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
+
+            IQueryable<Location> wholesellerContext = _context.Locations.Include(l => l.City).Include(l => l.LocationOwner);
+            if (query != null)
+            {
+                wholesellerContext = wholesellerContext.Where(i => i.Adress.Contains(query) | i.City.CityName.Contains(query));
+                TempData["Query"] = query;
+            }
+            if (sortOrder != null)
+            {
+                switch (sortOrder)
+                {
+                    default:
+                    case "location_adress":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.Adress);
+                        break;
+                    case "location_cityname":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.City.CityName);
+                        break;
+                    case "location_owner":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.LocationOwner);
+                        break;
+                }
+                TempData["CurrentFilter"] = sortOrder;
+            }
+            return View(await PaginatedList<Location>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 
         [Authorize]
@@ -86,10 +111,11 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Locations/Create
-        public IActionResult Create()
+        public IActionResult Create(string? returnUrl)
         {
             ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName");
             ViewData["LocationOwnerID"] = new SelectList(_context.Set<User>(), "Id", "Id");
+            TempData["returnUrl"] = returnUrl;
             return View();
         }
 
@@ -98,18 +124,19 @@ namespace WholeSaler.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Adress,CityID")] Location location)
+        public async Task<IActionResult> Create(string? returnUrl, [Bind("Adress,CityID")] Location location)
         {
             if (ModelState.IsValid)
             {
                 location.LocationOwnerID = _userManager.GetUserId(User);
                 _context.Add(location);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (returnUrl != null)
+                {
+                    return LocalRedirect(returnUrl);
+                }
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", location.CityID);
-            ViewData["LocationOwnerID"] = new SelectList(_context.Set<User>(), "Id", "Id", location.LocationOwnerID);
-            return View(location);
+            return View("Index");
         }
 
         // GET: Locations/Edit/5

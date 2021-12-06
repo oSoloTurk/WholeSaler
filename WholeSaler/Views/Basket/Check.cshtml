@@ -1,28 +1,53 @@
 ﻿@using WholeSaler.Controllers;
-@model List<Item>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @using WholeSaler.Utils
 @using WholeSaler.Resources
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@model CheckModel
 
+@{
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 
+}
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
-            <a class="btn btn-secondary btn-icon-split" asp-action="SubmitOrders">
+            <a class="btn btn-secondary btn-icon-split" asp-action="Index">
                 <span class="icon text-white-50">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fas fa-shopping-basket"></i>
                 </span>
-                <span class="text">@SharedLocalizer["Send Orders to Wholesaler"]</span>
+                <span class="text">@SharedLocalizer["Turn back to Shop"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center"> @SharedLocalizer["Check Items for Shopping"] </h6>
-            <div></div>
+            <button type="submit" form="SubmitOrders" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-truck-loading"></i>
+                </span>
+                <span class="text">@SharedLocalizer["Send Orders to Wholesaler"]</span>
+            </button>
         </div>
     </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-10">
+                <form asp-action="SubmitOrders" id="SubmitOrders">
+                    <select name="LocationID" class="form-control" asp-items="@Model.SelectLocations">
+                    </select>
+                </form>
+            </div>
+            <div class="col-2">
+                <a asp-action="Create" asp-controller="Locations" asp-route-returnUrl="@returnUrl" class="theme-button">Yeni Adres Ekle</a>
+            </div>
+        </div>
+        <hr />
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-        @foreach (var item in Model)
+        @if (Model.BasketItems.Count == 0) {
+            <p class="text-center text-warning h3">
+                Sepetin boş gözüküyor!
+            </p>    
+        }
+        @foreach (var item in Model.BasketItems)
         {
             <div class="row mt-2 basket-area-row">
                 <div class="col-3 basket-area">
@@ -38,9 +63,8 @@
                 <div class="col-3 basket-area">
                     <div class="h-50">
                         <div class="row">
-                            //Add remove from basket button here
-                            <input type="hidden" name="ItemID" value="@item.ItemID" />
-                            <input type="number" disabled name="ItemAmount" value="1" />
+                            <input type="number" disabled name="ItemAmount" value="@item.ItemAmount" />
+                            <a asp-action="RemoveBasket" asp-route-basketItemId="@item.ItemBasketID">X</a>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@
     }
 }
 
-<form asp-action="Create">
+<form asp-action="SendVehicle">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="d-flex justify-content-between">
@@ -49,9 +49,21 @@
                                 <div class="col mr-2">
                                     <label asp-for="VehicleID" class="control-label text-center"></label>
                                     <hr class="sidebar-divider">
-                                    @foreach (Vehicle vehicle in ViewBag.Vehicles)
+                                    @if (ViewBag.vehiclesInTheOperation.Count - ViewBag.Vehicles.Count != 0)
                                     {
-                                        <input type="radio" class="" asp-for="VehicleID" value="@vehicle.VehicleID" />@vehicle.VehicleName<br />
+                                        @foreach (Vehicle vehicle in ViewBag.Vehicles)
+                                        {
+                                            if (!ViewBag.vehiclesInTheOperation.Contains(vehicle.VehicleID))
+                                            {
+                                                <input type="radio" class="" asp-for="VehicleID" value="@vehicle.VehicleID" />@vehicle.VehicleName<br />
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="row justify-content-center">
+                                            <span colspan="6" class="text-center"> @SharedLocalizer["Currently no vehicles are suitable for the operation"] </span>
+                                        </div>
                                     }
                                 </div>
                             </div>

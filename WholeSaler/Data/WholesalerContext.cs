@@ -115,7 +115,7 @@ namespace WholeSaler.Data
 
             modelBuilder.Entity<BasketItem>(entity =>
             {
-                entity.HasKey(e => e.BasketID)
+                entity.HasKey(e => e.BasketItemID)
                     .HasName("basket_items_pkey");
 
                 entity.Property(e => e.BasketItemID)
@@ -223,8 +223,8 @@ namespace WholeSaler.Data
             modelBuilder.Entity<Operation>(entity =>
             {
                 entity.Property(e => e.OperationID)
-                    .ValueGeneratedNever()
-                    .HasColumnName("OperationID");
+                .UseIdentityAlwaysColumn();
+
 
                 entity.Property(e => e.BasketID).HasColumnName("BasketID");
 

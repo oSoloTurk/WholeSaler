@@ -68,8 +68,12 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.VehicleID">@Localizer["Edit"]</a>
-                                    | <a asp-action="Delete" asp-route-id="@item.VehicleID">@Localizer["Delete"]</a>
+                                    <a asp-action="Edit" asp-route-id="@item.VehicleID">@SharedLocalizer["Edit"]</a>
+                                    | <a asp-action="Delete" asp-route-id="@item.VehicleID">@SharedLocalizer["Delete"]</a>
+                                    @if (ViewBag.OperationStatus)
+                                    {
+                                        <a asp-action="EndOperation" asp-route-id="@item.VehicleID">@SharedLocalizer["Finish the Mission"]</a>
+                                    }
                                 </td>
                             </tr>
                         }

@@ -24,7 +24,11 @@ namespace WholeSaler.Controllers
         // GET: Operations
         public async Task<IActionResult> Index()
         {
-            var wholesellerContext = _context.Operations.Include(operation => operation.Basket).Include(operation => operation.Location);
+            var wholesellerContext = _context.Operations
+                .Include(operation => operation.Basket)
+                .Include(operation => operation.Location)
+                .Include(operation => operation.Location.City)
+                .Include(operation => operation.Location.City.Country);
             return View(await wholesellerContext.ToListAsync());
         }
 
@@ -47,10 +51,11 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Operations/SendVehicle
-        public IActionResult SendVehicle()
+        public async Task<IActionResult> SendVehicle()
         {
-            ViewData["Vehicles"] = _context.Vehicles.ToList();
-            ViewData["Operations"] = _context.Operations.Include(operation => operation.Owner).Include(operation => operation.Location).ToList();
+            ViewBag.vehiclesInTheOperation = await _context.Operations.Distinct().Select(operation => operation.VehicleID).ToListAsync();
+            ViewData["Vehicles"] = await _context.Vehicles.ToListAsync();
+            ViewData["Operations"] = await _context.Operations.Where(operation => operation.VehicleID == null).Include(operation => operation.Owner).Include(operation => operation.Location).ToListAsync();
             return View();
         }
 
@@ -61,66 +66,13 @@ namespace WholeSaler.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(operation);
+                var activeOperation = await _context.Operations.FindAsync(operation.OperationID);
+                activeOperation.VehicleID = operation.VehicleID;
+                _context.Update(activeOperation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
-           return View(operation);
-        }
-
-        // GET: Operations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var operation = await _context.Operations.FindAsync(id);
-            if (operation == null)
-            {
-                return NotFound();
-            }
-            ViewData["BasketID"] = new SelectList(_context.Baskets, "BasketID", "UserID", operation.BasketID);
-            ViewData["LocationID"] = new SelectList(_context.Locations.Include(loc => loc.City).Include(loc => loc.City.Country), "LocationID", "LocationOwnerID", operation.LocationID);
-            return View(operation);
-        }
-
-        // POST: Operations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OperationID,DateID,BasketID,LocationID,OperationValue")] Operation operation)
-        {
-            if (id != operation.OperationID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(operation);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OperationExists(operation.OperationID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["BasketID"] = new SelectList(_context.Baskets, "BasketID", "UserID", operation.BasketID);
-            ViewData["LocationID"] = new SelectList(_context.Locations.Include(loc => loc.City).Include(loc => loc.City.Country), "LocationID", "LocationOwnerID", operation.LocationID);
-            return View(operation);
+           return View();
         }
 
         // GET: Operations/Delete/5

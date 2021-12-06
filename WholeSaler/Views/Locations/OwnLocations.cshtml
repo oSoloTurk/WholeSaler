@@ -69,7 +69,7 @@
         </div>
         <div class="row justify-content-center">
 
-            <a asp-action="Index"
+            <a asp-action="OwnLocations"
                asp-route-pageSize="@ViewData["CurrentSize"]"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.PageIndex - 1)"
@@ -85,7 +85,7 @@
                     @if (Model.CurrentPageSize == value)
                     {
                         <option selected value="@value">
-                            <a class="dropdown-item btn btn-primary" asp-action="Index"
+                            <a class="dropdown-item btn btn-primary" asp-action="OwnLocations"
                                asp-route-pageSize="@value"
                                asp-route-sortOrder="@ViewData["CurrentSort"]"
                                asp-route-pageNumber="@ViewData["CurrentPage"]"
@@ -95,7 +95,7 @@
                     else
                     {
                         <option value="@value">
-                            <a class="dropdown-item btn btn-primary" asp-action="Index"
+                            <a class="dropdown-item btn btn-primary" asp-action="OwnLocations"
                                asp-route-pageSize="@value"
                                asp-route-sortOrder="@ViewData["CurrentSort"]"
                                asp-route-pageNumber="@ViewData["CurrentPage"]"
@@ -104,7 +104,7 @@
                     }
                 }
             </select>
-            <a asp-action="Index"
+            <a asp-action="OwnLocations"
                asp-route-pageSize="@ViewData["CurrentSize"]"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@ViewData["CurrentSize"]"
@@ -114,7 +114,7 @@
                class="btn btn-primary ml-1">
                 @ViewData["CurrentSize"]
             </a>
-            <a asp-action="Index"
+            <a asp-action="OwnLocations"
                asp-route-pageSize="@ViewData["CurrentSize"]"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.PageIndex + 1)"

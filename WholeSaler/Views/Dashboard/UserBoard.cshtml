@@ -91,16 +91,16 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Basket)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Date)
+                            @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Owner)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Location)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().OperationValue)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Operations.FirstOrDefault().Date)
                         </th>
                         <th>@Localizer["Actions"]</th>
                     </tr>
@@ -110,18 +110,19 @@
 
                         @foreach (var item in Model.Operations)
                         {
+                            var name = (item.Owner.UserName + " / " + item.Owner.CompanyName);
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Basket.UserID)
+                                    @Html.DisplayFor(modelItem => name)
+                                </td>
+                                <td>
+                                    @item.Location.Adress @item.Location.City.CityName/@item.Location.City.Country.CountryName
+                                </td>
+                                <td>
+                                    @SharedLocalizer["$"] @Html.DisplayFor(modelItem => item.OperationValue)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Date)
-                                </td>
-                                <td>
-                                    @item.Location.GetFullAdress()
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OperationValue)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.OperationID">@SharedLocalizer["Edit"]</a> |

@@ -31,7 +31,11 @@ namespace WholeSaler.Controllers
             if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
 
             UserDashboardModel model = new UserDashboardModel();
-            var query = _context.Operations.Where(operation => operation.OwnerID == _userManager.GetUserId(User));
+            var query = _context.Operations.Where(operation => operation.OwnerID == _userManager.GetUserId(User))
+                .Include(operation => operation.Location)
+                .Include(operation => operation.Location.City)
+                .Include(operation => operation.Location.City.Country)
+                .Include(operation => operation.Owner);
             model.Operations = await PaginatedList<Operation>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize.Value);
             return View(model);
         }
@@ -39,8 +43,9 @@ namespace WholeSaler.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminBoard(int? pageNumber, int? pageSize = 5)
         { 
-            int earnWeek = 0;
-            int earnMonthly = 0;
+            double earnWeek = 0;
+            double earnMonthly = 0;
+            int orderMonthly = 0;
             DateTime sevenDaysAgo = DateTime.Now.AddDays(-7);
             DateTime thirtyDaysAgo = DateTime.Now.AddDays(-30);
             foreach (var operation in await _context.Operations.ToListAsync()) {
@@ -51,14 +56,21 @@ namespace WholeSaler.Controllers
                 if (DateTime.Compare(thirtyDaysAgo, operation.Date) >= -1)
                 {
                     earnMonthly  += operation.OperationValue;
+                    orderMonthly += _context.BasketItems.Where(item => item.BasketID == operation.BasketID).Sum(item => item.Amount).Value;
                 }
             }
             ViewData["Earnings7"] = earnWeek;
             ViewData["Earnings30"] = earnMonthly;
             ViewData["WaitingCustomer"] = _context.Operations.Where(operation => operation.Vehicle == null).Count();
+            ViewData["Orders30"] = orderMonthly;
 
             AdminDashboardModel model = new AdminDashboardModel();
-            var query = _context.Operations;
+            var query = _context.Operations
+                .Include(operation => operation.Location)
+                .Include(operation => operation.Location.City)
+                .Include(operation => operation.Location.City.Country)
+                .Include(operation => operation.Owner)
+                ;
             model.Operations = await PaginatedList<Operation>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize.Value);
 
             return View(model);
