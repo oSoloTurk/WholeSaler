@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 #nullable disable
 
@@ -12,8 +13,13 @@ namespace WholeSaler.Models
             Operations = new HashSet<Operation>();
         }
 
+        [DisplayName("Vehicle ID")]
         public int VehicleID { get; set; }
+
+        [DisplayName("Vehicle Name")]
         public string VehicleName { get; set; }
+
+        [DisplayName("Vehicle Plate")]
         public string VehiclePlate { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
     }
