@@ -53,7 +53,7 @@ namespace WholeSaler.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> FillCities(int countryId)
         {
-            var cities = await _context.Cities.Where(model => model.CountryID == countryId).Select(model => new SelectListItem { Value = model.CityID.ToString(), Text = model.CityName }).ToListAsync();
+            var cities = await _context.Cities.Where(model => model.CountryID == countryId && !model.OperationalState).Select(model => new SelectListItem { Value = model.CityID.ToString(), Text = model.CityName }).ToListAsync();
             return Json(cities);
         }
 

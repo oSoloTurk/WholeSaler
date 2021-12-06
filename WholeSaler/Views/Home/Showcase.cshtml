@@ -132,8 +132,14 @@
             <div class="inner">
                 <div class="row gtr-uniform">
                     <div class="col-12">
-                        <form action="api/WorkingAreas/" method="post">
-                            <div class="col-12"> 
+                        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                        <div id="thanks_request" style="display:none;">
+                            <p>
+                                Talebini aldık teşekkürler.
+                            </p>
+                        </div>
+                        <form action="api/WorkingAreas/" method="post" target="dummyframe" id="requestForm" class="hideable">
+                            <div class="col-12">
                                 <select style="margin-bottom: 0.5rem;" asp-items="@Model" title="Countries" onchange="fillCities(this)" id="Countries" name="CountryID"></select>
                             </div>
                             <div class="col-12">
@@ -141,13 +147,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="text" class="form-control" style="margin-bottom: 0.5rem;" placeholder="Şehrini Belirt Sana Gelelim?" id="CityName" />
+                                    <input type="text" class="form-control" style="margin-bottom: 0.5rem;" placeholder="Şehrini Belirt Sana Gelelim?" name="CityName" />
                                 </div>
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="text" class="form-control" style="margin-bottom: 0.5rem;" placeholder="Bahsettiğin Şehir Hangi Ülkede?" id="CountryName" />
+                                    <input type="text" class="form-control" style="margin-bottom: 0.5rem;" placeholder="Bahsettiğin Şehir Hangi Ülkede?" name="CountryName" />
                                 </div>
                             </div>
-                            <input type="submit" class="form-control" value="Gönder" id="request" />
+                            <input type="submit" class="form-control" value="Gönder" id="request" onclick="showhide()"/>
                         </form>
                     </div>
                 </div>

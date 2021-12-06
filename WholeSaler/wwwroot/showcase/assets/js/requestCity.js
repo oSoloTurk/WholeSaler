@@ -14,8 +14,18 @@ function fillCities(select) {
             fillArea.html("");
             $.each(cities, function (id, value) {
                 fillArea.append(
-                    $('<option></option>').val(id).text(value.text));
+                    $('<option></option>').val(value.value).text(value.text));
             });
         }
     });
+}
+
+function showhide() {
+    var divid = document.getElementById("thanks_request");
+    var divs = document.getElementsByClassName("hideable");
+    for (var i = 0; i < divs.length; i = i + 1) {
+        $(divs[i]).fadeOut("slow");
+    }
+    $(divid).attr["style"] = "";
+    $(divid).fadeIn("slow");
 }

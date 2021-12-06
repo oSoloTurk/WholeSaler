@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,18 +49,19 @@ namespace WholeSaler.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] CityView value)
         {
-            int cityId = Int32.Parse(value.CityID);
-            int countryId = Int32.Parse(value.CountryID);
-            if (value.CityName == "") {
+            int cityId = Int32.Parse(value.CityID.ToString());
+            int countryId = Int32.Parse(value.CountryID.ToString());
+            if (value.CityName == null) {
                 var city = await _context.Cities.FirstOrDefaultAsync(city => city.CityID == cityId);
-                value.CityName = city != null ? city.CityName : "";
+                value.CityName = city != null ? city.CityName : null;
             }
-            if(value.CountryName== "") {
-                var country = await _context.Countries.FirstOrDefaultAsync(country => country.CountryID== countryId);
-                value.CountryName= country != null ? country.CountryName: "";
+            if(value.CountryName == null) {
+                var country = await _context.Countries.FirstOrDefaultAsync(country => country.CountryID == countryId);
+                value.CountryName = country != null ? country.CountryName: null;
             }
-            if (value.CityName == "" || value.CountryName == "") return BadRequest("Request have not any city details");
-            await _context.Cities.FromSqlRaw("select requestOperationalState(\'" + value.CityName + "\'::TEXT, \'" + value.CountryName + "\'::TEXT);").ToListAsync();
+            if (value.CityName == null || value.CountryName == null) 
+                return BadRequest("Request have not any city details");
+            _ = await _context.Cities.FromSqlRaw("select requestOperationalState({0}::TEXT, {1}::TEXT)", value.CityName.ToString(), value.CountryName.ToString()).Select(value => new City { }).FirstOrDefaultAsync();
             return Ok();
         }
 
