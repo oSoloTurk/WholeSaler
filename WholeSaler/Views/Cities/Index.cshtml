@@ -50,8 +50,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(Model.Count != 0) 
-                    
+                    @if (Model.Count != 0)
+
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -72,9 +72,9 @@
                         }
                         else
                         {
-                        <tr><td class="text-center" colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
+                            <tr><td class="text-center" colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
                         }
-                    
+
                 </tbody>
             </table>
             @{
@@ -140,3 +140,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/data_table.js"></script>

@@ -78,8 +78,8 @@
                     {
                         <tr><td colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td></tr>
                     }
-                    </tbody>
-</table>
+                </tbody>
+            </table>
             @{
                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";
@@ -143,3 +143,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/data_table.js"></script>

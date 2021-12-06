@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                     @if (Model.Count != 0)
-                    @foreach (var item in Model)
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td> @Html.DisplayFor(modelItem => item.CategoryName) </td>
@@ -45,13 +45,13 @@
                             </tr>
 
                         }
-                    else
-                    {
-                    <tr>
-                        <td class="text-center" colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td>
-                    </tr>
+                        else
+                        {
+                            <tr>
+                                <td class="text-center" colspan="6"> @SharedLocalizer["No data could be found in the conditions you were looking for."] </td>
+                            </tr>
 
-                    }
+                        }
                 </tbody>
             </table> @{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : ""; var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
         </div>
@@ -65,16 +65,18 @@
                         <option selected value="@value">
                             <a class="dropdown-item btn btn-primary" asp-action="Index" asp-route-pageSize="@value" asp-route-sortOrder="@ViewData[" CurrentSort"]" asp-route-pageNumber="@ViewData[" CurrentPage"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]">@value</a>
                         </option>
- }
+                    }
                     else
                     {
                         <option value="@value">
                             <a class="dropdown-item btn btn-primary" asp-action="Index" asp-route-pageSize="@value" asp-route-sortOrder="@ViewData[" CurrentSort"]" asp-route-pageNumber="@ViewData[" CurrentPage"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]">@value</a>
                         </option>
-}}
+                    }}
             </select>
             <a asp-action="Index" asp-route-pageSize="@ViewData[" CurrentSize"]" asp-route-sortOrder="@ViewData[" CurrentSort"]" asp-route-pageNumber="@ViewData[" CurrentSize"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]" hidden id="applyPageSizeChange" class="btn btn-primary ml-1"> @ViewData["CurrentSize"] </a>
             <a asp-action="Index" asp-route-pageSize="@ViewData[" CurrentSize"]" asp-route-sortOrder="@ViewData[" CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-currentFilter="@ViewData[" CurrentFilter"]" class="btn btn-primary ml-1 @nextDisabled"> @SharedLocalizer["Next"] </a>
         </div>
     </div>
 </div>
+
+<script src="~/js/data_table.js"></script>
