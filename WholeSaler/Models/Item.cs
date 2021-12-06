@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 #nullable disable
 
@@ -11,11 +12,15 @@ namespace WholeSaler.Models
         {
             BasketItems = new HashSet<BasketItem>();
         }
-
+        [DisplayName("Item ID")]
         public int ItemID { get; set; }
+        [DisplayName("Item Name")]
         public string ItemName { get; set; }
+        [DisplayName("Item Price")]
         public int? ItemPrice { get; set; }
+        [DisplayName("Item Description")]
         public string ItemDesc { get; set; }
+        [DisplayName("Category ID")]
         public int? CategoryID { get; set; }
 
         public virtual Category Category { get; set; }
