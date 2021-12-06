@@ -120,40 +120,16 @@
   <data name="About" xml:space="preserve">
     <value>Hakkında</value>
   </data>
-  <data name="asd" xml:space="preserve">
-    <value />
+  <data name="Actions" xml:space="preserve">
+    <value>Kayıtlar</value>
   </data>
-  <data name="asdas" xml:space="preserve">
-    <value />
+  <data name="Earnings (Monthly)" xml:space="preserve">
+    <value>Kazanılan (Aylık)</value>
   </data>
-  <data name="Go Items Management Page" xml:space="preserve">
-    <value>Ürün Yönetim Sayfasın Git</value>
+  <data name="Orders (Monthly)" xml:space="preserve">
+    <value>Sipariş (Aylık)</value>
   </data>
-  <data name="Go Reports Page" xml:space="preserve">
-    <value>Raporlar Sayfasına Git</value>
-  </data>
-  <data name="Go Vehicle Management" xml:space="preserve">
-    <value>Araç Yönetimine Git {0}</value>
-  </data>
-  <data name="Items" xml:space="preserve">
-    <value>Ürünler</value>
-  </data>
-  <data name="Lenght of fleet is {0}" xml:space="preserve">
-    <value>Filo Genişliği {0}</value>
-  </data>
-  <data name="Reports" xml:space="preserve">
-    <value>Raporlar</value>
-  </data>
-  <data name="Vehicles" xml:space="preserve">
-    <value>Araçlar</value>
-  </data>
-  <data name="You can manage your fleet" xml:space="preserve">
-    <value>Filoyu Yönet</value>
-  </data>
-  <data name="You can manage your items" xml:space="preserve">
-    <value>Ürünleri Yönetebilirsiniz</value>
-  </data>
-  <data name="You can see reports" xml:space="preserve">
-    <value>Raporları Görebilirsiniz</value>
+  <data name="Waiting Customer" xml:space="preserve">
+    <value>Bekleyen Müşteriler</value>
   </data>
 </root>
