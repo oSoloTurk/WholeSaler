@@ -17,7 +17,7 @@ namespace WholeSaler.Models
         [DisplayName("Item Name")]
         public string ItemName { get; set; }
         [DisplayName("Item Price")]
-        public int? ItemPrice { get; set; }
+        public double? ItemPrice { get; set; }
         [DisplayName("Item Description")]
         public string ItemDesc { get; set; }
         [DisplayName("Category ID")]

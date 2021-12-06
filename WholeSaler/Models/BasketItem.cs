@@ -12,7 +12,7 @@ namespace WholeSaler.Models
         public int BasketItemID { get; set; }
         public int BasketID { get; set; }
 
-        public int BasketPrice { get; set; }
+        public double BasketPrice { get; set; }
         public int ItemID { get; set; }
         public int? Amount { get; set; }
 
