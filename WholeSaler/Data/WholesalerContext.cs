@@ -135,9 +135,8 @@ namespace WholeSaler.Data
                 entity.Property(e => e.ItemID).HasColumnName("ItemID");
 
                 entity.HasOne(d => d.Basket)
-                    .WithOne(p => p.BasketItem)
-                    .HasForeignKey<BasketItem>(d => d.BasketID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .WithMany(p => p.BasketItems)
+                    .HasForeignKey(d => d.BasketID)
                     .HasConstraintName("basket_id");
 
                 entity.HasOne(d => d.Item)

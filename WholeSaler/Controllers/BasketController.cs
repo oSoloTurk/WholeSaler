@@ -61,16 +61,17 @@ namespace WholeSaler.Controllers
         public async Task<IActionResult> SubmitOrders([Bind("LocationID")] int locationId)
         {
             var userId = _userManager.GetUserId(User);
-            var basket = await _context.BasketItems.Include(basketItems => basketItems.Basket).Where(basketItems => basketItems.Basket.UserID == userId).ToListAsync();
-            if (basket != null)
+            var basket = await _context.Baskets.FirstOrDefaultAsync(basket => basket.UserID == userId);
+            var basketItems = await _context.BasketItems.Where(basketItems => basketItems.BasketID == basket.BasketID).ToListAsync();
+            if (basketItems != null)
             {
                 var value = 0.0;
-                foreach (var basketItem in basket)
+                foreach (var basketItem in basketItems)
                 {
                     value += basketItem.BasketPrice;
                 }
                 var operation = new Operation() {
-                    BasketID = basket.FirstOrDefault().BasketID,
+                    BasketID = basketItems.FirstOrDefault().BasketID,
                     Date = DateTime.Now,
                     LocationID = locationId,
                     OperationValue = value,
@@ -78,7 +79,7 @@ namespace WholeSaler.Controllers
                 _context.Operations.Add(operation);
                 await _context.SaveChangesAsync();
             }
-            return View("UserBoard", "Dashboard");
+            return RedirectToAction("UserBoard", "Dashboard");
         }
 
         [HttpPost]

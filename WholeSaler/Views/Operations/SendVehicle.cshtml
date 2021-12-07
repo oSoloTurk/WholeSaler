@@ -22,7 +22,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="d-flex justify-content-between">
-                <a class="btn btn-secondary btn-icon-split" asp-action="Index">
+                <a class="btn btn-secondary btn-icon-split" asp-controller="Vehicles" asp-action="Index">
                     <span class="icon text-white-50">
                         <i class="fas fa-arrow-left"></i>
                     </span>
@@ -49,22 +49,23 @@
                                 <div class="col mr-2">
                                     <label asp-for="VehicleID" class="control-label text-center"></label>
                                     <hr class="sidebar-divider">
-                                    @if (ViewBag.vehiclesInTheOperation.Count - ViewBag.Vehicles.Count != 0)
-                                    {
+                                    @{
+                                        int counter = 0;
                                         @foreach (Vehicle vehicle in ViewBag.Vehicles)
                                         {
                                             if (!ViewBag.vehiclesInTheOperation.Contains(vehicle.VehicleID))
                                             {
+                                                counter++;
                                                 <input type="radio" class="" asp-for="VehicleID" value="@vehicle.VehicleID" />@vehicle.VehicleName<br />
                                             }
                                         }
-                                    }
-                                    else
-                                    {
+
+                                        if (counter == 0) {
                                         <div class="row justify-content-center">
                                             <span colspan="6" class="text-center"> @SharedLocalizer["Currently no vehicles are suitable for the operation"] </span>
                                         </div>
-                                    }
+                                            }
+                                        }
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                                     <hr class="sidebar-divider">
                                     @foreach (Operation operation in ViewBag.Operations)
                                     {
-                                        <input type="radio" class="" asp-for="OperationID" value="@operation.OperationID" />@operation.Owner.UserName @operation.Location.Adress<br />
+                                        <input type="radio" class="" asp-for="OperationID" value="@operation.OperationID" />@operation.Owner.UserName @operation.Location.Adress <a asp-action="Details" asp-route-id="@operation.OperationID">See Details</a><br />
                                     }
                                 </div>
                             </div>

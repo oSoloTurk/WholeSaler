@@ -143,6 +143,18 @@ namespace WholeSaler.Controllers
             return View(vehicle);
         }
 
+        public async Task<IActionResult> EndOperation(int? id)
+        {
+            if (id != null)
+            {
+                var operation = await _context.Operations.FirstOrDefaultAsync(operation => operation.VehicleID == id);
+                operation.VehicleID = null;
+                _context.Operations.Update(operation);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
