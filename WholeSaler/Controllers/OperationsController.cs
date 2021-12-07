@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
@@ -22,14 +23,43 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Operations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
-            var wholesellerContext = _context.Operations
+            if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
+            if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
+
+            IQueryable<Operation> wholesellerContext = _context.Operations
                 .Include(operation => operation.Basket)
+                .Include(operation => operation.Owner)
                 .Include(operation => operation.Location)
                 .Include(operation => operation.Location.City)
                 .Include(operation => operation.Location.City.Country);
-            return View(await wholesellerContext.ToListAsync());
+            if (query != null)
+            {
+                wholesellerContext = wholesellerContext.Where(i => i.BasketID.ToString().Contains(query) | i.Location.City.CityName.Contains(query) | i.Location.City.Country.CountryName.Contains(query));
+                TempData["Query"] = query;
+            }
+            if (sortOrder != null)
+            {
+                switch (sortOrder)
+                {
+                    default:
+                    case "operation_owner":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.Owner.UserName);
+                        break;
+                    case "operation_value":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.OperationValue);
+                        break;
+                    case "operation_date":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.Date);
+                        break;
+                    case "operation_location":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.Location.Adress);
+                        break;
+                }
+                TempData["CurrentFilter"] = sortOrder;
+            }
+            return View(await PaginatedList<Operation>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 
         // GET: Operations/Details/5
@@ -47,6 +77,10 @@ namespace WholeSaler.Controllers
                 .Include(operation => operation.Location.City)
                 .Include(operation => operation.Location.City.Country)
                 .FirstOrDefaultAsync(m => m.OperationID == id);
+            if(operation == null)
+            {
+                return NotFound();
+            }
             var items = await _context.BasketItems.Where(item => item.BasketID == operation.BasketID).Include(item => item.Item).Select(item => new BasketItem()
             {
                 Amount = item.Amount,

@@ -133,7 +133,7 @@
     <value>Kategoriler</value>
   </data>
   <data name="Create Order" xml:space="preserve">
-    <value>Sİpariş Oluştur</value>
+    <value>Sipariş Oluştur</value>
   </data>
   <data name="Customer Dashboard" xml:space="preserve">
     <value>Müşteri Paneli</value>
@@ -170,9 +170,6 @@
   </data>
   <data name="Manage User Roles" xml:space="preserve">
     <value>Kullanıcı Yetkilerini Yönet</value>
-  </data>
-  <data name="New Operation" xml:space="preserve">
-    <value>Yeni Operasyon Oluştur</value>
   </data>
   <data name="Operation History" xml:space="preserve">
     <value>Operasyon Geçmişi</value>
