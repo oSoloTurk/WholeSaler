@@ -1,4 +1,7 @@
 ﻿@page
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -13,53 +16,53 @@
                         <img src="~/images/login.png" class="col-md-5 image" />
                         <div class="col-md-5 align-self-center">
                             <section>
+                                <hr />
+                                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <h4>@Localizer["Create a new account"]</h4>
                                     <hr />
-                                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                                        <h4>Create a new account.</h4>
-                                        <hr />
-                                        <div asp-validation-summary="All" class="text-danger"></div>
-                                        <div class="row form-group justify-content-around">
-                                            <div class="form-group">
-                                                <label asp-for="Input.Name"></label>
-                                                <input asp-for="Input.Name" class="form-control" />
-                                                <span asp-validation-for="Input.Name" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Input.SurName"></label>
-                                                <input asp-for="Input.SurName" class="form-control" />
-                                                <span asp-validation-for="Input.SurName" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group justify-content-around">
-                                            <div class="form-group">
-                                                <label asp-for="Input.UserName"></label>
-                                                <input asp-for="Input.UserName" class="form-control" />
-                                                <span asp-validation-for="Input.UserName" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Input.CompanyName"></label>
-                                                <input asp-for="Input.CompanyName" class="form-control" />
-                                                <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
-                                            </div>
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="row form-group justify-content-around">
+                                        <div class="form-group">
+                                            <label asp-for="Input.Name"></label>
+                                            <input asp-for="Input.Name" class="form-control" />
+                                            <span asp-validation-for="Input.Name" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label asp-for="Input.Email"></label>
-                                            <input asp-for="Input.Email" class="form-control" />
-                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                            <label asp-for="Input.SurName"></label>
+                                            <input asp-for="Input.SurName" class="form-control" />
+                                            <span asp-validation-for="Input.SurName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group justify-content-around">
+                                        <div class="form-group">
+                                            <label asp-for="Input.UserName"></label>
+                                            <input asp-for="Input.UserName" class="form-control" />
+                                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label asp-for="Input.Password"></label>
-                                            <input asp-for="Input.Password" class="form-control" />
-                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                            <label asp-for="Input.CompanyName"></label>
+                                            <input asp-for="Input.CompanyName" class="form-control" />
+                                            <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <label asp-for="Input.ConfirmPassword"></label>
-                                            <input asp-for="Input.ConfirmPassword" class="form-control" />
-                                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Register</button>
-                                    </form>
-                                </section>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Email"></label>
+                                        <input asp-for="Input.Email" class="form-control" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Password"></label>
+                                        <input asp-for="Input.Password" class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.ConfirmPassword"></label>
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">@Localizer["Register"]</button>
+                                </form>
+                            </section>
                         </div>
                     </div>
                 </div>
