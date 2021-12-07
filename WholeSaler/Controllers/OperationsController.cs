@@ -40,14 +40,29 @@ namespace WholeSaler.Controllers
                 return NotFound();
             }
 
-            var operation = await _context.Operations.Include(operation => operation.Basket).Include(operation => operation.Location)
+            var operation = await _context.Operations
+                .Include(operation => operation.Basket)
+                .Include(operation => operation.Owner)
+                .Include(operation => operation.Location)
+                .Include(operation => operation.Location.City)
+                .Include(operation => operation.Location.City.Country)
                 .FirstOrDefaultAsync(m => m.OperationID == id);
+            var items = await _context.BasketItems.Where(item => item.BasketID == operation.BasketID).Include(item => item.Item).Select(item => new BasketItem()
+            {
+                Amount = item.Amount,
+                Item = new Item()
+                {
+                    ItemName = item.Item.ItemName,
+                    ItemDesc = item.Item.ItemDesc,
+                    ItemPrice = item.Item.ItemPrice
+                }
+            }).ToListAsync();
             if (operation == null)
             {
                 return NotFound();
             }
 
-            return View(operation);
+            return View(new OperationDetailModel() { Operation = operation, Items = items });
         }
 
         // GET: Operations/SendVehicle
@@ -110,5 +125,11 @@ namespace WholeSaler.Controllers
         {
             return _context.Operations.Any(e => e.OperationID == id);
         }
+    }
+
+    public class OperationDetailModel
+    {
+        public Operation Operation { get; set; }
+        public List<BasketItem> Items { get; set; }
     }
 }
