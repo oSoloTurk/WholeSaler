@@ -11554,11 +11554,6 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .basket-area {
-    border-left: 1px dotted #ebebeb;
+    border-left: 1px solid rgba(0,0,0,.1);
     border-left-color: rgb(54, 58, 60);
-}
-
-.basket-area-row {
-    border-bottom: 1px dotted #ebebeb;
-    border-bottom-color: rgb(54, 58, 60);
 }

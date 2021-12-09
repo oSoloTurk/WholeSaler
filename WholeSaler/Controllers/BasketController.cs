@@ -26,12 +26,16 @@ namespace WholeSaler.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var userId = _userManager.GetUserId(User);
+            ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => item.Basket.UserID == userId).Count();
             var model = await _context.Categories.Select(category => new CategoryViewModel() { Category = category, ElementCount = _context.Items.Where(item => item.CategoryID == category.CategoryID).Count() }).ToListAsync(); ;
             return View(model);
         }
 
         public async Task<IActionResult> ViewCategory(int categoryId)
         {
+            var userId = _userManager.GetUserId(User);
+            ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => item.Basket.UserID == userId).Count();
             var model = await _context.Items.Where(item => item.CategoryID == categoryId).ToListAsync();
             return View(model);
         }

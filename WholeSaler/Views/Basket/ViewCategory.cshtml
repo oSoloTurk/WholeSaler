@@ -10,16 +10,23 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
-            <a class="btn btn-secondary btn-icon-split" asp-action="Index">
+            <a class="btn btn-warning btn-icon-split" asp-action="Index">
                 <span class="icon text-white-50">
                     <i class="fas fa-shopping-basket"></i>
                 </span>
                 <span class="text">@SharedLocalizer["Turn back to Categories"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center"> @SharedLocalizer["Choose Item for Shopping"] </h6>
-            <a class="btn btn-secondary btn-icon-split" asp-action="Check">
+            <a class="btn btn-success btn-icon-split" asp-action="Check">
                 <span class="icon text-white-50">
-                    <i class="fas fa-shopping-basket"></i>
+                    @if ((int)ViewData["BasketSize"] != 0)
+                    {
+                        <span class="badge badge-danger badge-counter">@ViewData["BasketSize"]</span>
+                    }
+                    else
+                    {
+                        <i class="fas fa-shopping-basket"></i>
+                    }
                 </span>
                 <span class="text">@SharedLocalizer["Check the Basket"]</span>
             </a>
@@ -29,31 +36,29 @@
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
         @foreach (var item in Model)
         {
-            <div class="row mt-2 basket-area-row">
-                <div class="col-3 basket-area">
-                    <div class="h-25">
-                        @item.ItemName
-                    </div>
-                </div>
-                <div class="col-6 basket-area">
-                    <div class="h-50">
-                        @item.ItemDesc
-                    </div>
-                </div>
-                <div class="col-3 basket-area">
-                    <div class="h-50">
-                        <form asp-action="AddBasket" method="post" target="dummyframe" >
-                            <div class="row">
-                                <input type="hidden" name="ItemID" value="@item.ItemID" />
-                                <input type="number" name="ItemAmount" value="1" />
+            <form asp-action="AddBasket" method="post" target="dummyframe" class="align-self-center">
+                <div class="ml-4 mr-4 mb-2 col-11">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" title="Item Title">
+                                        @item.ItemName
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" title="Description">
+                                        @item.ItemDesc
+                                    </div>
+                                </div>
+                                <div class="col-auto d-flex flex-column">
+                                    <input type="hidden" name="ItemID" value="@item.ItemID" />
+                                    <input type="number" class="form-control" name="ItemAmount" value="1" />
+                                    <input type="submit" class="btn btn-success" value="Sepete Ekle" />
+                                </div>
                             </div>
-                            <div class="row">
-                                <input type="submit" value="Sepete Ekle" />
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+                </form>
         }
     </div>
 </div>

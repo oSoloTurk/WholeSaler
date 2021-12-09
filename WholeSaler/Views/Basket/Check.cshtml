@@ -13,14 +13,14 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
-            <a class="btn btn-secondary btn-icon-split" asp-action="Index">
+            <a class="btn btn-warning btn-icon-split" asp-action="Index">
                 <span class="icon text-white-50">
                     <i class="fas fa-shopping-basket"></i>
                 </span>
                 <span class="text">@SharedLocalizer["Turn back to Shop"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center"> @SharedLocalizer["Check Items for Shopping"] </h6>
-            <button type="submit" form="SubmitOrders" class="btn btn-secondary btn-icon-split">
+            <button type="submit" form="SubmitOrders" class="btn btn-success btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-truck-loading"></i>
                 </span>
@@ -29,46 +29,58 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-10">
+        <div class="row justify-content-between">
+            <div class="col-1"></div>
+            <div class="col-8">
                 <form asp-action="SubmitOrders" id="SubmitOrders">
                     <select name="LocationID" class="form-control" asp-items="@Model.SelectLocations">
                     </select>
                 </form>
             </div>
-            <div class="col-2">
-                <a asp-action="Create" asp-controller="Locations" asp-route-returnUrl="@returnUrl" class="theme-button">Yeni Adres Ekle</a>
+            <div class="col-3">
+                <a asp-action="Create" asp-controller="Locations" asp-route-returnUrl="@returnUrl" class="btn btn-outline-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-shopping-basket"></i>
+                    </span>
+                    <span class="text">@SharedLocalizer["Add New Location"]</span>
+                </a>
             </div>
         </div>
         <hr />
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-        @if (Model.BasketItems.Count == 0) {
-            <p class="text-center text-warning h3">
-                Sepetin boş gözüküyor!
-            </p>    
-        }
-        @foreach (var item in Model.BasketItems)
-        {
-            <div class="row mt-2 basket-area-row">
-                <div class="col-3 basket-area">
-                    <div class="h-25">
-                        @item.ItemName
+        <div class="ml-2 mr-2">
+            @if (Model.BasketItems.Count == 0)
+            {
+                <p class="text-center text-warning h3">
+                    Sepetin boş gözüküyor!
+                </p>
+            }
+            @foreach (var item in Model.BasketItems)
+            {
+                <div class="row mt-2">
+                    <div class="col-3 basket-area align-self-center">
+                        <div class="h-25">
+                            @item.ItemName
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 basket-area">
-                    <div class="h-50">
-                        @item.ItemDesc
+                    <div class="col-6 basket-area align-self-center">
+                        <div class="h-50">
+                            @item.ItemDesc
+                        </div>
                     </div>
-                </div>
-                <div class="col-3 basket-area">
-                    <div class="h-50">
-                        <div class="row">
-                            <input type="number" disabled name="ItemAmount" value="@item.ItemAmount" />
-                            <a asp-action="RemoveBasket" asp-route-basketItemId="@item.ItemBasketID">X</a>
+                    <div class="col-3 basket-area align-self-center">
+                        <div class="h-50">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <input type="number" disabled name="ItemAmount" class="form-control col-8" value="@item.ItemAmount" />
+                                <div class="col-1"></div>
+                                <a class="btn btn-danger col-2" asp-action="RemoveBasket" asp-route-basketItemId="@item.ItemBasketID">X</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+                <hr />
+            }
+        </div>
     </div>
 </div>
