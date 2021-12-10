@@ -14,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using WholeSaler.Models;
 using System.ComponentModel;
 using WholeSaler.Resources;
+using Microsoft.Extensions.Localization;
+using System.Reflection;
 
 namespace WholeSaler.Areas.Identity.Pages.Account
 {
@@ -23,14 +25,20 @@ namespace WholeSaler.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IStringLocalizer _identityLocalizer;
 
         public LoginModel(SignInManager<User> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IStringLocalizerFactory factory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+
+            var type = typeof(IdentityResource);
+            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+            _identityLocalizer = factory.Create("IdentityResource", assemblyName.Name);
         }
 
         [BindProperty]
