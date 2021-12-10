@@ -54,22 +54,16 @@ namespace WholeSaler.Data
 
             modelBuilder.Entity<Action>(entity =>
             {
-                entity.HasIndex(e => e.AffectedUser, "IX_Actions_AffectedUser");
-
 
                 entity.Property(e => e.ActionID)
                     .ValueGeneratedNever()
                     .HasColumnName("ActionID");
 
-                entity.Property(e => e.AffectedUser).IsRequired();
+                entity.Property(e => e.ActionDescription)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ActionDescription");
 
                 entity.Property(e => e.EffecterUser).IsRequired();
-
-                entity.HasOne(d => d.AffectedUserNavigation)
-                    .WithMany(p => p.ActionAffectedUserNavigations)
-                    .HasForeignKey(d => d.AffectedUser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("affected");
 
                 entity.HasOne(d => d.EffecterUserNavigation)
                     .WithMany(p => p.ActionEffecterUserNavigations)

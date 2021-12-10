@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WholeSaler.Models;
+using System.ComponentModel;
+using WholeSaler.Resources;
 
 namespace WholeSaler.Areas.Identity.Pages.Account
 {

@@ -12,11 +12,10 @@ namespace WholeSaler.Models
         public int ActionID { get; set; }
         [DisplayName("Efect User")]
         public string EffecterUser { get; set; }
-        [DisplayName("Affect User")]
-        public string AffectedUser { get; set; }
+        [DisplayName("Action")]
+        public string ActionDescription { get; set; }
         [DisplayName("Date")]
         public DateTime Date { get; set; }
-        public virtual User AffectedUserNavigation { get; set; }
         public virtual User EffecterUserNavigation { get; set; }
     }
 }
