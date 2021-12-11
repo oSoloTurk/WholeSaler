@@ -120,8 +120,8 @@
   <data name="Adress" xml:space="preserve">
     <value>Adres</value>
   </data>
-  <data name="City ID" xml:space="preserve">
-    <value>Şehir ID</value>
+  <data name="City" xml:space="preserve">
+    <value>Şehir</value>
   </data>
   <data name="Location ID" xml:space="preserve">
     <value>Lokasyon ID</value>

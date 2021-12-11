@@ -195,6 +195,9 @@
   <data name="Shortcuts" xml:space="preserve">
     <value>Kısayollar</value>
   </data>
+  <data name="System Logs" xml:space="preserve">
+    <value>Sistem Günlüğü</value>
+  </data>
   <data name="Vehicles" xml:space="preserve">
     <value>Araçlar</value>
   </data>

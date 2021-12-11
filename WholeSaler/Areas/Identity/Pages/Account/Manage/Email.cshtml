@@ -6,18 +6,18 @@
 @using WholeSaler.Resources
 @inject IdentityLocalizationService IdentityLocalizer
 @{
-    ViewData["Title"] = "Manage Email";
+    ViewData["Title"] = IdentityLocalizer.GetLocalizedHtmlString("Manage email");
     ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
+<div class="row text-center">
+    <div class="col-md-12">
         <form id="email-form" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Email">>@IdentityLocalizer.GetLocalizedHtmlString("New email")</label>
+                <label asp-for="Email">@IdentityLocalizer.GetLocalizedHtmlString("Current email")</label>
                 @if (Model.IsEmailConfirmed)
                 {
                     <div class="input-group">
@@ -34,7 +34,7 @@
                 }
             </div>
             <div class="form-group">
-                <label asp-for="Input.NewEmail"></label>
+                <label asp-for="Input.NewEmail">@IdentityLocalizer.GetLocalizedHtmlString("New email")</label>
                 <input asp-for="Input.NewEmail" class="form-control" />
                 <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
             </div>
