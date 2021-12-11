@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using WholeSaler.Resources
+@inject IdentityLocalizationService IdentityLocalizer
 @{
     ViewData["Title"] = "Delete Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
@@ -22,12 +24,12 @@
         @if (Model.RequirePassword)
         {
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
+                <label asp-for="Input.Password">>@IdentityLocalizer.GetLocalizedHtmlString("Password")</label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }
-    <button class="btn btn-danger" type="submit">@Localizer["Delete data and close my account"]</button>
+        <button class="btn btn-danger" type="submit">@Localizer["Delete data and close my account"]</button>
     </form>
 </div>
 

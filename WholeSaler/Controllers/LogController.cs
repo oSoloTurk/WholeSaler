@@ -18,7 +18,7 @@ namespace WholeSaler.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
+        public async Task<IActionResult> Index(string filter,string sortOrder, string query, int? pageNumber, int? pageSize = 5)
         {
             if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
             if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
@@ -45,8 +45,15 @@ namespace WholeSaler.Controllers
                         break;
                 }
                 TempData["CurrentFilter"] = sortOrder;
+
             }
+            if (filter != null)
+            {
+                TempData["Filter"] = filter;
+            }
+
             return View(await PaginatedList<Models.Action>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
+
     }
 }

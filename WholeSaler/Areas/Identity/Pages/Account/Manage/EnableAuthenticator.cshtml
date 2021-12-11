@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using WholeSaler.Resources
+@inject IdentityLocalizationService IdentityLocalizer
 @{
     ViewData["Title"] = "Configure authenticator app";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
@@ -11,11 +13,11 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 <h4>@ViewData["Title"]</h4>
 <div>
-    <p>@Localizer[""]To use an authenticator app go through the following steps:</p>
-    <ol class="list">
+    <p>@Localizer["To use an authenticator app go through the following steps:"]</p>
+    <ol class="list">>
         <li>
             <p>
-                @Localizer["Download a two-factor authenticator app like Microsoft Authenticator for"] 
+                @Localizer["Download a two-factor authenticator app like Microsoft Authenticator for"]
                 <a href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> @Localizer["and"]
                 <a href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> @Localizer["or"]
                 @Localizer["Google Authenticator for"]
@@ -31,14 +33,14 @@
         </li>
         <li>
             <p>
-                @Localizer["Once you have scanned the QR code or input the key above, your two factor authentication app will provide you"+
+                @Localizer["Once you have scanned the QR code or input the key above, your two factor authentication app will provide you" +
                 "with a unique code.Enter the code in the confirmation box below."]
             </p>
             <div class="row">
                 <div class="col-md-6">
                     <form id="send-code" method="post">
                         <div class="form-group">
-                            <label asp-for="Input.Code" class="control-label">@Localizer["Verification Code"]</label>
+                            <label asp-for="Input.Code" class="control-label">@IdentityLocalizer.GetLocalizedHtmlString("Vertification Code")</label>
                             <input asp-for="Input.Code" class="form-control" autocomplete="off" />
                             <span asp-validation-for="Input.Code" class="text-danger"></span>
                         </div>

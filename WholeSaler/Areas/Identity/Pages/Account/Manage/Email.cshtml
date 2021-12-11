@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using WholeSaler.Resources
+@inject IdentityLocalizationService IdentityLocalizer
 @{
     ViewData["Title"] = "Manage Email";
     ViewData["ActivePage"] = ManageNavPages.Email;
@@ -15,7 +17,7 @@
         <form id="email-form" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Email"></label>
+                <label asp-for="Email">>@IdentityLocalizer.GetLocalizedHtmlString("New email")</label>
                 @if (Model.IsEmailConfirmed)
                 {
                     <div class="input-group">

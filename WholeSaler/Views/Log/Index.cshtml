@@ -10,12 +10,35 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
+            <div>
+                <a asp-action="Create" asp-route-filter="urun_degisiklik" class="btn btn-primary btn-icon-split float-right ml-1">
+                    <span class="icon text-white-50">
+                    </span>
+                    <span class="text">@Localizer["Ürünlerdeki Değişiklikler"]</span>
+                </a>
+                <a asp-action="Create" asp-route-filter="yeni_kullanici" class="btn btn-primary btn-icon-split float-right ">
+                    <span class="icon text-white-50">
+                    </span>
+                    <span class="text">@Localizer["Yeni Kullanıcı"]</span>
+                </a>
+            </div>
             <div></div>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
                 @SharedLocalizer["Logs"]
             </h6>
             <div></div>
-            <div></div>
+            <div>
+                <a asp-action="Create" asp-route-filter="arac_degisiklik" class="btn btn-primary btn-icon-split float-right ml-1">
+                    <span class="icon text-white-50">
+                    </span>
+                    <span class="text">@Localizer["Araçlardaki Değişiklikler"]</span>
+                </a>
+                <a asp-action="Create" asp-route-filter="profil_degisiklik" class="btn btn-primary btn-icon-split float-right">
+                    <span class="icon text-white-50">
+                    </span>
+                    <span class="text">@Localizer["Profil Değişiklikleri"]</span>
+                </a>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -81,6 +104,7 @@
         </div><div class="row justify-content-center">
 
             <a asp-action="Index"
+               asp-route-filter="@ViewData["Filter"]"
                asp-route-pageSize="@ViewData["CurrentSize"]"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.PageIndex - 1)"
@@ -99,6 +123,7 @@
                         <option selected value="@value">
                             <a class="dropdown-item btn btn-primary" asp-action="Index"
                                asp-route-pageSize="@value"
+                               asp-route-filter="@ViewData["Filter"]"
                                asp-route-sortOrder="@ViewData["CurrentSort"]"
                                asp-route-pageNumber="@ViewData["CurrentPage"]"
                                asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
@@ -109,6 +134,7 @@
                         <option value="@value">
                             <a class="dropdown-item btn btn-primary" asp-action="Index"
                                asp-route-pageSize="@value"
+                               asp-route-filter="@ViewData["Filter"]"
                                asp-route-sortOrder="@ViewData["CurrentSort"]"
                                asp-route-pageNumber="@ViewData["CurrentPage"]"
                                asp-route-currentFilter="@ViewData["CurrentFilter"]">@value</a>
@@ -118,6 +144,7 @@
                 }
             </select>
             <a asp-action="Index"
+               asp-route-filter="@ViewData["Filter"]"
                asp-route-pageSize="@ViewData["CurrentSize"]"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@ViewData["CurrentSize"]"
@@ -128,6 +155,7 @@
                 @ViewData["CurrentSize"]
             </a>
             <a asp-action="Index"
+               asp-route-filter="@ViewData["Filter"]"
                asp-route-pageSize="@ViewData["CurrentSize"]"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.PageIndex + 1)"

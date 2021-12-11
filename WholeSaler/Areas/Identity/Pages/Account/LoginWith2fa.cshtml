@@ -1,5 +1,7 @@
 ﻿@page
 @model LoginWith2faModel
+@inject IdentityLocalizationService IdentityLocalizer
+@using WholeSaler.Resources
 @{
     ViewData["Title"] = "Two-factor authentication";
 }
@@ -13,7 +15,7 @@
             <input asp-for="RememberMe" type="hidden" />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.TwoFactorCode"></label>
+                <label asp-for="Input.TwoFactorCode">@IdentityLocalizer.GetLocalizedHtmlString("Authenticator code")</label>
                 <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
             </div>
