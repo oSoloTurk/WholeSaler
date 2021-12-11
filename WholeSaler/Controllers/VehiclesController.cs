@@ -85,6 +85,7 @@ namespace WholeSaler.Controllers
         {
             if (ModelState.IsValid)
             {
+                vehicle.LastModifier = User.Identity.Name;
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -124,6 +125,7 @@ namespace WholeSaler.Controllers
             {
                 try
                 {
+                    vehicle.LastModifier = User.Identity.Name;
                     _context.Update(vehicle);
                     await _context.SaveChangesAsync();
                 }

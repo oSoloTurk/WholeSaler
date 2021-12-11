@@ -44,32 +44,24 @@ namespace WholeSaler.Data
         {
             modelBuilder.Ignore<LoginModel>();
 
-            modelBuilder.HasPostgresEnum(null, "ACTIONS", new[] { "LOOK", "CREATE", "EDIT", "DELETE", "VERIFY" })
-                .HasPostgresEnum(null, "EMAIL_STATUS", new[] { "UNVERIFIED", "VERIFIED", "VERIFYING", "MANUAL_VERIFIED" })
-                .HasPostgresEnum(null, "PERMISSIONS", new[] { "LOGIN", "CREATE_NEW_USER", "VEHICLE_CREATE", "VEHICLE_EDIT", "VEHICLE_DELETE", "VEHICLE_SEE_ALL", "VEHICLE_QUEST_MAKE", "ITEM_CREATE", "ITEM_EDIT", "ITEM_DELETE", "ITEM_SEE_ALL", "REPORTS_CLEAR", "REPORTS_SEE_ALL", "PROFILE_CHANCE_PHONE", "PROFILE_CHANCE_EMAIL", "PROFILE_CHANCE_PASSWORD", "PROFILE_PERSONAL_DATA", "PROFILE_CLEAR_SELF_DATAS", "PROFILE_DOWNLOAD_SELF_DATAS", "USERS_SEE_ALL", "USERS_EDIT", "USERS_DELETE", "USERS_DETAILS", "PROFILE_EFFECTED", "PROFILE_EFFECTER" })
-                .HasPostgresEnum(null, "ROLES", new[] { "MANAGER", "SUPPORTER", "DRIVER", "CUSTOMER" })
-                .HasPostgresEnum(null, "STATE", new[] { "Waiting", "Transporting", "Archive" })
+            modelBuilder.HasPostgresEnum(null, "ACTION_TYPES", new[] { "INSERT", "UPDATE", "DELETE" })
                 .HasPostgresExtension("adminpack")
                 .HasAnnotation("Relational:Collation", "Turkish_Turkey.1254");
 
             modelBuilder.Entity<Action>(entity =>
             {
-
                 entity.Property(e => e.ActionID)
                     .ValueGeneratedNever()
                     .HasColumnName("ActionID");
 
                 entity.Property(e => e.ActionDescription)
-                    .ValueGeneratedNever()
                     .HasColumnName("ActionDescription");
+
+                entity.Property(e => e.ActionElement)
+                    .HasColumnName("ActionElement");
 
                 entity.Property(e => e.EffecterUser).IsRequired();
 
-                entity.HasOne(d => d.EffecterUserNavigation)
-                    .WithMany(p => p.ActionEffecterUserNavigations)
-                    .HasForeignKey(d => d.EffecterUser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("effecter");
             });
             modelBuilder.Entity<User>(entity =>
             {
@@ -87,6 +79,7 @@ namespace WholeSaler.Data
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+
             });
             modelBuilder.Entity<Basket>(entity =>
             {
@@ -174,6 +167,8 @@ namespace WholeSaler.Data
                     .WithMany(p => p.Items)
                     .HasForeignKey(d => d.CategoryID)
                     .HasConstraintName("category");
+
+                entity.Property(e => e.LastModifier).HasColumnName("LastModifier");
             });
 
             modelBuilder.Entity<Location>(entity =>
@@ -200,6 +195,8 @@ namespace WholeSaler.Data
                     .WithMany(p => p.Locations)
                     .HasForeignKey(d => d.CityID)
                     .HasConstraintName("state_id");
+
+                entity.Property(e => e.LastModifier).HasColumnName("LastModifier");
             });
 
             modelBuilder.Entity<Alert>(entity =>
@@ -227,6 +224,8 @@ namespace WholeSaler.Data
 
                 entity.Property(e => e.VehicleID).HasColumnName("VehicleID");
 
+                entity.Property(e => e.LastModifier).HasColumnName("LastModifier");
+
                 entity.HasOne(d => d.Owner)
                     .WithMany(p => p.OperationNavigations)
                     .HasForeignKey(d => d.OwnerID)
@@ -243,6 +242,8 @@ namespace WholeSaler.Data
                 entity.Property(e => e.VehicleID)
                     .HasColumnName("VehicleID")
                     .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.LastModifier).HasColumnName("LastModifier");
             });
 
             modelBuilder.Entity<City>(entity =>

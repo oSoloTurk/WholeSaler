@@ -21,6 +21,7 @@ namespace WholeSaler.Models
 
         [DisplayName("Vehicle Plate")]
         public string VehiclePlate { get; set; }
+        public string? LastModifier { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
     }
 }

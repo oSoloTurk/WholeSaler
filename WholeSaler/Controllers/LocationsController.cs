@@ -128,6 +128,7 @@ namespace WholeSaler.Controllers
         {
             if (ModelState.IsValid)
             {
+                location.LastModifier = User.Identity.Name;
                 location.LocationOwnerID = _userManager.GetUserId(User);
                 _context.Add(location);
                 await _context.SaveChangesAsync();
@@ -173,6 +174,7 @@ namespace WholeSaler.Controllers
             {
                 try
                 {
+                    location.LastModifier = User.Identity.Name;
                     _context.Update(location);
                     await _context.SaveChangesAsync();
                 }

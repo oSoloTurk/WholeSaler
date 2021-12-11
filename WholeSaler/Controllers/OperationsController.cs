@@ -116,6 +116,7 @@ namespace WholeSaler.Controllers
             if (ModelState.IsValid)
             {
                 var activeOperation = await _context.Operations.FindAsync(operation.OperationID);
+                activeOperation.LastModifier = User.Identity.Name;
                 activeOperation.VehicleID = operation.VehicleID;
                 _context.Update(activeOperation);
                 await _context.SaveChangesAsync();

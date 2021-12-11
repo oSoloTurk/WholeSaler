@@ -20,6 +20,7 @@ namespace WholeSaler.Models
         public string Adress { get; set; }
         [DisplayName("City ID")]
         public int? CityID { get; set; }
+        public string? LastModifier { get; set; }
         public virtual User LocationOwner { get; set; }
         public virtual City City { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }

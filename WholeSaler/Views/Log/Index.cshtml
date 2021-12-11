@@ -11,32 +11,36 @@
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
             <div>
-                <a asp-action="Create" asp-route-filter="urun_degisiklik" class="btn btn-primary btn-icon-split float-right ml-1">
+                <a asp-action="Index" asp-route-filter="product_changes" class="btn btn-primary btn-icon-split float-right ml-1">
                     <span class="icon text-white-50">
+                        <i class="fas fa-shopping-basket"></i>
                     </span>
-                    <span class="text">@Localizer["Ürünlerdeki Değişiklikler"]</span>
+                    <span class="text">@Localizer["Product Logs"]</span>
                 </a>
-                <a asp-action="Create" asp-route-filter="yeni_kullanici" class="btn btn-primary btn-icon-split float-right ">
+                <a asp-action="Index" asp-route-filter="adress_changes" class="btn btn-primary btn-icon-split float-right ">
                     <span class="icon text-white-50">
+                        <i class="fas fa-location-arrow"></i>
                     </span>
-                    <span class="text">@Localizer["Yeni Kullanıcı"]</span>
+                    <span class="text">@Localizer["Adres Logs"]</span>
                 </a>
             </div>
             <div></div>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                @SharedLocalizer["Logs"]
+                @SharedLocalizer["System Logs"]
             </h6>
             <div></div>
             <div>
-                <a asp-action="Create" asp-route-filter="arac_degisiklik" class="btn btn-primary btn-icon-split float-right ml-1">
+                <a asp-action="Index" asp-route-filter="vehicle_changes" class="btn btn-primary btn-icon-split float-right ml-1">
                     <span class="icon text-white-50">
+                        <i class="fas fa-car"></i>
                     </span>
-                    <span class="text">@Localizer["Araçlardaki Değişiklikler"]</span>
+                    <span class="text">@Localizer["Vehicle Logs"]</span>
                 </a>
-                <a asp-action="Create" asp-route-filter="profil_degisiklik" class="btn btn-primary btn-icon-split float-right">
+                <a asp-action="Index" asp-route-filter="operation_changes" class="btn btn-primary btn-icon-split float-right">
                     <span class="icon text-white-50">
+                        <i class="fas fa-truck-loading"></i>
                     </span>
-                    <span class="text">@Localizer["Profil Değişiklikleri"]</span>
+                    <span class="text">@Localizer["Operation Logs"]</span>
                 </a>
             </div>
         </div>
@@ -46,7 +50,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        @{ 
+                        @{
                             var exampleItem = Model.FirstOrDefault();
                         }
                         <th>
@@ -65,6 +69,11 @@
                             </a>
                         </th>
                         <th>
+                            <a asp-route-sortOrder="log_element">
+                                @Html.DisplayNameFor(model => exampleItem.ActionElement)
+                            </a>
+                        </th>
+                        <th>
                             @SharedLocalizer["Actions"]
                         </th>
                     </tr>
@@ -74,20 +83,23 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Date)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EffecterUserNavigation.UserName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ActionDescription)
-                                </td>
-                                <td>
-                                    <a asp-action="Delete" asp-route-id="@item.ActionID">@SharedLocalizer["Delete"]</a>
-                                </td>
-                            </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EffecterUser)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ActionDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ActionElement)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.ActionID">@SharedLocalizer["Delete"]</a>
+                        </td>
+                    </tr>
                         }
                         else
                         {

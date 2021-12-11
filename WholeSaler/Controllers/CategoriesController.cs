@@ -9,6 +9,7 @@ using WholeSaler.Models;
 using WholeSaler.Data;
 using Microsoft.AspNetCore.Authorization;
 using WholeSaler.Utils;
+using Microsoft.AspNetCore.Identity;
 
 namespace WholeSaler.Controllers
 {

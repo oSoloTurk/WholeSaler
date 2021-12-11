@@ -92,6 +92,7 @@ namespace WholeSaler.Controllers
         {
             if (ModelState.IsValid)
             {
+                item.LastModifier = User.Identity.Name;
                 _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -133,6 +134,7 @@ namespace WholeSaler.Controllers
             {
                 try
                 {
+                    item.LastModifier = User.Identity.Name;
                     _context.Update(item);
                     await _context.SaveChangesAsync();
                 }

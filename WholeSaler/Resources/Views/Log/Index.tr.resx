@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Action" xml:space="preserve">
-    <value>Kayıt Detayları</value>
+  <data name="Adres Logs" xml:space="preserve">
+    <value>Adres Kayıtları</value>
   </data>
-  <data name="Action ID" xml:space="preserve">
-    <value>Kayıt Numarası</value>
+  <data name="Operation Logs" xml:space="preserve">
+    <value>Operasyon Kayıtları</value>
   </data>
-  <data name="Affect Element" xml:space="preserve">
-    <value>Veri Türü</value>
+  <data name="Product Logs" xml:space="preserve">
+    <value>Ürün Kayıtları</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Tarih</value>
-  </data>
-  <data name="Effecter User" xml:space="preserve">
-    <value>İşlemi Gerçekleştiren</value>
+  <data name="Vehicle Logs" xml:space="preserve">
+    <value>Araç Kayıtları</value>
   </data>
 </root>

@@ -81,6 +81,9 @@ namespace WholeSaler.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             var result = await _userManager.RemoveFromRolesAsync(user, roles);
             result = await _userManager.AddToRolesAsync(user, model.Roles.Where(x => x.Selected).Select(y => y.RoleName));
+
+            await _userManager.UpdateAsync(user);
+
             return RedirectToAction("Index");
         }
     }

@@ -23,12 +23,34 @@ namespace WholeSaler.Controllers
             if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
             if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
 
-            IQueryable<Models.Action> wholesellerContext = _context.Actions.Include(action => action.EffecterUserNavigation);
+            IQueryable<Models.Action> wholesellerContext = _context.Actions;
             if (query != null)
             {
-                wholesellerContext = wholesellerContext.Where(i => i.ActionDescription.ToString().Contains(query) | i.EffecterUserNavigation.UserName.Contains(query));
+                wholesellerContext = wholesellerContext.Where(i => i.ActionDescription.ToString().Contains(query) | i.EffecterUser.Contains(query));
                 TempData["Query"] = query;
             }
+            if (filter != null)
+            {
+                switch (filter)
+                {
+                    default:
+                        break;
+                    case "product_changes":
+                        wholesellerContext = wholesellerContext.Where(item => item.ActionElement.Equals("Items"));
+                        break;
+                    case "adress_changes":
+                        wholesellerContext = wholesellerContext.Where(item => item.ActionElement.Equals("Locations"));
+                        break;
+                    case "vehicle_changes":
+                        wholesellerContext = wholesellerContext.Where(item => item.ActionElement.Equals("Vehicles"));
+                        break;
+                    case "operation_changes":
+                        wholesellerContext = wholesellerContext.Where(item => item.ActionElement.Equals("Operations"));
+                        break;
+                }
+                TempData["Filter"] = filter;
+            }
+
             if (sortOrder != null)
             {
                 switch (sortOrder)
@@ -43,15 +65,13 @@ namespace WholeSaler.Controllers
                     case "log_desc":
                         wholesellerContext = wholesellerContext.OrderBy(item => item.ActionDescription);
                         break;
+                    case "log_element":
+                        wholesellerContext = wholesellerContext.OrderBy(item => item.ActionElement);
+                        break;
                 }
                 TempData["CurrentFilter"] = sortOrder;
 
             }
-            if (filter != null)
-            {
-                TempData["Filter"] = filter;
-            }
-
             return View(await PaginatedList<Models.Action>.CreateAsync(wholesellerContext.AsNoTracking(), pageNumber ?? 1, pageSize.Value));
         }
 

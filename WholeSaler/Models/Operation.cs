@@ -22,6 +22,7 @@ namespace WholeSaler.Models
         public int? VehicleID { get; set; }
         [DisplayName("Owner ID")]
         public string OwnerID { get; set; }
+        public string? LastModifier { get; set; }
         public virtual User Owner { get; set; }
         public virtual Basket Basket { get; set; }
         public virtual Vehicle Vehicle { get; set; }
