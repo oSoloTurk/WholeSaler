@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Join Us" xml:space="preserve">
-    <value>Bize Katıl</value>
+  <data name="Alerts Center" xml:space="preserve">
+    <value>Bildirim Merkezi</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Giriş Yap</value>
+  <data name="Logout" xml:space="preserve">
+    <value>Çıkış Yap</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Kayıt Ol</value>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
   </data>
 </root>

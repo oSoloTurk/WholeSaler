@@ -124,8 +124,9 @@
                    title="Manage">@Localizer["Manage Email"]</a>
                 <a class="collapse-item @ManageNavPages.ChangePasswordNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/ChangePassword"
                    title="Manage">@Localizer["Manage Password"]</a>
-                <a class="collapse-item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication"
-                   title="Manage">@Localizer["Manage T-FA"]</a>
+                <!--<a class="collapse-item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication"
+    title="Manage">@Localizer["Manage T-FA"]</a>-->
+
                 <a class="collapse-item @(page == "Locations" ? "active" : "")" asp-controller="Locations" asp-action="OwnLocations" title="Manage">@Localizer["Manage Locations"]</a>
                 <a class="collapse-item @ManageNavPages.PersonalDataNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/PersonalData"
                    title="Manage">@Localizer["Manage Personal Datas"]</a>

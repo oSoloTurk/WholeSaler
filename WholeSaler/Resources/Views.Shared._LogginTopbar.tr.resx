@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Delete" xml:space="preserve">
-    <value>Sil</value>
+  <data name="Login" xml:space="preserve">
+    <value>Giriş Yap</value>
   </data>
-  <data name="Deleting this data will permanently remove your account, and this cannot be recovered." xml:space="preserve">
-    <value>Bu verileri silmek, hesabınızı kalıcı olarak kaldıracak ve bu, kurtarılamaz.</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>İndir</value>
-  </data>
-  <data name="Your account contains personal data that you have given us. This page allows you to download or delete that data." xml:space="preserve">
-    <value>Hesabınız bize vermiş olduğunuz kişisel verileri içermektedir. Bu sayfa, bu verileri indirmenize veya silmenize izin verir.</value>
+  <data name="Register" xml:space="preserve">
+    <value>Kayıt Ol</value>
   </data>
 </root>

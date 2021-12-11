@@ -117,58 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Authenticator Code" xml:space="preserve">
-    <value>Doğrulayıcı Kod</value>
+  <data name="Authenticator code" xml:space="preserve">
+    <value>Doğrulama Kodu</value>
+  </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>Şifreni Değiştir</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
-    <value>Şirket İsmi</value>
+    <value>Şirket Adı</value>
   </data>
   <data name="Confirm new password" xml:space="preserve">
-    <value>Yeni Şifreyi Onayla</value>
+    <value>Yeni şifre tekrar</value>
   </data>
-  <data name="Confirm password" xml:space="preserve">
-    <value>Şifreyi Onayla</value>
+  <data name="Current email" xml:space="preserve">
+    <value>Şuanki E-Posta</value>
   </data>
-  <data name="Current password" xml:space="preserve">
-    <value>Güncel Şifre</value>
+  <data name="Current Password" xml:space="preserve">
+    <value>Şuanki Şifren</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>E-Posta</value>
   </data>
-  <data name="Email1" xml:space="preserve">
-    <value>Email</value>
+  <data name="Manage email" xml:space="preserve">
+    <value>E-Posta Adresini Yönet</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Ad</value>
   </data>
   <data name="New email" xml:space="preserve">
-    <value>Yeni Email</value>
+    <value>Yeni E-Posta</value>
   </data>
-  <data name="New password" xml:space="preserve">
-    <value>Yeni Şifre</value>
+  <data name="New Password" xml:space="preserve">
+    <value>Yeni Şifren</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Şifre</value>
   </data>
+  <data name="Personal Datas" xml:space="preserve">
+    <value>Kişisel Verilerin</value>
+  </data>
   <data name="Phone number" xml:space="preserve">
     <value>Telefon Numarası</value>
   </data>
-  <data name="Recovery Code" xml:space="preserve">
-    <value>Kurtarma Kodu</value>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>Beni Hatırla</value>
   </data>
-  <data name="Remember this machine" xml:space="preserve">
-    <value>Bu makineyi hatırla</value>
-  </data>
-  <data name="Surname" xml:space="preserve">
+  <data name="SurName" xml:space="preserve">
     <value>Soyad</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Kullanıcı Adı</value>
   </data>
-  <data name="Verification Code" xml:space="preserve">
+  <data name="Vertification Code" xml:space="preserve">
     <value>Doğrulama Kodu</value>
   </data>
 </root>
