@@ -14,8 +14,7 @@ namespace WholeSaler.Models
         public string UserID { get; set; }
         [DisplayName("Message")]
         public string Message { get; set; }
-        [DisplayName("Action")]
-        public string Action { get; set; }
+        public string Redirect { get; set; }
         [DisplayName("Date")]
         public DateTime Date { get; set; }
         public virtual User User { get; set; }

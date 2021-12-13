@@ -16,15 +16,18 @@ namespace WholeSaler.Utils
             _context = context;
         }
 
-        public void SendAlert(User targetUser, string message, string action)         
+        public async void SendAlert(User targetUser, string message, string action)         
         {
-                Alert alert = new Alert();
-                alert.Action = action;
-                alert.User = targetUser;
-                alert.UserID = targetUser.Id;
-                alert.Message = message;
-                alert.Date = DateTime.Now;
-                _context.Add(new Alert());
+            Alert alert = new()
+            {
+                Redirect = action,
+                User = targetUser,
+                UserID = targetUser.Id,
+                Message = message,
+                Date = DateTime.Now
+            };
+            _context.Add(alert);
+            await _context.SaveChangesAsync();
         }
 
         public async void DisposeAlert(int alertId)

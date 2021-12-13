@@ -12,7 +12,7 @@ using WholeSaler.Models;
 
 namespace WholeSaler.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    [Authorize(Roles = "SuperAdmin, Customer")]
     public class BasketController : Controller
     {
         private readonly WholesalerContext _context;

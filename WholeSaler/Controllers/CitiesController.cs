@@ -12,7 +12,7 @@ using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
-    [Authorize(Roles = "Admin, Employee")]
+    [Authorize(Roles = "SuperAdmin, Admin, Employee")]
     public class CitiesController : Controller
     {
         private readonly WholesalerContext _context;

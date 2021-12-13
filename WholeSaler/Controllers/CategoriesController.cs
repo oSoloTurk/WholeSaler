@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WholeSaler.Controllers
 {
-    [Authorize(Roles = "Admin, Employee")]
+    [Authorize(Roles = "SuperAdmin, Admin, Employee")]
     public class CategoriesController : Controller
     {
         private readonly WholesalerContext _context;

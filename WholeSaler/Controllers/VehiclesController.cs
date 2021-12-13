@@ -12,7 +12,7 @@ using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
-    [Authorize(Roles = "Admin, Employee")]
+    [Authorize(Roles = "SuperAdmin, Admin, Employee")]
     public class VehiclesController : Controller
     {
         private readonly WholesalerContext _context;

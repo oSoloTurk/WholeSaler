@@ -13,6 +13,7 @@ using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
 {
+    [Authorize(Roles = "SuperAdmin, Admin, Customer")]
     public class DashboardController : Controller
     {
         private readonly WholesalerContext _context;
@@ -40,7 +41,7 @@ namespace WholeSaler.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<IActionResult> AdminBoard(int? pageNumber, int? pageSize = 5)
         { 
             double earnWeek = 0;
