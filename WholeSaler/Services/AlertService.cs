@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WholeSaler.Data;
 using WholeSaler.Models;
 
-namespace WholeSaler.Utils
+namespace WholeSaler.Services
 {
     public class AlertService
     {
@@ -16,13 +16,12 @@ namespace WholeSaler.Utils
             _context = context;
         }
 
-        public async void SendAlert(User targetUser, string message, string action)         
+        public async Task SendAlert(string targetUser, string message, string action)         
         {
             Alert alert = new()
             {
                 Redirect = action,
-                User = targetUser,
-                UserID = targetUser.Id,
+                UserID = targetUser,
                 Message = message,
                 Date = DateTime.Now
             };

@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Services;
 using WholeSaler.Utils;
 
 namespace WholeSaler.Controllers
@@ -16,10 +18,14 @@ namespace WholeSaler.Controllers
     public class OperationsController : Controller
     {
         private readonly WholesalerContext _context;
+        private readonly AlertService _alertService;
+        private readonly IStringLocalizer<OperationsController> _localizer;
 
-        public OperationsController(WholesalerContext context)
+        public OperationsController(WholesalerContext context, IStringLocalizer<OperationsController> localizer)
         {
             _context = context;
+            _alertService = new AlertService(_context);
+            _localizer = localizer;
         }
 
         // GET: Operations
@@ -119,6 +125,7 @@ namespace WholeSaler.Controllers
                 activeOperation.LastModifier = User.Identity.Name;
                 activeOperation.VehicleID = operation.VehicleID;
                 _context.Update(activeOperation);
+                await _alertService.SendAlert(activeOperation.OwnerID, _localizer["We send your orders!"], Url.Action("UserBoard", "Dashboard"));
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }

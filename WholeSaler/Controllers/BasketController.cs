@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WholeSaler.Data;
 using WholeSaler.Models;
+using WholeSaler.Services;
 
 namespace WholeSaler.Controllers
 {
@@ -17,11 +19,15 @@ namespace WholeSaler.Controllers
     {
         private readonly WholesalerContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly AlertService _alertService;
+        private readonly IStringLocalizer<BasketController> _localizer;
 
-        public BasketController(WholesalerContext context, UserManager<User> userManager)
+        public BasketController(WholesalerContext context, UserManager<User> userManager, IStringLocalizer<BasketController> localizer)
         {
             _context = context;
             _userManager = userManager;
+            _alertService = new AlertService(_context);
+            _localizer = localizer;
         }
 
         public async Task<IActionResult> Index()
@@ -80,7 +86,8 @@ namespace WholeSaler.Controllers
                     LocationID = locationId,
                     OperationValue = value,
                     OwnerID = userId };
-                _context.Operations.Add(operation);
+                _context.Operations.Add(operation);                
+                await _alertService.SendAlert(userId, _localizer["We got your orders we will send notification to you when sending you."], Url.Action("UserBoard", "Dashboard"));
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("UserBoard", "Dashboard");
