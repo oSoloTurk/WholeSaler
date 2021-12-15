@@ -120,7 +120,22 @@
   <data name="Back to List" xml:space="preserve">
     <value>Listeye Dön</value>
   </data>
+  <data name="Email of Customer:" xml:space="preserve">
+    <value>Müşteri Mail Adresi:</value>
+  </data>
+  <data name="ID of Customer:" xml:space="preserve">
+    <value>Müşteri Numarası:</value>
+  </data>
+  <data name="ID of Vehicle:" xml:space="preserve">
+    <value>Aracın Numarası:</value>
+  </data>
+  <data name="Name of Customer:" xml:space="preserve">
+    <value>Müşteri Adı:</value>
+  </data>
+  <data name="Plate of Vehicle:" xml:space="preserve">
+    <value>Aracın Plakası:</value>
+  </data>
   <data name="Send Operation" xml:space="preserve">
-    <value>Operasyon Gönder</value>
+    <value>Operasyona Gönder</value>
   </data>
 </root>

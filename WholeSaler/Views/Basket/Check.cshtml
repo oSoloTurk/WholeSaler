@@ -52,7 +52,7 @@
             @if (Model.BasketItems.Count == 0)
             {
                 <p class="text-center text-warning h3">
-                    Sepetin boş gözüküyor!
+                    @SharedLocalizer["Your basket is empty!"]
                 </p>
             }
             @foreach (var item in Model.BasketItems)

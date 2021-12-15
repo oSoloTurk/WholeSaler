@@ -14,7 +14,7 @@
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             @Localizer["Earnings (Last 7 Days)"]
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Earnings7"]</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.Earning7</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -31,7 +31,7 @@
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             @Localizer["Earnings (Monthly)"]
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Earnings30"]</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.Earning30</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -48,7 +48,7 @@
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             @Localizer["Waiting Customer"]
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["WaitingCustomer"]</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.WaitingCustomers</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -65,7 +65,7 @@
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             @Localizer["Orders (Monthly)"]
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewData["Orders30"]</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.Orders30</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -79,10 +79,10 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                All Orders
-            </h6>
             <div></div>
+            <h6 class="m-0 font-weight-bold text-primary align-self-center">
+                @Localizer["All Orders"]
+            </h6>
             <div></div>
         </div>
     </div>

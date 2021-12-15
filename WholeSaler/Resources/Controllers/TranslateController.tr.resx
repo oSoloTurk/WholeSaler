@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Here is empty!" xml:space="preserve">
+    <value>Burası Boş!</value>
+  </data>
   <data name="We checked your take the orders and changed operation status to completed" xml:space="preserve">
     <value>Siparişini teslim ettik!</value>
   </data>

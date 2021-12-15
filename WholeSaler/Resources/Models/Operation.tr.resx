@@ -120,17 +120,20 @@
   <data name="Basket ID" xml:space="preserve">
     <value>Sepet ID</value>
   </data>
-  <data name="Date ID" xml:space="preserve">
-    <value>Tarih ID</value>
+  <data name="Date" xml:space="preserve">
+    <value>Tarih</value>
   </data>
-  <data name="Location ID" xml:space="preserve">
-    <value>Lokasyon ID</value>
+  <data name="Location" xml:space="preserve">
+    <value>Lokasyon</value>
   </data>
   <data name="Operation ID" xml:space="preserve">
     <value>Operasyon ID</value>
   </data>
   <data name="Operation Value" xml:space="preserve">
     <value>Operasyon Değeri</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Sahibi</value>
   </data>
   <data name="Owner ID" xml:space="preserve">
     <value>Sahip ID</value>

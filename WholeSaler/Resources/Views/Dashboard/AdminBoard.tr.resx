@@ -123,6 +123,9 @@
   <data name="Actions" xml:space="preserve">
     <value>Kayıtlar</value>
   </data>
+  <data name="All Orders" xml:space="preserve">
+    <value>Tüm Siparişler</value>
+  </data>
   <data name="Earnings (Last 7 Days)" xml:space="preserve">
     <value>Kazanılan (7 Günlük)</value>
   </data>

@@ -41,6 +41,7 @@ namespace WholeSaler.Controllers
         public async Task<IActionResult> ViewCategory(int categoryId)
         {
             var userId = _userManager.GetUserId(User);
+            ViewData["CategoryName"] = (await _context.Categories.FirstOrDefaultAsync(category => category.CategoryID == categoryId)).CategoryName;
             ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => !item.Basket.IsArchived && item.Basket.UserID == userId).Count();
             var model = await _context.Items.Where(item => item.CategoryID == categoryId).ToListAsync();
             return View(model);
@@ -70,8 +71,12 @@ namespace WholeSaler.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitOrders([Bind("LocationID")] int locationId)
         {
+            if(locationId == 0)
+            {
+                return RedirectToAction("Check");
+            }
             var userId = _userManager.GetUserId(User);
-            var basket = await _context.Baskets.FirstOrDefaultAsync(basket => basket.UserID == userId);
+            var basket = await _context.Baskets.FirstOrDefaultAsync(basket => !basket.IsArchived && basket.UserID == userId);
             var basketItems = await _context.BasketItems.Where(basketItems => basketItems.BasketID == basket.BasketID).ToListAsync();
             if (basketItems != null)
             {
@@ -102,7 +107,7 @@ namespace WholeSaler.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User);
-                var basket = await _context.Baskets.FirstOrDefaultAsync(basket => basket.UserID == userId);
+                var basket = await _context.Baskets.FirstOrDefaultAsync(basket => !basket.IsArchived && basket.UserID == userId);
                 if (basket == null)
                 {
                     basket = new Basket() { UserID = userId, Date = DateTime.Now };

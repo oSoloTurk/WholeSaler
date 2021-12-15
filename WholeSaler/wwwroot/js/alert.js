@@ -1,19 +1,19 @@
 ﻿$(document).ready(function () {
-    fillAlerts($("#alerts").get(0));
+    fillAlerts();
 });
 
-function fillAlerts(alerts) {
+function fillAlerts() {
     var fillArea = $("#alerts");
     $.ajax({
         url: '/api/Alert',
         type: "GET",
-        dataType: "JSON",
         success: function (alerts) {
             $("#alert-counter").html(alerts["alertCount"]);
             fillArea.html("");
             $.ajax({
                 url: location.protocol + '//' + location.host + '/Templates/AlertTemplates/AlertTemplate.html',
                 success: function (response) {
+                    fillArea.html("");
                     var alertTemplate = response;
                     if (alerts["alertCount"] > 0) {
                         for (var key in alerts.elements) {
@@ -30,6 +30,15 @@ function fillAlerts(alerts) {
                                 }
                             });
                         }
+                    } else {
+                        $.ajax({
+                            url: location.protocol + '//' + location.host + '/api/Translate/',
+                            data: { word: "Here is empty!" },
+                            success: function (data) {
+                                fillArea.append('<hr/><div class="text-center">' + data + '</div><hr/>');
+                            }
+                        });
+                        fillArea.append()
                     }
                 }
             });
@@ -37,3 +46,12 @@ function fillAlerts(alerts) {
     });
 }
 
+function clearAlerts() {
+    $.ajax({
+        url: '/api/Alert',
+        type: "Delete",
+        success: function () {
+            fillAlerts();
+        }
+    });
+}

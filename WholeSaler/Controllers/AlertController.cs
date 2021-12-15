@@ -36,7 +36,7 @@ namespace WholeSaler.Controllers
             {
                 Elements = await _context.Alerts.Where(alert => alert.UserID == userId).Select(alert => new AlertView()
                 {
-                    Date = alert.Date,
+                    Date = alert.Date.ToString("MM/dd/yyyy | hh:mm:ss"),
                     Message = alert.Message,
                     Redirect =  alert.Redirect,
                 }).ToListAsync()
@@ -45,6 +45,14 @@ namespace WholeSaler.Controllers
             return alerts;
         }
 
+        // DELETE: api/Alert
+        [HttpDelete]
+        public async Task Delete()
+        {
+            var userId = _userManager.GetUserId(User);
+            await _context.Alerts.Where(alert => alert.UserID == userId).ForEachAsync(alert => _context.Alerts.Remove(alert));
+            await _context.SaveChangesAsync();
+        }
     }
 
     public class Alerts
@@ -57,6 +65,6 @@ namespace WholeSaler.Controllers
     {
         public string Message { get; set; }
         public string Redirect { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

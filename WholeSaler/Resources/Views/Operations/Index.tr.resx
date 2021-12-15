@@ -138,4 +138,7 @@
   <data name="Next" xml:space="preserve">
     <value>İleri</value>
   </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Operasyonlar</value>
+  </data>
 </root>

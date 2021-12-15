@@ -6,7 +6,7 @@
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 @{
-    ViewData["Title"] = "SendVehicle";
+    ViewData["Title"] = Localizer["Send Operation"];
 }
 @{
     foreach (Operation operation in ViewBag.Operations)
@@ -56,7 +56,7 @@
                                             if (!ViewBag.vehiclesInTheOperation.Contains(vehicle.VehicleID))
                                             {
                                                 counter++;
-                                                <input type="radio" class="" asp-for="VehicleID" value="@vehicle.VehicleID" />@vehicle.VehicleName<br />
+                                                <input type="radio" asp-for="VehicleID" value="@vehicle.VehicleID" /><span  class="ml-2" title="@Localizer["ID of Vehicle:"] @vehicle.VehicleID &#013;@Localizer["Plate of Vehicle"]: @vehicle.VehiclePlate">@vehicle.VehicleName</span><br />
                                             }
                                         }
 
@@ -80,7 +80,7 @@
                                     <hr class="sidebar-divider">
                                     @foreach (Operation operation in ViewBag.Operations)
                                     {
-                                        <input type="radio" class="" asp-for="OperationID" value="@operation.OperationID" />@operation.Owner.UserName @operation.Location.Adress <a asp-action="Details" asp-route-id="@operation.OperationID">See Details</a><br />
+                                        <input type="radio" asp-for="OperationID" value="@operation.OperationID" /><span  class="ml-2" title="@Localizer["ID of Customer:"] @operation.OwnerID &#013;@Localizer["Name of Customer:"] @operation.Owner.UserName &#013;@Localizer["Email of Customer:"] @operation.Owner.Email">@operation.Location.Adress </span><a asp-action="Details" asp-route-id="@operation.OperationID">See Details</a><br />
                                     }
                                 </div>
                             </div>

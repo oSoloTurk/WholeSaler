@@ -30,7 +30,7 @@ namespace WholeSaler.Controllers
         }
 
         // GET: Locations
-        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 5)
+        public async Task<IActionResult> Index(string sortOrder, string query, int? pageNumber, int? pageSize = 10)
         {
             if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
             if (!pageSize.HasValue || pageSize.Value < 10) pageSize = 10;
