@@ -1,4 +1,8 @@
 ﻿@model List<SelectListItem>
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using WholeSaler.Resources
+@inject IViewLocalizer Localizer
 @{ Layout = null; } 
     <!DOCTYPE HTML>
     <!--
@@ -26,7 +30,7 @@
                 <p> Wholesaler order management system <br /> for corporate customers </p>
                 <ul class="actions">
                     <li>
-                        <a asp-area="Identity" asp-page="/Account/Register" class="button primary icon solid fa-user">Register</a>
+                        <a asp-area="Identity" asp-page="/Account/Register" class="button primary icon solid fa-user">@Localizer["Register"]</a>
                     </li>
                     <li>
                         <a asp-area="Identity" asp-page="/Account/Login" class="button icon solid fa-sign-in-alt scrolly">Already Registered? Join Now</a>
@@ -195,6 +199,9 @@
             <p class="copyright">
                 &copy; WholeSaler: 2021 | Designed by <span>ajlkn</span> for <a href="html5up.net">html5up.net</a>
             </p>
+            <div class="text-center">
+               @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
         </footer>
         <!-- Scripts -->
         <script src="~/showcase/assets/js/jquery.min.js"></script>

@@ -19,11 +19,9 @@
     <form id="selectLanguage"
           method="post" class="form-horizontal" role="form">
         <label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language:"]</label> </br>
-        <div class="row">
             @foreach (var culture in cultureItems)
             {
                 <a asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value" title="@culture.Text"><img class="language-image" src="@Url.Content(culture.Source)" /></a>
             }
-        </div>
     </form>
 </div>

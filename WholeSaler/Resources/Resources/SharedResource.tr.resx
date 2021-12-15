@@ -141,6 +141,15 @@
   <data name="Category" xml:space="preserve">
     <value>Kategori</value>
   </data>
+  <data name="Check the Basket" xml:space="preserve">
+    <value>Sepete Git</value>
+  </data>
+  <data name="Choose Category for Shopping" xml:space="preserve">
+    <value>Sepetini Doldur</value>
+  </data>
+  <data name="Choose Item for Shopping" xml:space="preserve">
+    <value>Sepetini Doldur!</value>
+  </data>
   <data name="Cities" xml:space="preserve">
     <value>Şehirler</value>
   </data>
@@ -197,6 +206,9 @@
   </data>
   <data name="System Logs" xml:space="preserve">
     <value>Sistem Günlüğü</value>
+  </data>
+  <data name="Turn back to Categories" xml:space="preserve">
+    <value>Kategorilere Dön</value>
   </data>
   <data name="Vehicle" xml:space="preserve">
     <value>Araç</value>

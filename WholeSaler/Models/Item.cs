@@ -23,7 +23,7 @@ namespace WholeSaler.Models
         [DisplayName("Category ID")]
         public int? CategoryID { get; set; }
         public string? LastModifier { get; set; }
-
+        [DisplayName("Category")]
         public virtual Category Category { get; set; }
         public virtual ICollection<BasketItem> BasketItems { get; set; }
     }

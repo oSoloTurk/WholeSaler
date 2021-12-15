@@ -132,10 +132,16 @@
   <data name="Name of Customer:" xml:space="preserve">
     <value>Müşteri Adı:</value>
   </data>
+  <data name="Operation" xml:space="preserve">
+    <value>Operasyon</value>
+  </data>
   <data name="Plate of Vehicle:" xml:space="preserve">
     <value>Aracın Plakası:</value>
   </data>
   <data name="Send Operation" xml:space="preserve">
     <value>Operasyona Gönder</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>Araç</value>
   </data>
 </root>

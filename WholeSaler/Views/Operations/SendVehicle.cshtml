@@ -47,7 +47,7 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <label asp-for="VehicleID" class="control-label text-center"></label>
+                                    <label class="control-label text-center">@Localizer["Vehicle"]</label>
                                     <hr class="sidebar-divider">
                                     @{
                                         int counter = 0;
@@ -76,7 +76,7 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <label asp-for="OperationID" class="control-label text-center"></label>
+                                    <label class="control-label text-center">@Localizer["Operation"]</label>
                                     <hr class="sidebar-divider">
                                     @foreach (Operation operation in ViewBag.Operations)
                                     {

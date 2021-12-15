@@ -1,7 +1,6 @@
 ﻿@using WholeSaler.Controllers;
 @model List<CategoryViewModel>
 @using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
 @using WholeSaler.Utils
 @using WholeSaler.Resources
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
@@ -24,7 +23,7 @@
                 <span class="text">@SharedLocalizer["Check the Basket"]</span>
             </a>
             <h6 class="m-0 font-weight-bold text-primary align-self-center">
-                @Localizer["Choose Category for Shopping"]
+                @SharedLocalizer["Choose Category for Shopping"]
             </h6>
             <div></div>
             <div></div>
