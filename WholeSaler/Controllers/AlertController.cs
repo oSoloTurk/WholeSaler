@@ -26,7 +26,8 @@ namespace WholeSaler.Controllers
             _context = context;
             _userManager = userManager;
         }
-        // GET: api/WorkingAreas
+
+        // GET: api/Alert
         [HttpGet]
         public async Task<Alerts> Get()
         {

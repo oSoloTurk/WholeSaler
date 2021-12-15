@@ -33,7 +33,7 @@ namespace WholeSaler.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => item.Basket.UserID == userId).Count();
+            ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => !item.Basket.IsArchived && item.Basket.UserID == userId).Count();
             var model = await _context.Categories.Select(category => new CategoryViewModel() { Category = category, ElementCount = _context.Items.Where(item => item.CategoryID == category.CategoryID).Count() }).ToListAsync(); ;
             return View(model);
         }
@@ -41,7 +41,7 @@ namespace WholeSaler.Controllers
         public async Task<IActionResult> ViewCategory(int categoryId)
         {
             var userId = _userManager.GetUserId(User);
-            ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => item.Basket.UserID == userId).Count();
+            ViewData["BasketSize"] = _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => !item.Basket.IsArchived && item.Basket.UserID == userId).Count();
             var model = await _context.Items.Where(item => item.CategoryID == categoryId).ToListAsync();
             return View(model);
         }
@@ -55,7 +55,7 @@ namespace WholeSaler.Controllers
                 Value = loc.LocationID.ToString(),
                 Text = loc.Adress + " " + loc.City.CityName + "/" + loc.City.Country.CountryName
             }).ToListAsync();
-            model.BasketItems = await _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => item.Basket.UserID == userId).Select(basketItems => new BasketItemModel
+            model.BasketItems = await _context.BasketItems.Include(item => item.Basket).Include(item => item.Item).Where(item => !item.Basket.IsArchived && item.Basket.UserID == userId).Select(basketItems => new BasketItemModel
             {
                 ItemName = basketItems.Item.ItemName,
                 ItemDesc = basketItems.Item.ItemDesc,
@@ -86,7 +86,9 @@ namespace WholeSaler.Controllers
                     LocationID = locationId,
                     OperationValue = value,
                     OwnerID = userId };
-                _context.Operations.Add(operation);                
+                _context.Operations.Add(operation);
+                basket.IsArchived = true;
+                _context.Baskets.Update(basket);
                 await _alertService.SendAlert(userId, _localizer["We got your orders we will send notification to you when sending you."], Url.Action("UserBoard", "Dashboard"));
                 await _context.SaveChangesAsync();
             }

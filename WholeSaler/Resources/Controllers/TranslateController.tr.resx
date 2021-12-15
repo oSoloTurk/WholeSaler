@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Alerts Center" xml:space="preserve">
-    <value>Bildirim Merkezi</value>
+  <data name="We checked your take the orders and changed operation status to completed" xml:space="preserve">
+    <value>Siparişini teslim ettik!</value>
   </data>
-  <data name="Search for..." xml:space="preserve">
-    <value>Aramak için yazınız.</value>
+  <data name="We got your orders we will send notification to you when sending you." xml:space="preserve">
+    <value>Siparişini Aldık! Siparişin yola çıktığında sana bir bildirim göndereceğiz.</value>
+  </data>
+  <data name="We send your orders!" xml:space="preserve">
+    <value>Siparişlerin Yola Çıktı!</value>
   </data>
 </root>

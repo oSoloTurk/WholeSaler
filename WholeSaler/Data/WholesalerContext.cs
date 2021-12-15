@@ -93,6 +93,9 @@ namespace WholeSaler.Data
                     .IsRequired()
                     .HasColumnName("UserID");
 
+                entity.Property(e => e.IsArchived)
+                    .HasColumnName("IsArchived");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Baskets)
                     .HasForeignKey(d => d.UserID)
