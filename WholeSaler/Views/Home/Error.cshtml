@@ -1,12 +1,4 @@
-﻿@page
-@model AccessDeniedModel
-@using Microsoft.AspNetCore.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
-
-<div class="container-fluid">
-
-
+﻿
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
@@ -28,9 +20,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">@Localizer["Somethings Wrong"]</h1>
                                     </div>
-
                                     <div class="text-center">
-                                        @Localizer["You do not have access to this resource."]
+                                        @Localizer["We dont know what happened but logged the situation and we absolutely will check for the next times"]
                                     </div>
                                     <div class="text-center">
                                                 <a asp-controller="Dashboard" asp-action="Index"> &larr; @Localizer["Back to Dashboard"]</a>
@@ -47,5 +38,3 @@
         </div>
 
     </div>
-
-</div>

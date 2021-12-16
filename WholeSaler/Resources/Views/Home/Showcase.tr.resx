@@ -124,7 +124,7 @@
     <value>Tüm Çözümler Tek Platformda</value>
   </data>
   <data name="Already Registered? Join Now" xml:space="preserve">
-    <value>Kayıtlı mısın? Şimdi Katıl</value>
+    <value>Kayıtlı mısın? Giriş Yap</value>
   </data>
   <data name="Analyze and Improve" xml:space="preserve">
     <value>Analiz edin ve Gelişin</value>
@@ -170,9 +170,6 @@
   </data>
   <data name="Strengthen Your Communication With Your Customers!" xml:space="preserve">
     <value>Müşterilerinizle İletişiminizi Kuvvetlendirin!</value>
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value>Bizler Çalışmalarımızı Yeni Alanlara Yayıyor ve Gelişiyoruz.</value>
   </data>
   <data name="This application is aimed at small-scale wholesaler to carry out service transactions." xml:space="preserve">
     <value>Bu uygulama, küçük ölçekli toptancıların hizmet işlemlerini gerçekleştirmesini amaçlamaktadır.</value>

@@ -50,6 +50,12 @@ namespace WholeSaler.Controllers
             return View("Showcase", countries);
         }
 
+        [System.Web.Mvc.HandleError]
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public async Task<IActionResult> FillCities(int countryId)
         {

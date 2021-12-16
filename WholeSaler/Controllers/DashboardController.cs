@@ -24,8 +24,20 @@ namespace WholeSaler.Controllers
             _userManager = userManager;
             _context = context;
         }
-        [Authorize(Roles = "Customer")]
+        public IActionResult Index()
+        {
+            if(User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+            {
+                return RedirectToAction("AdminBoard");
+            }
+            if(User.IsInRole("Customer"))
+            {
+                return RedirectToAction("UserBoard");
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> UserBoard(int? pageNumber, int? pageSize = 10)
         {
             if (!pageNumber.HasValue || pageNumber.Value < 1) pageNumber = 1;
