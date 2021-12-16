@@ -117,7 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About the Project" xml:space="preserve">
+    <value>Proje hakkında</value>
+  </data>
+  <data name="All Solutions in One Platform" xml:space="preserve">
+    <value>Tüm Çözümler Tek Platformda</value>
+  </data>
+  <data name="Already Registered? Join Now" xml:space="preserve">
+    <value>Zaten kayıtlı? Şimdi Katıl</value>
+  </data>
+  <data name="Analyze and Improve" xml:space="preserve">
+    <value>Analiz edin ve Gelişin</value>
+  </data>
+  <data name="Assign your logistics hats through a single platform." xml:space="preserve">
+    <value>Lojistik hatlarınızı tek bir platform üzerinden atayın.</value>
+  </data>
+  <data name="Collect orders from companies on a single platform" xml:space="preserve">
+    <value>Şirketlerin siparişlerini tek bir platform üzerinden toplayın</value>
+  </data>
+  <data name="Collect your orders and manage your logistics lines on a single platform." xml:space="preserve">
+    <value>Tek platformda siparişlerinizi toplayın ve lojistik hatlarınızı yönetin.</value>
+  </data>
+  <data name="Created by" xml:space="preserve">
+    <value>Tarafından yaratıldı</value>
+  </data>
+  <data name="Desktop Experience" xml:space="preserve">
+    <value>Masaüstü Deneyimi</value>
+  </data>
+  <data name="for corporate customers" xml:space="preserve">
+    <value>kurumsal müşteriler için</value>
+  </data>
+  <data name="If you have a different suggestion, you can send it below." xml:space="preserve">
+    <value>Farklı bir önerin var ise aşağıdan gönderebilirsin.</value>
+  </data>
+  <data name="Let's analyze the sales made on the platform and develop your business." xml:space="preserve">
+    <value>Platform üzerinde yapılan satışları analiz edelim ve işletmenizi geliştirelim.</value>
+  </data>
+  <data name="Mobile Device Experience" xml:space="preserve">
+    <value>Mobil Cihaz Deneyimi</value>
+  </data>
+  <data name="Nerede Olmamızı İstersin?" xml:space="preserve">
+    <value>Nerede Olmamızı İstersin?</value>
+  </data>
+  <data name="Real Time Management" xml:space="preserve">
+    <value>Gerçek Zamanlı Yönetim</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Kayıt ol</value>
+  </data>
+  <data name="Standardize your communication with your customers and avoid costs with the WholeSaler platform." xml:space="preserve">
+    <value>WholeSaler platformuyla müşterileriniz ile iletişiminizi standartlaştırın ve maliyetlerden kurtulun.</value>
+  </data>
+  <data name="Strengthen Your Communication With Your Customers!" xml:space="preserve">
+    <value>Müşterilerinizle İletişiminizi Kuvvetlendirin!</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Bizler Çalışmalarımızı Yeni Alanlara Yayıyor ve Gelişiyoruz.</value>
+  </data>
+  <data name="This application is aimed at small-scale wholesaler to carry out service transactions." xml:space="preserve">
+    <value>Bu uygulama, küçük ölçekli toptancıların hizmet işlemlerini gerçekleştirmesini amaçlamaktadır.</value>
+  </data>
+  <data name="We received your request, thank you." xml:space="preserve">
+    <value>Talebini aldık teşekkürler.</value>
+  </data>
+  <data name="Where would you like us to be?" xml:space="preserve">
+    <value>Nerede Olmamızı İstersin?</value>
+  </data>
+  <data name="Wholesaler order management system" xml:space="preserve">
+    <value>Toptancı sipariş yönetim sistemi</value>
+  </data>
+  <data name="You can let us know below where you would like to see us! You can also see the regions we have planned below." xml:space="preserve">
+    <value>Bizi nerede görmek istediğini aşağıdan bildirebilirsin! Bizim planladığımız bölgeleri aşağıda görebilirsin ayrıca</value>
   </data>
 </root>
