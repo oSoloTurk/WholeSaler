@@ -55,7 +55,16 @@ function clearAlerts() {
         url: '/api/Alert',
         type: "Delete",
         success: function () {
-            fillAlerts();
+            $.ajax({
+                url: location.protocol + '//' + location.host + '/api/Translate/',
+                data: { word: "Here is empty!" },
+                success: function (data) {
+                    var fillArea = $("#alerts");
+                    $("#alert-counter").html("0");
+                    fillArea.html("");
+                    fillArea.append('<hr/><div class="text-center">' + data + '</div><hr/>');
+                }
+            });
         }
     });
 }
