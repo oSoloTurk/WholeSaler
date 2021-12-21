@@ -1,7 +1,11 @@
-﻿$(document).ready(function () {
+﻿/*$(document).ready(function () {
     fillAlerts();
 });
 
+ * recoded as viewcomponent
+ * you can see called position in views/shared/loggedtopbar
+ * you can see referenced component in views/shared/components/alert/default
+ 
 function fillAlerts() {
     var fillArea = $("#alerts");
     $.ajax({
@@ -44,7 +48,7 @@ function fillAlerts() {
             });
         }
     });
-}
+}*/
 
 function clearAlerts() {
     $.ajax({

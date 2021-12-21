@@ -27,28 +27,8 @@
 
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter" id="alert-counter">0</span>
-            </a>
-            <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                 aria-labelledby="alertsDropdown">                 
-                     <h6 class="dropdown-header">
-                         <div class="row justify-content-between">
-                            <iframe name="dummyAlertFrame" id="dummyAlertFrame" style="display: none;"></iframe>
-                            <div class="align-self-center">@Localizer["Alerts Center"]</div>
-                            <div class="btn-danger" >
-                                <a onclick="clearAlerts()" class="btn btn-danger btn-circle btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </h6>
-                <div id="alerts" style="overflow-y: auto; max-height:30rem;"></div>
-            </div>
+            <!-- Alerts -->
+            @await Component.InvokeAsync("Alerts");
         </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>

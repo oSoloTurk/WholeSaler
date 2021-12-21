@@ -36,7 +36,7 @@ namespace WholeSaler.Controllers
             {
                 Elements = await _context.Alerts.Where(alert => alert.UserID == userId).Select(alert => new AlertView()
                 {
-                    Date = alert.Date.ToString("MM/dd/yyyy | hh:mm:ss"),
+                    Date = alert.Date.ToLongDateString() + " | " + alert.Date.ToLongTimeString(),
                     Message = alert.Message,
                     Redirect =  alert.Redirect,
                 }).ToListAsync()

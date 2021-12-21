@@ -18,5 +18,6 @@ namespace WholeSaler.Models
         public string ActionElement { get; set; }
         [DisplayName("Date")]
         public DateTime Date { get; set; }
+
     }
 }
