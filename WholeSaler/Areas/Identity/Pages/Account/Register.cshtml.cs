@@ -7,13 +7,16 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using WholeSaler.Enums;
 using WholeSaler.Models;
+using WholeSaler.Services;
 
 namespace WholeSaler.Areas.Identity.Pages.Account
 {
@@ -23,18 +26,21 @@ namespace WholeSaler.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailService _emailSender;
+        private readonly IHostingEnvironment _env;
 
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, 
+            IHostingEnvironment env)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _emailSender = (EmailService)emailSender;
+            _env = env;
         }
 
         [BindProperty]
@@ -101,8 +107,8 @@ namespace WholeSaler.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, userName = user.UserName, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    _emailSender.SendEmail(Input.Email, "Confirm Your Account", _env.WebRootPath, EmailTemplates.CONFIRM_ACCOUNT.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
