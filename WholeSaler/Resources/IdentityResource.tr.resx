@@ -138,6 +138,12 @@
   <data name="Email" xml:space="preserve">
     <value>E-Posta</value>
   </data>
+  <data name="Go to the Dashboard" xml:space="preserve">
+    <value>Kullanıcı Paneline Git</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
   <data name="Manage email" xml:space="preserve">
     <value>E-Posta Adresini Yönet</value>
   </data>
@@ -173,5 +179,11 @@
   </data>
   <data name="Vertification Code" xml:space="preserve">
     <value>Doğrulama Kodu</value>
+  </data>
+  <data name="Well done, your account confirmed!" xml:space="preserve">
+    <value>Tebrikler, Hesabını Doğruladın!</value>
+  </data>
+  <data name="Well done, your password changed please login again!" xml:space="preserve">
+    <value>Tebrikler, Şifreni değiştirdin şimdi yeniden giriş yap.</value>
   </data>
 </root>

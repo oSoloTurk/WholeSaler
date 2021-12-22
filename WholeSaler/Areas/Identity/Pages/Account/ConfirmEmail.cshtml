@@ -1,7 +1,26 @@
 ﻿@page
 @model ConfirmEmailModel
-@{
-    ViewData["Title"] = "Confirm email";
-}
 
-<h1>@ViewData["Title"]</h1>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using WholeSaler.Resources
+@inject IdentityLocalizationService IdentityLocalizer
+
+<div class="card o-hidden border-0 shadow-lg my-5 mainbody">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            @IdentityLocalizer.GetLocalizedHtmlString("Well done, your account confirmed!")
+                            <hr />
+                            <a asp-controller="Dashboard" asp-action="UserBoard">@IdentityLocalizer.GetLocalizedHtmlString("Go to the Dashboard")</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+

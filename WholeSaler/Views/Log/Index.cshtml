@@ -54,22 +54,37 @@
                             var exampleItem = Model.FirstOrDefault();
                         }
                         <th>
-                            <a asp-route-sortOrder="log_date">
+                            <a asp-route-sortOrder="log_date"
+                               asp-route-filter="@ViewData["Filter"]"
+                               asp-route-pageSize="@ViewData["CurrentSize"]"
+                               asp-route-pageNumber="@(Model.PageIndex)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">
                                 @Html.DisplayNameFor(model => exampleItem.Date)
                             </a>
                         </th>
                         <th>
-                            <a asp-route-sortOrder="log_effecter">
+                            <a asp-route-sortOrder="log_effecter"
+                               asp-route-filter="@ViewData["Filter"]"
+                               asp-route-pageSize="@ViewData["CurrentSize"]"
+                               asp-route-pageNumber="@(Model.PageIndex)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">
                                 @Html.DisplayNameFor(model => exampleItem.EffecterUser)
                             </a>
                         </th>
                         <th>
-                            <a asp-route-sortOrder="log_desc">
-                                @Html.DisplayNameFor(model => exampleItem.ActionDescription)
+                            <a asp-route-sortOrder="log_desc"
+                               asp-route-filter="@ViewData["Filter"]"
+                               asp-route-pageSize="@ViewData["CurrentSize"]"
+                               asp-route-pageNumber="@(Model.PageIndex)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"> @Html.DisplayNameFor(model => exampleItem.ActionDescription)
                             </a>
                         </th>
                         <th>
-                            <a asp-route-sortOrder="log_element">
+                            <a asp-route-sortOrder="log_element"
+                               asp-route-filter="@ViewData["Filter"]"
+                               asp-route-pageSize="@ViewData["CurrentSize"]"
+                               asp-route-pageNumber="@(Model.PageIndex)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">
                                 @Html.DisplayNameFor(model => exampleItem.ActionElement)
                             </a>
                         </th>

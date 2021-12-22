@@ -29,14 +29,31 @@
                 </h1>
                 <p> @Localizer["Wholesaler order management system"] <br /> @Localizer["for corporate customers"] </p>
                 <ul class="actions">
-                    <li>
-                        <a asp-area="Identity" asp-page="/Account/Register" class="button primary icon solid fa-user">@Localizer["Register"]</a>
+                   @if(User.Identity.IsAuthenticated && !User.IsInRole("Customer"))
+                    {
+                    
+                     <li>
+                        <a asp-area="Identity" asp-page="/Account/ResendEmailConfirmation" class="button primary icon solid fa-user">@Localizer["You must have to confirm your email"]</a>
                     </li>
                     <li>
-                        <a asp-area="Identity" asp-page="/Account/Login" class="button icon solid fa-sign-in-alt scrolly">@Localizer["Already Registered? Join Now"] </a>
+                       <form id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home" , new { area="" })">
+                            <a class="button primary icon solid fa-sign-out-alt" href="javascript:void()" onclick="document.getElementById('logout').submit();">
+                               @Localizer["Logout"]
+                            </a>
+                        </form>
                     </li>
-                </ul>
-            </div>
+                    } 
+                    else
+                    {                    
+                    <li>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="button primary icon solid fa-user">@Localizer["Register"]</a>
+                        </li>
+                        <li>
+                            <a asp-area="Identity" asp-page="/Account/Login" class="button icon solid fa-sign-in-alt scrolly">@Localizer["Already Registered? Join Now"] </a>
+                        </li>
+                    }
+                    </ul>
+        </div>
         </header>
         <!-- One -->
         <section id="one" class="wrapper style2 special">

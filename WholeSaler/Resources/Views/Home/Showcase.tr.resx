@@ -189,4 +189,7 @@
   <data name="You can let us know below where you would like to see us! You can also see the regions we have planned below." xml:space="preserve">
     <value>Bizi nerede görmek istediğini aşağıdan bildirebilirsin! Bizim planladığımız bölgeleri aşağıda görebilirsin ayrıca</value>
   </data>
+  <data name="You must have to confirm your email" xml:space="preserve">
+    <value>E-Posta Adresini Doğrulamalısın</value>
+  </data>
 </root>

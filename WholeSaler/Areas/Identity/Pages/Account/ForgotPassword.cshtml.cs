@@ -63,7 +63,7 @@ namespace WholeSaler.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                _emailSender.SendEmail(Input.Email, "Confirm Your Account", _env.WebRootPath, EmailTemplates.FORGOT_PASSWORD.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
+                _emailSender.SendEmail(Input.Email, "Forgot Password", _env.WebRootPath, EmailTemplates.FORGOT_PASSWORD.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
