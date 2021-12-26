@@ -109,7 +109,6 @@ namespace WholeSaler.Areas.Identity.Pages.Account
 
                     _emailSender.SendEmail(Input.Email, "Confirm Your Account", _env.WebRootPath, EmailTemplates.CONFIRM_ACCOUNT.Value, new Dictionary<String, String>() { ["{0}"] = callbackUrl });
 
-
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });

@@ -32,18 +32,15 @@ namespace WholeSaler.Data
             } };
             foreach(var defaultUser in defaultUsers)
             {
-                if (userManager.Users.All(u => u.Id != defaultUser.Id))
+                var user = await userManager.FindByEmailAsync(defaultUser.Email);
+                if (user == null)
                 {
-                    var user = await userManager.FindByEmailAsync(defaultUser.Email);
-                    if (user == null)
-                    {
-                        await userManager.CreateAsync(defaultUser, "123");
-                        await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Customer.ToString());
-                        await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Employee.ToString());
-                        await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Admin.ToString());
-                        await userManager.AddToRoleAsync(defaultUser, Enums.Roles.SuperAdmin.ToString());
-                     }
-                }
+                    await userManager.CreateAsync(defaultUser, "123");
+                    await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Customer.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Employee.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Admin.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Enums.Roles.SuperAdmin.ToString());
+                    }
             }
         }
 

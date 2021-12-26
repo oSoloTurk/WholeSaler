@@ -33,6 +33,7 @@ namespace WholeSaler.Services
         {
             Alert alert = await _context.Alerts.FindAsync(alertId);
             _context.Alerts.Remove(alert);
+            await _context.SaveChangesAsync();
         }
     }
 }
