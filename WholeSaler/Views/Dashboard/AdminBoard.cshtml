@@ -5,9 +5,12 @@
 @using WholeSaler.Resources
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @model AdminDashboardModel
+<link rel="stylesheet" href="~/lib/chart/dist/chartist-plugin-tooltip.css" type="text/css"/>
+<link rel="stylesheet" href="~/lib/chart/dist/chartist.min.css" type="text/css"/>
+
 <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success border-start-3 shadow h-100 py-2">
+        <div class="card border-left-warning border-start-3 shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -75,7 +78,18 @@
         </div>
     </div>
 </div>
+<div class="card mb-4 py-3 border-left-primary">
+    <div class="card-body">
+        <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                @Localizer["Earnings (Last 30 Days)"]
+            </div>                  
+        </div>
+        <div id="ct-chart">
 
+        </div>  
+    </div>
+</div>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between">
@@ -203,4 +217,8 @@
         </div>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/data_table.js"></script>
+<script src="~/lib/chart/dist/chartist.min.js"></script>
+<script src="~/lib/chart/dist/chartist-plugin-tooltip.js"></script>
+<script src="~/js/dashboard.js"></script>

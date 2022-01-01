@@ -110,7 +110,81 @@ namespace WholeSaler.Controllers
 
             return View(model);
         }
+
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        public async Task<ActionResult> AdminDashboardChart(int? lastDays)
+        {
+            var operations = _context.Operations
+                .OrderBy(operation => operation.Date)
+                .GroupBy(operation => operation.Date.Date);
+
+            var newestOperations = operations
+                .Where(group => group.Key >= DateTime.Now.AddDays(lastDays ?? -30))
+                .Select(group => new
+                {
+                    Date = group.Key.ToShortDateString(),
+                    Value = group.Sum(operation => operation.OperationValue)
+                });
+
+            var previouslyOperations = operations
+                .Where(group => group.Key <= DateTime.Now.AddDays(lastDays ?? -30) && group.Key >= DateTime.Now.AddDays(2 * (lastDays ?? -30)))
+                .Select(group => new
+                {
+                    Date = group.Key.ToShortDateString(),
+                    Value = group.Sum(operation => operation.OperationValue)
+                });
+
+            var label = await newestOperations.Select(operation => operation.Date).ToListAsync();
+            var series = new List<List<DataObject>>() {
+                await newestOperations.Select(operation => new DataObject{meta = "This month", value = operation.Value}).ToListAsync(),
+                await previouslyOperations.Select(operation => new DataObject{meta = "Previously month", value = operation.Value}).ToListAsync(),
+            };
+
+
+            return Json(new { labels = label, series = series });
+        }
+
+
+        [Authorize(Roles = "Customer")]
+        public async Task<ActionResult> CustomerDashboardChart(int? lastDays)
+        {
+            var operations = _context.Operations
+                .Where(operation => operation.OwnerID == _userManager.GetUserId(User))
+                .OrderBy(operation => operation.Date)
+                .GroupBy(operation => operation.Date.Date);
+
+            var newestOperations = operations
+                .Where(group => group.Key >= DateTime.Now.AddDays(lastDays ?? -30))
+                .Select(group => new
+                {
+                    Date = group.Key.ToShortDateString(),
+                    Value = group.Sum(operation => operation.OperationValue)
+                });
+
+            var previouslyOperations = operations
+                .Where(group => group.Key <= DateTime.Now.AddDays(lastDays ?? -30) && group.Key >= DateTime.Now.AddDays(2 * (lastDays ?? -30)))
+                .Select(group => new
+                {
+                    Date = group.Key.ToShortDateString(),
+                    Value = group.Sum(operation => operation.OperationValue)
+                });
+
+            var label = await newestOperations.Select(operation => operation.Date).ToListAsync();
+            var series = new List<List<DataObject>>() {
+                await newestOperations.Select(operation => new DataObject{meta = "This month", value = operation.Value}).ToListAsync(),
+                await previouslyOperations.Select(operation => new DataObject{meta = "Previously month", value = operation.Value}).ToListAsync(),
+            };
+
+
+            return Json(new { labels = label, series = series });
+        }
     }
+    public class DataObject
+    {
+        public string meta { get; set; }
+        public double value { get; set; }
+    }
+
     public class UserDashboardModel
     {
         public double Payments7 { get; set; }
