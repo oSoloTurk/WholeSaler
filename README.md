@@ -17,15 +17,16 @@ Sakarya University - Web Programming Project - This application is aimed at smal
 
 ## Images
 
-* See at the <a href="https://imgur.com/a/doGgX9g">imgur</a>
+<img src="https://i.imgur.com/wp4oaeU.png" name="dashboard">
+  
+* See more at the <a href="https://imgur.com/a/doGgX9g">imgur</a>
 
 <details>
-  <summary>See here</summary>
+  <summary> See more</summary>
   <img src="https://i.imgur.com/2aLC1oH.png" name="showcase">
   <img src="https://i.imgur.com/MtcZ0Li.png" name="register">
   <img src="https://i.imgur.com/1KI8K8Q.png" name="confirm_account">
   <img src="https://i.imgur.com/Nnb0Mb4.png" name="login">
-  <img src="https://i.imgur.com/wp4oaeU.png" name="dashboard">
   <img src="https://i.imgur.com/6pcy33s.png" name="create_category">
   <img src="https://i.imgur.com/QZeZuLZ.png" name="list_operations">
   <img src="https://i.imgur.com/QIJqeU6.png" name="manage_account">
