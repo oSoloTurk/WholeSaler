@@ -1,3 +1,11 @@
+<div>
+  <img alt="project: finished" src="https://img.shields.io/badge/project-finished-success"/>
+  <img alt="technology: asp.net mvc" src="https://img.shields.io/badge/technology-asp.net%20mvc-critical"/>
+  <a href="https://github.com/oSoloTurk/WholeSaler/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/oSoloTurk/WholeSaler"></a>
+  <a href="https://github.com/oSoloTurk/WholeSaler/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/oSoloTurk/WholeSaler"></a>
+  <a href="https://sakarya.edu.tr"><img alt="university: Sakarya University" src="https://img.shields.io/badge/university-sakarya%20university-blue"/>
+</div>
+
 # 
 # WholeSaler
 
