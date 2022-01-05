@@ -14,6 +14,7 @@ Sakarya University - Web Programming Project - This application is aimed at smal
 * JQuery
 * Bootstrap
 * FontAwesome
+* Chartist.js
 
 ## Images
 
